@@ -5,9 +5,11 @@ spl_autoload_register("Autoloader");
 function Autoloader($className)
 {
     $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    
-    if (strpos($url, 'includes') !== false)
-        $path = "../src/classes/";
+
+    if (strpos($url, 'auth') !== false)
+        $path = "../../src/classes/";
+    else if (strpos($url, 'includes') !== false)
+    $path = "../src/classes/";
     else
         $path = "";
 

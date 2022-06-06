@@ -3,7 +3,7 @@ require "../includes/class-autoload.inc.php";
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("location: ../public/e404.html");
+    header("location: ../../public/e404.html");
     exit();
 }
 
@@ -23,11 +23,11 @@ if ($otp == $otpv) {
                 if ($bool) {
                     // echo "";
                     $_SESSION['error'] = " Registered Sucessfully!";
-                    header("location: ../public/auth?error");
+                    header("location: ../../public/auth/index?error");
                 } else {
                     $error = true;
                     $_SESSION['error'] = "Registration Error!";
-                    header("location: ../public/auth?error");
+                    header("location: ../../public/auth/index?error");
                     exit();
                 }
 
@@ -41,6 +41,6 @@ if ($otp == $otpv) {
 //    unlink($_SESSION['fileDestination']);
     $_SESSION['error'] = "Incorrect OTP!";
     echo $otp;
-      header("location: ../public/verify?error");
+      header("location: ../../public/auth/verify?error");
 
 }

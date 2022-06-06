@@ -20,20 +20,20 @@ if (isset($_SESSION['loggedin'])) {
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
   <!-- Bootstrap -->
-  <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap.min.css" />
 
   <!-- Slick -->
-  <link type="text/css" rel="stylesheet" href="../resources/css/slick.css" />
-  <link type="text/css" rel="stylesheet" href="../resources/css/slick-theme.css" />
+  <link type="text/css" rel="stylesheet" href="../../resources/css/slick.css" />
+  <link type="text/css" rel="stylesheet" href="../../resources/css/slick-theme.css" />
 
   <!-- nouislider -->
-  <link type="text/css" rel="stylesheet" href="../resources/css/nouislider.min.css" />
+  <link type="text/css" rel="stylesheet" href="../../resources/css/nouislider.min.css" />
 
   <!-- Font Awesome Icon -->
-  <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../resources/css/font-awesome.min.css">
 
   <!-- Custom stlylesheet -->
-  <link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
+  <link type="text/css" rel="stylesheet" href="../../resources/css/style.css" />
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -77,7 +77,7 @@ if (isset($_SESSION['loggedin'])) {
         }
         ?>
         <div class="_form-wrapper align-items-center">
-          <form action="../includes/register-auth.inc.php" id="register" method="post">
+          <form action="../../includes/auth/register-auth.inc.php" id="register" method="post">
             <div class="_form sign-up">
               <div class="input-group">
                 <i class='bx bxs-user'></i>
@@ -145,7 +145,7 @@ if (isset($_SESSION['loggedin'])) {
         ?>
         <div class="_form-wrapper align-items-center">
         
-          <form action="../includes/login-auth.inc.php" id="login" method="post">
+          <form action="../../includes/auth/login-auth.inc.php" id="login" method="post">
             <div class="_form sign-in">
               <div class="input-group">
                 <i class='bx bxs-user'></i>
@@ -166,7 +166,9 @@ if (isset($_SESSION['loggedin'])) {
               </div>
               <p>
                 <b>
+                  <a href="./forgot.php">
                   Forgot password?
+                  </a>
                 </b>
               </p>
               <p>
@@ -327,13 +329,13 @@ if (isset($_SESSION['loggedin'])) {
   <!-- /FOOTER -->
 
   <!-- jQuery Plugins -->
-  <script src="../resources/js/jquery.min.js"></script>
-  <script src="../resources/js/bootstrap.min.js"></script>
-  <script src="../resources/js/slick.min.js"></script>
-  <script src="../resources/js/nouislider.min.js"></script>
-  <script src="../resources/js/jquery.zoom.min.js"></script>
-  <script src="../resources/js/main.js"></script>
-  <script src="../resources/js/main.js.js"></script>
+  <script src="../../resources/js/jquery.min.js"></script>
+  <script src="../../resources/js/bootstrap.min.js"></script>
+  <script src="../../resources/js/slick.min.js"></script>
+  <script src="../../resources/js/nouislider.min.js"></script>
+  <script src="../../resources/js/jquery.zoom.min.js"></script>
+  <script src="../../resources/js/main.js"></script>
+  <script src="../../resources/js/main.js.js"></script>
 
 </body>
 <script>

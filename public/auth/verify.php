@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['access'])){
+    header("location: 404");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,7 +117,7 @@ session_start();
         ?>
         <h2>Verify Your Account</h2>
         <p>We emailed you the six digit code to <?php echo $_SESSION["email"]; ?><br /> Enter the code below to confirm your email address.</p>
-        <form action="../includes/otp-auth.inc.php" method="post">
+        <form action="../../includes/auth/otp-auth.inc.php" method="post">
             <div class="code-container">
                 <input type="number" class="code" placeholder="0" min="0" max="9" required>
                 <input type="number" class="code" placeholder="0" min="0" max="9" required>

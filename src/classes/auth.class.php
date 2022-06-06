@@ -13,7 +13,7 @@ class auth
     private $password;
     private $encrypted_pass;
 
-    private $conn;
+    public $conn;
     function __construct($email = "", $password = "", $encrypted_pass = "")
     {
         $db = new config();
@@ -97,20 +97,54 @@ class auth
             if ($row = $result->fetch_assoc()) {
                 return $row['otp'];
             }
-        }
-        else{
-           return false;
+        } else {
+            return false;
         }
     }
-    public function otpDelete($email){
+    public function otpDelete($email)
+    {
         $insert_sql = "DELETE FROM `otp` WHERE `otp`.`email` = '$email';";
         $result = $this->conn->query($insert_sql);
         if ($result) {
             return true;
+        } else {
+            return false;
         }
-        else{
-           return false;
+    }
+
+    public function insertToken($token, $expDate, $email)
+    {
+        $sqli = "INSERT INTO `pwd_reset` (`reset_link_token`, `exp_date`, `reset_email`) VALUES ('$token', '$expDate', '$email');";
+        $update = mysqli_query($this->conn, $sqli);
+
+        if ($update) {
+            return true;
         }
-        
+        return false;
+    }
+
+    public function fetchToken($token, $email)
+    {
+        if ($query = $this->conn->query("SELECT * FROM `pwd_reset` WHERE reset_link_token='$token' and reset_email ='$email' ")) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteToken($email)
+    {
+        if ($result = $this->conn->query("DELETE FROM `pwd_reset` WHERE `pwd_reset`.`reset_email` = '$email'"))
+            return true;
+        else
+            return false;
+    }
+    public function updatePassword($password, $email)
+    {
+
+        if ($result = $this->conn->query("UPDATE `user` set  u_password='$password' WHERE  u_email='$email'"))
+            return true;
+        else
+            return false;
     }
 }
