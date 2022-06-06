@@ -1,2 +1,2 @@
 <?php 
-header("location: ../public/e404.html");
+// header("location: ../public/e404.html");

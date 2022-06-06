@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
     if ($_register->emailExist($email)) {
         $_SESSION['error'] = " Email Exist!";
-        echo '<script>window.location.href = "../../public/auth/index?register&error_r"</script>';
+        echo '<script>window.location.href = "../../public/auth/?register&error_r"</script>';
         exit();
     } else {
 
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 $_SESSION['error'] = "Otp Send Failed!";
-                header("location: ../../public/auth/index?register&error_r");
+                header("location: ../../public/auth/?register&error_r");
         }
     }
     else{

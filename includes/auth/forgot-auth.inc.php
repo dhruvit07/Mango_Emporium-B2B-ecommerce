@@ -337,10 +337,10 @@ if (isset($_POST['password-reset-token']) && $_POST['email']) {
                 $obj->updatePassword($password, $email);
                 $obj->deleteToken($email);
                 $_SESSION["error"] = "Password Reset Sucessfully";
-                header("location: ../../public/auth/index?error");
+                header("location: ../../public/auth/?error");
             } else {
                 $_SESSION["error"] = "Something went wrong.";
-                header("location: ../../public/auth/index?error");
+                header("location: ../../public/auth/?error");
             }
         } else {
             $obj->deleteToken($token);
@@ -349,7 +349,7 @@ if (isset($_POST['password-reset-token']) && $_POST['email']) {
         }
     } else {
         $_SESSION["error"] = "Something went wrong.";
-        header("location: ../../public/auth/index?error");
+        header("location: ../../public/auth/?error");
     }
 } else {
     header("location: ../../public/e404.html");

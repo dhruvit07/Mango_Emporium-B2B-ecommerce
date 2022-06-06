@@ -1,9 +1,4 @@
 <?php
-
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("location: ../../public/e404.html");
-    exit();
-}
 class config {
     protected $serverName;
     protected $userName;

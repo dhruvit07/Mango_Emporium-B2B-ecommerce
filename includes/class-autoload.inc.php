@@ -6,7 +6,7 @@ function Autoloader($className)
 {
     $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-    if (strpos($url, 'auth') !== false)
+    if (strpos($url, 'auth') !== false || strpos($url, 'user') !== false)
         $path = "../../src/classes/";
     else if (strpos($url, 'includes') !== false)
     $path = "../src/classes/";

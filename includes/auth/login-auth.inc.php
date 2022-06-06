@@ -21,11 +21,11 @@ if (isset($_POST['submit'])) {
 
     if ($bool) {
         // echo "";
-        header("location: ../../public/index");
+        header("location: ../../public/");
     } else {
         $error = true;
         $_SESSION['error'] = "Incorrect Credentials!";
-        header("location: ../../public/auth/index?error");
+        header("location: ../../public/auth/?error");
         exit();
     }
 }

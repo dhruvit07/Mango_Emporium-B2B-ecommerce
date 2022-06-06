@@ -1,8 +1,8 @@
 <?php
 session_start();
-unset($_SESSION['loggedin']);
+define("MYSITE",true);
 if (isset($_SESSION['loggedin'])) {
-  echo '<script>window.location.href="index.php"</script>';
+  echo '<script>window.location.href="../index.php"</script>';
 }
 ?>
 <!DOCTYPE html>
@@ -47,33 +47,25 @@ if (isset($_SESSION['loggedin'])) {
 </head>
 
 <body>
-  <!-- HEADER -->
-
-  <!-- /HEADER -->
-
-  <!-- NAVIGATION -->
-
-  <!-- /NAVIGATION -->
-
-  <!-- BREADCRUMB -->
-
   <!-- container -->
   <!-- <div class="container"> -->
   <!-- row -->
   <div id="_container" class="_container">
+
     <!-- _form SECTION -->
     <div class="_row">
+
       <!-- SIGN UP -->
       <div class="_col align-items-center flex-_col sign-up">
-      <?php
-          if (isset($_GET['error_r']) && isset($_SESSION['error'])) {
-            echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
-            <strong>'.$_SESSION["error"].'</strong> 
+        <?php
+        if (isset($_GET['error_r']) && isset($_SESSION['error'])) {
+          echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
+            <strong>' . $_SESSION["error"] . '</strong> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>';
-            unset($_SESSION['error']);
+          unset($_SESSION['error']);
         }
         ?>
         <div class="_form-wrapper align-items-center">
@@ -127,24 +119,24 @@ if (isset($_SESSION['loggedin'])) {
         </div>
 
       </div>
-
       <!-- END SIGN UP -->
+
       <!-- SIGN IN -->
       <div class="_col align-items-center flex-_col sign-in">
 
-      <?php
-          if (isset($_GET['error']) && isset($_SESSION['error'])) {
-            echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
-            <strong>'.$_SESSION["error"].'</strong> 
+        <?php
+        if (isset($_GET['error']) && isset($_SESSION['error'])) {
+          echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
+            <strong>' . $_SESSION["error"] . '</strong> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>';
-           unset($_SESSION['error']);
+          unset($_SESSION['error']);
         }
         ?>
         <div class="_form-wrapper align-items-center">
-        
+
           <form action="../../includes/auth/login-auth.inc.php" id="login" method="post">
             <div class="_form sign-in">
               <div class="input-group">
@@ -167,7 +159,7 @@ if (isset($_SESSION['loggedin'])) {
               <p>
                 <b>
                   <a href="./forgot.php">
-                  Forgot password?
+                    Forgot password?
                   </a>
                 </b>
               </p>
@@ -187,8 +179,10 @@ if (isset($_SESSION['loggedin'])) {
         </div>
       </div>
       <!-- END SIGN IN -->
+
     </div>
     <!-- END _form SECTION -->
+
     <!-- CONTENT SECTION -->
     <div class="_row content-_row">
       <!-- SIGN IN CONTENT -->
@@ -233,100 +227,9 @@ if (isset($_SESSION['loggedin'])) {
   <!-- /NEWSLETTER -->
 
   <!-- FOOTER -->
-  <footer id="footer">
-    <!-- top footer -->
-    <div class="section">
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="row">
-          <div class="col-md-3 col-xs-6">
-            <div class="footer">
-              <h3 class="footer-title">About Us</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
-              <ul class="footer-links">
-                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="footer">
-              <h3 class="footer-title">Categories</h3>
-              <ul class="footer-links">
-                <li><a href="#">Hot deals</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="clearfix visible-xs"></div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="footer">
-              <h3 class="footer-title">Information</h3>
-              <ul class="footer-links">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Orders and Returns</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-md-3 col-xs-6">
-            <div class="footer">
-              <h3 class="footer-title">Service</h3>
-              <ul class="footer-links">
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">View Cart</a></li>
-                <li><a href="#">Wishlist</a></li>
-                <li><a href="#">Track My Order</a></li>
-                <li><a href="#">Help</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!-- /row -->
-      </div>
-      <!-- /container -->
-    </div>
-    <!-- /top footer -->
-
-    <!-- bottom footer -->
-    <div id="bottom-footer" class="section">
-      <div class="container">
-        <!-- row -->
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <ul class="footer-payments">
-              <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
-              <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-              <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-              <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-              <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-              <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
-            </ul>
-            <span class="copyright">
-              <a target="_blank" href="https://www.templateshub.net">Templates Hub</a>
-            </span>
-
-
-          </div>
-        </div>
-        <!-- /row -->
-      </div>
-      <!-- /container -->
-    </div>
-    <!-- /bottom footer -->
-  </footer>
-  <!-- /FOOTER -->
+  <?php
+  include_once "../../templates/footer.php";
+?>  <!-- /FOOTER -->
 
   <!-- jQuery Plugins -->
   <script src="../../resources/js/jquery.min.js"></script>
@@ -340,22 +243,20 @@ if (isset($_SESSION['loggedin'])) {
 </body>
 <script>
   <?php
-if(isset($_GET["register"]))
-{
+  if (isset($_GET["register"])) {
   ?>
-  $(document).ready(function() {
+    $(document).ready(function() {
       timeout("sign-up");
-  });
+    });
   <?php
-}
-else{
-?>
-$(document).ready(function() {
+  } else {
+  ?>
+    $(document).ready(function() {
       timeout("sign-in");
-  });
-<?php
-}
-?>
+    });
+  <?php
+  }
+  ?>
 </script>
 
 </html>

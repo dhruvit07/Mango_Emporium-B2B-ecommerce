@@ -23,11 +23,12 @@ if ($otp == $otpv) {
                 if ($bool) {
                     // echo "";
                     $_SESSION['error'] = " Registered Sucessfully!";
-                    header("location: ../../public/auth/index?error");
+                    unset($_SESSION['access']);
+                    header("location: ../../public/auth/?error");
                 } else {
                     $error = true;
                     $_SESSION['error'] = "Registration Error!";
-                    header("location: ../../public/auth/index?error");
+                    header("location: ../../public/auth/?error");
                     exit();
                 }
 

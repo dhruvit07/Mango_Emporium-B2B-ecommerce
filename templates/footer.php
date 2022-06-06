@@ -6,8 +6,11 @@ if(!defined("MYSITE"))
 ?>
 
 <!-- NEWSLETTER -->
-<div id="newsletter" class="section">
+<div id="newsletter" class="">
 			<!-- container -->
+			<?php 
+    $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+			if(strpos($url, 'user') === false){ ?>
 			<div class="container">
 				<!-- row -->
 				<div class="row">
@@ -37,6 +40,7 @@ if(!defined("MYSITE"))
 				</div>
 				<!-- /row -->
 			</div>
+			<?php }?>
 			<!-- /container -->
 		</div>
 		<!-- /NEWSLETTER -->
