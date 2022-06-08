@@ -3,7 +3,7 @@
 session_start();
 require "../includes/class-autoload.inc.php";
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("location: ../../public/e404.html");
+    header("location: ../../../public/e404.html");
     exit();
 }
 
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
     if ($_register->emailExist($email)) {
         $_SESSION['error'] = " Email Exist!";
-        echo '<script>window.location.href = "../../public/auth/?register&error_r"</script>';
+        echo '<script>window.location.href = "../../../public/auth/?register&error_r"</script>';
         exit();
     } else {
 
@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
         {
         try {
             // Sending Otp Through Mail
-            require '../../src/phpmail/emailconfig.inc.php';
+            require '../../phpmail/emailconfig.inc.php';
 
             $mail->addAddress($email, 'Person Name'); // Add a recipient
 
@@ -52,12 +52,12 @@ if (isset($_POST['submit'])) {
 
             if ($mail->send()) {
                 $_SESSION['access'] = true;
-                header("location: ../../public/auth/verify");
+                header("location: ../../../public/auth/verify");
             } 
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 $_SESSION['error'] = "Otp Send Failed!";
-                header("location: ../../public/auth/?register&error_r");
+                header("location: ../../../public/auth/?register&error_r");
         }
     }
     else{

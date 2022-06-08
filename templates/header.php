@@ -1,5 +1,6 @@
 <?php
-
+// define( 'ROOT_DIR', dirname(__FILE__) );
+$url = "/project-1";
 // session_start();
 if (!defined("MYSITE")) {
 	header("location: ../public/404");
@@ -20,20 +21,21 @@ if (!defined("MYSITE")) {
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+	<!-- <link type="text/css" rel="stylesheet" href="<?php echo $url;?>/resources/css/bootstrap.css" /> -->
+	<link type="text/css" rel="stylesheet" href="<?php echo $url;?>/resources/css/bootstrap.min.css" />
 
 	<!-- Slick -->
-	<link type="text/css" rel="stylesheet" href="../resources/css/slick.css" />
-	<link type="text/css" rel="stylesheet" href="../resources/css/slick-theme.css" />
+	<link type="text/css" rel="stylesheet" href="<?php echo $url;?>/resources/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="<?php echo $url;?>/resources/css/slick-theme.css" />
 
 	<!-- nouislider -->
-	<link type="text/css" rel="stylesheet" href="../resources/css/nouislider.min.css" />
+	<link type="text/css" rel="stylesheet" href="<?php echo $url;?>/resources/css/nouislider.min.css" />
 
 	<!-- Font Awesome Icon -->
-	<link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo $url;?>/resources/css/font-awesome.min.css">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="../resources/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="<?php echo $url;?>/resources/css/style.css" />
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,10 +61,10 @@ if (!defined("MYSITE")) {
 				<ul class="header-links pull-right">
 					<!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
 					<?php if (isset($_SESSION['loggedin'])) { ?>
-						<li><a href="../public/user/?profile"><i class="fa fa-user-o"></i> My Account</a></li>
+						<li><a href="<?php echo $url;?>/public/user/?profile"><i class="fa fa-user-o"></i> My Account</a></li>
 					<?php } else { ?>
-						<li><a href="../public/auth/?register"><i class="fa fa-user-o"></i> Join here</a></li>
-						<li><a href="../public/auth/"><i class="fa fa-user-o"></i> Sign in</a></li>
+						<li><a href="<?php echo $url;?>/public/auth/?register"><i class="fa fa-user-o"></i> Join here</a></li>
+						<li><a href="<?php echo $url;?>/public/auth/"><i class="fa fa-user-o"></i> Sign in</a></li>
 					<?php } ?>
 				</ul>
 			</div>
@@ -79,7 +81,7 @@ if (!defined("MYSITE")) {
 					<div class="col-md-3">
 						<div class="header-logo">
 							<a href="#" class="logo">
-								<img src="./img/logo.png" alt="">
+								<img src="<?php echo $url;?>/resources/img/logo.png" alt="">
 							</a>
 						</div>
 					</div>

@@ -758,14 +758,11 @@ include_once "../templates/header.php";
 </div>
 <!-- /SECTION -->
 
-<?php include_once "../templates/footer.php"; ?>
+<?php include_once "../templates/footer.php"; 
+	  include_once "../templates/loadJS.php";
+?>
 <!-- jQuery Plugins -->
-<script src="../resources/js/jquery.min.js"></script>
-<script src="../resources/js/bootstrap.min.js"></script>
-<script src="../resources/js/slick.min.js"></script>
-<script src="../resources/js/nouislider.min.js"></script>
-<script src="../resources/js/jquery.zoom.min.js"></script>
-<script src="../resources/js/main.js"></script>
+
 
 </body>
 

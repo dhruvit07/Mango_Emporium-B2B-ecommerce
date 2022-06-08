@@ -76,7 +76,7 @@ if (isset($_GET['key']) && isset($_GET['token'])) {
               <h2 class="text-center">Forgot Password?</h2>
               <p>Enter Your New Password Here.</p>
               <div class="panel-body">
-                <form id="form1" action="../../includes/auth/forgot-auth.inc.php" role="form" autocomplete="off" class="form" method="post">
+                <form id="form1" action="../../src/process/auth/forgot-auth.process.php" role="form" autocomplete="off" class="form" method="post">
 
                   <div class="form-group">
                     <div class="input-group">
@@ -99,7 +99,7 @@ if (isset($_GET['key']) && isset($_GET['token'])) {
               <h2 class="text-center">Forgot Password?</h2>
               <p>You can reset your password here.</p>
               <div class="panel-body">
-                <form id="form2" action="../../includes//auth/forgot-auth.inc.php" role="form" autocomplete="off" class="form" method="post">
+                <form id="form2" action="../../src/process/auth/forgot-auth.process.php" role="form" autocomplete="off" class="form" method="post">
 
                   <div class="form-group">
                     <div class="input-group">

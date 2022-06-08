@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-require "../class-autoload.inc.php";
+require "../../../includes/class-autoload.inc.php";
 
 if (isset($_POST['password-reset-token']) && $_POST['email']) {
 
@@ -24,7 +24,7 @@ if (isset($_POST['password-reset-token']) && $_POST['email']) {
         $bool = $obj->insertToken($token, $expDate, $email);
         $link = "http://localhost/project-1/public/auth/forgot?key=" . $email . "&token=" . $token;
 
-        require "../../src/phpmail/emailconfig.inc.php";
+        require "../../phpmail/emailconfig.inc.php";
 
         $mail->addAddress($email, 'Person Name');
 
@@ -239,7 +239,7 @@ if (isset($_POST['password-reset-token']) && $_POST['email']) {
                                 <tr>
                                     <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: "Source Sans Pro", Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
                                     <p style="margin: 0;">If that doesn"t work, copy and paste the following link in your browser:</p>
-                                    <p style="margin: 0;"><a href="'.$link.'" target="_blank">' . $link . '</a></p>
+                                    <p style="margin: 0;"><a href="' . $link . '" target="_blank">' . $link . '</a></p>
                                     </td>
                                 </tr>
                                 <!-- end copy -->
@@ -329,30 +329,30 @@ if (isset($_POST['password-reset-token']) && $_POST['email']) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-    
+
         if ($row['exp_date'] >= $curDate) {
-            
+
             $row = $result->num_rows;
             if ($row) {
                 $obj->updatePassword($password, $email);
                 $obj->deleteToken($email);
                 $_SESSION["error"] = "Password Reset Sucessfully";
-                header("location: ../../public/auth/?error");
+                header("location: ../../../public/auth/?error");
             } else {
                 $_SESSION["error"] = "Something went wrong.";
-                header("location: ../../public/auth/?error");
+                header("location: ../../../public/auth/?error");
             }
         } else {
             $obj->deleteToken($token);
             $_SESSION["msg"] = "This forget password link has been expired.";
-            header("location: ../../public/auth/forgot?key&token&msg");
+            header("location: ../../../public/auth/forgot?key&token&msg");
         }
     } else {
         $_SESSION["error"] = "Something went wrong.";
-        header("location: ../../public/auth/?error");
+        header("location: ../../../public/auth/?error");
     }
 } else {
-    header("location: ../../public/e404.html");
+    header("location: ../../../public/e404.html");
 }
 
 ob_end_flush();

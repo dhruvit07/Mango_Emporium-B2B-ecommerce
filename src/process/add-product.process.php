@@ -1,18 +1,19 @@
 <?php
 session_start();
-require './class-autoload.inc.php';
+require '../../includes/class-autoload.inc.php';
 
 if (isset($_POST['submit'])) {
     // echo "<pre>" . print_r($_FILES['img_archive']) . "</pre>";
     $id = $_SESSION['u_id'];
     $name = $_POST['name'];
+    $price = $_POST['price'];
     $quantity = trim($_POST['quantity']);
     $category = trim($_POST['category']);
     $subCategory = trim($_POST['sub_category']);
     $location = trim($_POST['location']);
     $seller_type = trim($_POST['seller_type']);
-    $primary_img = $_FILES['file_img'];
     $desc = $_POST['description'];
+    $primary_img = $_FILES['file_img'];
     $other_img = $_FILES['img_archive'];
     $product = new  product();
     $processedPrimaryImage = processImage("file_img");
@@ -20,20 +21,21 @@ if (isset($_POST['submit'])) {
     for ($i = 0; $i < $total; $i++) {
         $processedOtherImages[$i] = processImage('img_archive', $i);
     }
-    $inserted_id = $product->addProuct($id, $name, $quantity, $category, $subCategory, $location, $seller_type, $desc);
+    $inserted_id = $product->addProuct($id, $price,$name, $quantity, $category, $subCategory, $location, $seller_type, $desc);
     if ($inserted_id != false) {
         $bool = $product->addImages($inserted_id, $processedPrimaryImage, '1');
         for ($i = 0; $i < $total; $i++) {
             $bool = $product->addImages($inserted_id, $processedOtherImages[$i], '0');
         }
         if ($bool) {
-            // $_SESSION['msg'] = "Product Added!";
-            // echo '<script>window.location.href="../public/user/?msg"</script>';
-            // exit();
+            $_SESSION['msg'] = "Product Added!";
+            echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
+            exit();
         }
     }
 } else {
-    header('location: ../public/e404.html');
+    
+    header('location: ../../public/e404.html');
 }
 
 function processImage($filetag, $i = 0)
@@ -57,31 +59,31 @@ function processImage($filetag, $i = 0)
                 if ($fileSize < 1048576) {
                     $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = $fileNameNew;
-                    $fileD = "../uploads/products/" . $fileNameNew;
+                    $fileD = "../../uploads/products/" . $fileNameNew;
                     $stat =  move_uploaded_file($fileTmpName, $fileD);
                     if ($stat == true) {
                         return $fileDestination;
                     } else {
                         $_SESSION['msg'] = "Error Uploading!";
-                        echo '<script>window.location.href="../public/user/?msg&addproduct"</script>';
+                        echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
                         exit();
                     }
                 } else {
                     // $error = true;
                     $_SESSION['msg'] = "File Size is too big! Choose a lower Resolution Image.";
-                    echo '<script>window.location.href="../public/user/?msg&addproduct"</script>';
+                    echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
                     exit();
                 }
             } else {
                 // $error = true;
                 $_SESSION['msg'] = "Error Uploading Image!! Try Again.";
-                echo '<script>window.location.href="../public/user/?msg&addproduct"</script>';
+                echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
                 exit();
             }
         } else {
             // $error = true;
             $_SESSION['msg'] = "Image Type Not Allowed!! Try a Diffrent Format eg. JPG, PNG, JPEG";
-            echo '<script>window.location.href="../public/user/?msg&addproduct"</script>';
+            echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
             exit();
         }
     }

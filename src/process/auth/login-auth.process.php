@@ -1,11 +1,11 @@
 
 <?php
 session_start();
-require "../class-autoload.inc.php";
+require "../../../includes/class-autoload.inc.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("location: ../../public/e404.html");
+    header("location: ../../../public/e404.html");
     exit();
 }
 
@@ -21,11 +21,11 @@ if (isset($_POST['submit'])) {
 
     if ($bool) {
         // echo "";
-        header("location: ../../public/");
+        header("location: ../../../public/");
     } else {
         $error = true;
         $_SESSION['error'] = "Incorrect Credentials!";
-        header("location: ../../public/auth/?error");
+        header("location: ../../../public/auth/?error");
         exit();
     }
 }

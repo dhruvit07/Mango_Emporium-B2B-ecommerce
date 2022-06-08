@@ -1,5 +1,5 @@
 <?php
-require './class-autoload.inc.php';
+require '../../includes/class-autoload.inc.php';
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $db = new product();

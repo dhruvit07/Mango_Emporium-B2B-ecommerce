@@ -1,6 +1,7 @@
 <?php
 session_start();
 define("MYSITE",true);
+// unset($_SESSION['loggedin']);
 if (isset($_SESSION['loggedin'])) {
   echo '<script>window.location.href="../index.php"</script>';
 }
@@ -69,7 +70,7 @@ if (isset($_SESSION['loggedin'])) {
         }
         ?>
         <div class="_form-wrapper align-items-center">
-          <form action="../../includes/auth/register-auth.inc.php" id="register" method="post">
+          <form action="../../src/process/auth/register-auth.process.php" id="register" method="post">
             <div class="_form sign-up">
               <div class="input-group">
                 <i class='bx bxs-user'></i>
@@ -137,7 +138,7 @@ if (isset($_SESSION['loggedin'])) {
         ?>
         <div class="_form-wrapper align-items-center">
 
-          <form action="../../includes/auth/login-auth.inc.php" id="login" method="post">
+          <form action="../../src/process/auth/login-auth.process.php" id="login" method="post">
             <div class="_form sign-in">
               <div class="input-group">
                 <i class='bx bxs-user'></i>

@@ -10,8 +10,8 @@ if(!defined("MYSITE"))
 			<!-- container -->
 			<?php 
     $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-			if(strpos($url, 'user') === false){ ?>
-			<div class="container">
+			if(strpos($url, 'index') === true){ ?>
+			<div class="container" >
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-12">
@@ -50,7 +50,7 @@ if(!defined("MYSITE"))
 			<!-- top footer -->
 			<div class="section">
 				<!-- container -->
-				<div class="container">
+				<div class="container" style="margin: 30px; width: 100%;">
 					<!-- row -->
 					<div class="row">
 						<div class="col-md-3 col-xs-6">

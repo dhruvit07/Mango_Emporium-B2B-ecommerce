@@ -5,10 +5,7 @@ if (!isset($_SESSION['loggedin'])) {
 }
 define("MYSITE", true);
 require '../../includes/class-autoload.inc.php';
-$user = new user();
-$product = new product();
-$row = $user->getUser($_SESSION['u_id']);
-// echo $_GET['id'];
+require '../../includes/user-product.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,6 +36,28 @@ $row = $user->getUser($_SESSION['u_id']);
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <title>Profile</title>
     <style>
+        a,
+        a:hover,
+        a:active {
+            text-decoration: none;
+            color: inherit;
+            font-weight: bold;
+        }
+
+        a:hover,
+        a:active {
+            color: var(--primary-color);
+            /* background-color: #1a202c; */
+        }
+
+
+        /* .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--grey);
+        } */
+
+
         body {
             /* margin-top: 20px; */
             color: #1a202c;
@@ -49,15 +68,17 @@ $row = $user->getUser($_SESSION['u_id']);
         .main-body {
             padding: 15px;
         }
-         .container::before{
+
+        .container::before {
             display: table !important;
             content: " ";
         }
-        .container::after{
+
+        .container::after {
             display: table !important;
             content: " ";
-            clear:both;
-        } 
+            clear: both;
+        }
 
         .card {
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
@@ -149,9 +170,9 @@ $row = $user->getUser($_SESSION['u_id']);
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="mt-3">
-                                    <h4><?php echo $row['u_name']; ?></h4>
-                                    <p class="text-secondary mb-1"></p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <h4><?php echo $user['u_name']; ?></h4>
+                                    <p class="text-secondary mb-1"><?php echo $user['u_contact']; ?></p>
+                                    <p class="text-muted font-size-sm"><?php echo $user['u_email']; ?></p>
                                     <!-- <button class="btn btn-primary">Follow</button> -->
                                     <!-- <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
@@ -161,56 +182,43 @@ $row = $user->getUser($_SESSION['u_id']);
                     <div class="card mt-3">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                    </svg><a href="./?profile">Profile</a></h6>
+                                <h6 class="mb-0">
+                                    <img src="../../resources/img/profile_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="34"></img>
+                                    <a href="./?profile">Profile</a>
+                                </h6>
                                 <span class="text-secondary">Profile</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                    </svg><a href="./?addproduct">Add Product</a></h6>
+                                <h6 class="mb-0">
+                                    <img src="../../resources/img/product_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <a href="./?addproduct">Add Product</a>
+                                </h6>
                                 <span class="text-secondary">Product</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline">
-                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                    </svg>Github</h6>
-                                <span class="text-secondary">bootdey</span>
+                                <h6 class="mb-0">
+                                    <img src="../../resources/img/myproduct_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <a href="./?viewproduct">My Product</a>
+                                </h6>
+                                <span class="text-secondary">My Product</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info">
-                                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                                    </svg>Twitter</h6>
-                                <span class="text-secondary">@bootdey</span>
+                                <h6 class="mb-0">
+                                    <img src="../../resources/img/logout_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <a href="../../src/process/auth/logout.process.php">Logout</a>
+                                </h6>
+                                <span class="text-secondary">Logout</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger">
-                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                    </svg>Instagram</h6>
-                                <span class="text-secondary">bootdey</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary">
-                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                    </svg>Facebook</h6>
-                                <span class="text-secondary">bootdey</span>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
                 <?php if (isset($_GET['profile'])) { ?>
-                    
+
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
-                            <div class="panel-heading">
+                                <div class="panel-heading">
                                     <h3 class="panel-title">Profile</h3>
                                 </div>
                                 <hr>
@@ -221,7 +229,7 @@ $row = $user->getUser($_SESSION['u_id']);
                                         </h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?php echo $row['u_name']; ?>
+                                        <?php echo $user['u_name']; ?>
                                     </div>
                                 </div>
                                 <hr>
@@ -230,7 +238,7 @@ $row = $user->getUser($_SESSION['u_id']);
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?php echo $row['u_email']; ?>
+                                        <?php echo $user['u_email']; ?>
                                     </div>
                                 </div>
                                 <hr>
@@ -239,7 +247,7 @@ $row = $user->getUser($_SESSION['u_id']);
                                         <h6 class="mb-0">Mobile</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?php echo $row['u_contact']; ?>
+                                        <?php echo $user['u_contact']; ?>
                                     </div>
                                 </div>
                                 <hr>
@@ -263,12 +271,7 @@ $row = $user->getUser($_SESSION['u_id']);
                             <div class="card-body">
                                 <?php
                                 if (isset($_GET['msg']) && isset($_SESSION['msg'])) {
-                                    echo ' <div class="alert alert-success alert-dismissible  show" role="alert">
-                                    <strong>' . $_SESSION["msg"] . '</strong> 
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>';
+                                    echo msg($_SESSION['msg']);
                                     unset($_SESSION['msg']);
                                 }
                                 ?>
@@ -278,133 +281,118 @@ $row = $user->getUser($_SESSION['u_id']);
                                 <hr>
                                 <div class="panel-body">
 
-                                    <form action="../../includes/product-process.inc.php" id="form" method="post" enctype="multipart/form-data">
-                                
-                                        
-                                    <div class="form-group">
+                                    <form action="../../src/process/add-product.process.php" id="form" method="post" enctype="multipart/form-data">
+
+
+                                        <div class="form-group">
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <label for="name" class="col-sm-6 control-label">Product Name</label>
                                                 </div>
                                                 <div class="row">
-                                                <div class="col-sm-12">
-                                                    <input type="text" class="form-control" name="name" id="name" placeholder="Product Name" required>
-                                                </div>
-                                                </div>
-                                                </div>
-                                            </div> <!-- form-group // -->
-                                            <div class="form-group">
-                                                <div class="col-sm-12">
-                                                    <div class="row">
-                                                        <label for="name" class="col-sm-6 control-label"> Product Quantity</label>
-                                                        <label for="tech" class="col-sm-6 control-label">Location</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <input type="number" class="form-control" name="quantity" id="name" placeholder="Product Quantity" required>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <select class="form-control" name="location" id="location" required>
-                                                                <option value="">Location</option>
-                                                                <?php
-                                                                $result = $product->getLocation();
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    echo '<option value=' . $row['id'] . '>' . $row['location'] . '</option>';
-                                                                }
-
-                                                                ?>
-                                                            </select>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div> <!-- form-group // -->
-                                            <div class="form-group">
-                                                <!-- <div class="row"> -->
-                                                <div class="col-sm-12">
-
-                                                    <div class="row">
-                                                        <label for="tech" class="col-sm-6 control-label">Category</label>
-                                                        <label for="tech" class="col-sm-6 control-label">Sub Category</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <select class="form-control" id="category" name="category" required>
-                                                                <option value="">Category</option>
-                                                                <?php
-                                                                $result = $product->getCategory();
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    echo '<option value=' . $row['id'] . '>' . $row['category_name'] . '</option>';
-                                                                }
-
-                                                                ?>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <select class="form-control" name="sub_category" id="sub_category" required>
-                                                                <option value="">Sub Category</option>
-
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-sm-12">
+                                                        <input type="text" class="form-control" name="name" id="name" placeholder="Product Name" required>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <!-- <div class="row"> -->
-                                                <div class="col-sm-12">
-
-                                                    <div class="row">
-                                                        <label for="tech" class="col-sm-12 control-label">Seller Type</label>
-
+                                        </div> <!-- form-group // -->
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <label for="tech" class="col-sm-6 control-label">Product Price</label>
+                                                    <label for="name" class="col-sm-6 control-label"> Product Quantity</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <input type="number" class="form-control" name="price" id="name" placeholder="Product Quantity" required>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <select class="form-control" id="seller_type" name="seller_type" required>
-                                                                <option value="">Seller Type</option>
-                                                                <?php
-                                                                $result = $product->getSellerType();
-                                                                while ($row = $result->fetch_assoc()) {
-                                                                    echo '<option value=' . $row['id'] . '>' . $row['seller_type'] . '</option>';
-                                                                }
-
-                                                                ?>
-
-                                                            </select>
-                                                        </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="number" class="form-control" name="quantity" id="name" placeholder="Product Quantity" required>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div> <!-- form-group // -->
+                                        <div class="form-group">
+                                            <!-- <div class="row"> -->
+                                            <div class="col-sm-12">
 
+                                                <div class="row">
+                                                    <label for="tech" class="col-sm-6 control-label">Category</label>
+                                                    <label for="tech" class="col-sm-6 control-label">Sub Category</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <select class="form-control" id="category" name="category" required>
+                                                            <option value="">Category</option>
+                                                            <?php echo $category_html; ?>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <select class="form-control" name="sub_category" id="sub_category" required>
+                                                            <option value="">Sub Category</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- <div class="row"> -->
+                                            <div class="col-sm-12">
+
+                                                <div class="row">
+                                                    <label for="tech" class="col-sm-6 control-label">Seller Type</label>
+                                                    <label for="tech" class="col-sm-6 control-label">Location</label>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <select class="form-control" id="seller_type" name="seller_type" required>
+                                                            <option value="">Seller Type</option>
+                                                            <?php echo $sellerType_html; ?>
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <select class="form-control" name="location" id="location" required>
+                                                            <option value="">Location</option>
+                                                            <?php echo $location_html; ?>
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                             </div>
-                                            <div class="form-group">
-                                                <label for="about" class="col-sm-6 control-label">Product Description</label>
-                                                <div class="col-sm-12">
-                                                    <textarea class="form-control" rows="5" name="description" placeholder="Write Description Here." required></textarea>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="about" class="col-sm-6 control-label">Product Description</label>
+                                            <div class="col-sm-12">
+                                                <textarea class="form-control" rows="5" name="description" placeholder="Write Description Here." required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-6 control-label">Images</label>
+                                            <div class="col-sm-6">
+                                                <label class="control-label small" for="file_img">Primary Image (jpg/png):</label>
+                                                <input type="file" name="file_img" accept=".png,image/jpg, image/jpeg" required>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <label class="control-label small col-sm-6" for="file_img">Other Images(Upto 3):</label>
+                                                </div>
+                                                <div class="row">
+                                                    <input type="file" class="col-sm-6" id="img_archive" name="img_archive[]" multiple="multiple" accept=".png,image/jpg, image/jpeg" required>
+
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-6 control-label">Images</label>
-                                                <div class="col-sm-6">
-                                                    <label class="control-label small" for="file_img">Primary Image (jpg/png):</label>
-                                                    <input type="file" name="file_img" accept=".png,image/jpg, image/jpeg" required>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="row">
-                                                        <label class="control-label small col-sm-6" for="file_img">Other Images(Upto 3):</label>
-                                                    </div>
-                                                    <div class="row">
-                                                        <input type="file" class="col-sm-6" id="img_archive" name="img_archive[]" multiple="multiple" accept=".png,image/jpg, image/jpeg" required>
-
-                                                    </div>
-                                                </div>
-                                            </div> <!-- form-group // -->
-                                            <hr>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-3 col-sm-12">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </div> <!-- form-group // -->
+                                        </div> <!-- form-group // -->
+                                        <hr>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-3 col-sm-12">
+                                                <button type="submit" name="submit" class="btn btn-primary color-primary">Submit</button>
+                                            </div>
+                                        </div> <!-- form-group // -->
                                     </form>
 
                                 </div><!-- panel-body // -->
@@ -418,13 +406,41 @@ $row = $user->getUser($_SESSION['u_id']);
 
                     </div>
 
+                <?php } else if (isset($_GET['viewproduct'])) { ?>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body ">
+
+                                <div class="container table-responsive py-5">
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Product Name</th>
+                                                <th scope="col">Product Quantity</th>
+                                                <th scope="col" class="text-center">Category</th>
+                                                <th scope="col" class="text-center">location </th>
+                                                <th scope="col" class="text-center">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php echo $userProducts_html; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 <?php } ?>
             </div>
 
         </div>
     </div>
 </body>
-<?php include "../../templates/footer.php"; ?>
+<?php
+include "../../templates/footer.php";
+include "../../templates/loadJS.php";
+?>
 <script src="../../resources/js/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -442,7 +458,7 @@ $row = $user->getUser($_SESSION['u_id']);
             var id = $("#category").val();
             // console.log(id);
             $.ajax({
-                url: '../../includes/ajax.inc.php',
+                url: '../../src/process/ajax.process.php',
                 type: 'post',
                 data: {
                     id: id
