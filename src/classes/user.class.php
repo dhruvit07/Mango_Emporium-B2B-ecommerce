@@ -1,5 +1,8 @@
 <?php
-// require '../../includes/class-autoload.inc.php';
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+if(defined("require")){
+      require $phpPath . "src/classes/config.class.php";
+}
 class user
 {
 

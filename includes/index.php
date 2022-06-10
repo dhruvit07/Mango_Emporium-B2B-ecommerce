@@ -1,2 +1,3 @@
 <?php
-// header("location: ../public/e404.html");
+require './path-config.inc.php';
+header("location: " . $phpPath . "public/e404.html");

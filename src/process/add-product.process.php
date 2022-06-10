@@ -1,6 +1,10 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 session_start();
-require '../../includes/class-autoload.inc.php';
+if(!function_exists("Autoloader"))
+{
+  require $phpPath . 'includes/class-autoload.inc.php';
+}
 
 if (isset($_POST['submit'])) {
     // echo "<pre>" . print_r($_FILES['img_archive']) . "</pre>";
@@ -29,7 +33,7 @@ if (isset($_POST['submit'])) {
         }
         if ($bool) {
             $_SESSION['msg'] = "Product Added!";
-            echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
+            header('location: ../../public/user/?msg&addproduct');
             exit();
         }
     }
@@ -65,25 +69,25 @@ function processImage($filetag, $i = 0)
                         return $fileDestination;
                     } else {
                         $_SESSION['msg'] = "Error Uploading!";
-                        echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
+                        header('../../public/user/?msg&addproduct');
                         exit();
                     }
                 } else {
                     // $error = true;
                     $_SESSION['msg'] = "File Size is too big! Choose a lower Resolution Image.";
-                    echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
+                    header('location: ../../public/user/?msg&addproduct');
                     exit();
                 }
             } else {
                 // $error = true;
                 $_SESSION['msg'] = "Error Uploading Image!! Try Again.";
-                echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
+                header('location: ../../public/user/?msg&addproduct');
                 exit();
             }
         } else {
             // $error = true;
             $_SESSION['msg'] = "Image Type Not Allowed!! Try a Diffrent Format eg. JPG, PNG, JPEG";
-            echo '<script>window.location.href="../../public/user/?msg&addproduct"</script>';
+            header('location: ../../public/user/?msg&addproduct');
             exit();
         }
     }

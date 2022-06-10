@@ -1,4 +1,5 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 session_start();
 if (isset($_GET['key']) && isset($_GET['token'])) {
   $key = $_GET['key'];
@@ -38,10 +39,12 @@ if (isset($_GET['key']) && isset($_GET['token'])) {
     visibility: visible;
   }
 </style>
-<link href="../../resources/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="icon" type="image/x-icon" href="<?php echo $htmlPath; ?>/resources/img/favicon.png">
+<title>Forgot Password</title>
+<link href="<?php echo $htmlPath; ?>/resources/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- <link href="../../resources/css/style.css" rel="stylesheet"> -->
-<script src="../../resources/js/bootstrap.min.js"></script>
-<script src="../../resources/js/jquery.min.js"></script>
+<script src="<?php echo $htmlPath; ?>/resources/js/bootstrap.min.js"></script>
+<script src="<?php echo $htmlPath; ?>/resources/js/jquery.min.js"></script>
 
 <!------ Include the above in your HEAD tag ---------->
 <style>
@@ -76,7 +79,7 @@ if (isset($_GET['key']) && isset($_GET['token'])) {
               <h2 class="text-center">Forgot Password?</h2>
               <p>Enter Your New Password Here.</p>
               <div class="panel-body">
-                <form id="form1" action="../../src/process/auth/forgot-auth.process.php" role="form" autocomplete="off" class="form" method="post">
+                <form id="form1" action="<?php echo $htmlPath; ?>/src/process/auth/forgot-auth.process.php" role="form" autocomplete="off" class="form" method="post">
 
                   <div class="form-group">
                     <div class="input-group">
@@ -99,7 +102,7 @@ if (isset($_GET['key']) && isset($_GET['token'])) {
               <h2 class="text-center">Forgot Password?</h2>
               <p>You can reset your password here.</p>
               <div class="panel-body">
-                <form id="form2" action="../../src/process/auth/forgot-auth.process.php" role="form" autocomplete="off" class="form" method="post">
+                <form id="form2" action="<?php echo $htmlPath; ?>/src/process/auth/forgot-auth.process.php" role="form" autocomplete="off" class="form" method="post">
 
                   <div class="form-group">
                     <div class="input-group">

@@ -1,4 +1,5 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 
 $user_obj = new user();
 $product = new product();
@@ -33,7 +34,7 @@ if ($item->num_rows == 0) {
         $status = $row['status'] == 1 ? "Approved" : "Pending";
         $status_class = $row['status'] == 1 ? "duccess" : "danger";
         $userProducts_html .= '<tr>
-    <td ><a href="../store/product.php?id=' . $row['id'] . '">' . $row["product_name"] . '</a></td>
+    <td ><a href="'.$htmlPath.'/public/store/product.php?id=' . $row['id'] . '">' . $row["product_name"] . '</a></td>
     <td >' . $row["product_quantity"] . '</td>
     <td class="text-center">' . $category['category_name'] . '</td>
     <td class="text-center">' . $location['location'] . '</td>

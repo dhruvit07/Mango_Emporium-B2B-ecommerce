@@ -1,16 +1,18 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 session_start();
-if(!isset($_SESSION['access'])){
-    header("location: 404");
+if (!isset($_SESSION['access'])) {
+    header("location: ../e404.html");
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+	<link rel="icon" type="image/x-icon" href="<?php echo $htmlPath; ?>/resources/img/favicon.png">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/bootstrap.min.css" />
     <style>
         * {
             box-sizing: border-box;
@@ -92,8 +94,9 @@ if(!isset($_SESSION['access'])){
                 max-width: 70px;
             }
         }
-        br{
-           /* display: none; */
+
+        br {
+            /* display: none; */
         }
     </style>
 
@@ -103,10 +106,10 @@ if(!isset($_SESSION['access'])){
 
 <body>
     <div class="container">
-    <?php
-          if (isset($_GET['error']) && isset($_SESSION['error'])) {
+        <?php
+        if (isset($_GET['error']) && isset($_SESSION['error'])) {
             echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
-            <strong>'.$_SESSION["error"].'</strong> 
+            <strong>' . $_SESSION["error"] . '</strong> 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -131,13 +134,17 @@ if(!isset($_SESSION['access'])){
             <small onclick="sub()" class="info">
                 Submit
             </small>
+            <small id="resend" class="info">
+                Resend
+            </small>
             <button style="visibility:hidden;" type="submit" id="button"></button>
             <form>
     </div>
+    <script src="<?php echo $htmlPath; ?>/resources/js/jquery.min.js"></script>
     <script>
-        const codes = document.querySelectorAll('.code')
+        const codes = document.querySelectorAll('.code');
 
-        codes[0].focus()
+        codes[0].focus();
 
         codes.forEach((code, idx) => {
             code.addEventListener('keydown', (e) => {
@@ -148,7 +155,7 @@ if(!isset($_SESSION['access'])){
                     setTimeout(() => codes[idx - 1].focus(), 10)
                 }
             })
-        })
+        });
 
         function sub() {
             const code = codes[0].value + codes[1].value + codes[2].value + codes[3].value + codes[4].value + codes[5].value;
@@ -157,6 +164,23 @@ if(!isset($_SESSION['access'])){
             var but = document.getElementById("button").click();
 
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            resend = true
+            $("#resend").click(function() {
+                $.ajax({
+                    url: "<?php echo $htmlPath; ?>/src/process/auth/register-auth.process.php",
+                    type: 'post',
+                    data: {
+                        resend: resend
+                    },
+                    success: function(result) {
+                        console.log(result);
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

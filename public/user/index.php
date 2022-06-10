@@ -1,16 +1,21 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+
 session_start();
 if (!isset($_SESSION['loggedin'])) {
     header("location: ../e404.html");
 }
 define("MYSITE", true);
-require '../../includes/class-autoload.inc.php';
-require '../../includes/user-product.inc.php';
+if (!function_exists("Autoloader")) {
+    require $phpPath . 'includes/class-autoload.inc.php';
+}
+require $phpPath . 'includes/user-product.inc.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <link rel="icon" type="image/x-icon" href="<?php echo $htmlPath; ?>/resources/img/favicon.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,17 +26,17 @@ require '../../includes/user-product.inc.php';
     <!-- <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap.min.css" /> -->
 
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="../../resources/css/slick.css" />
-    <link type="text/css" rel="stylesheet" href="../../resources/css/slick-theme.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/slick.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/slick-theme.css" />
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="../../resources/css/nouislider.min.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/nouislider.min.css" />
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="../../resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/font-awesome.min.css">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="../../resources/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/style.css" />
 
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <title>Profile</title>
@@ -143,10 +148,10 @@ require '../../includes/user-product.inc.php';
             <ul class="header-links pull-right">
                 <!-- <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li> -->
                 <?php if (isset($_SESSION['loggedin'])) { ?>
-                    <li><a href="../public/user/?profile"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li><a href="<?php echo $htmlPath; ?>/public/user/?profile"><i class="fa fa-user-o"></i> My Account</a></li>
                 <?php } else { ?>
-                    <li><a href="../public/auth/?register"><i class="fa fa-user-o"></i> Join here</a></li>
-                    <li><a href="../public/auth/"><i class="fa fa-user-o"></i> Sign in</a></li>
+                    <li><a href="<?php echo $htmlPath; ?>/public/auth/?register"><i class="fa fa-user-o"></i> Join here</a></li>
+                    <li><a href="<?php echo $htmlPath; ?>/public/auth/"><i class="fa fa-user-o"></i> Sign in</a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -158,7 +163,7 @@ require '../../includes/user-product.inc.php';
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?php echo $htmlPath; ?>/public/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">User Profile</li>
                 </ol>
             </nav>
@@ -183,29 +188,29 @@ require '../../includes/user-product.inc.php';
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="../../resources/img/profile_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="34"></img>
+                                    <img src="<?php echo $htmlPath; ?>/resources/img/profile_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="34"></img>
                                     <a href="./?profile">Profile</a>
                                 </h6>
                                 <span class="text-secondary">Profile</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="../../resources/img/product_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <img src="<?php echo $htmlPath; ?>/resources/img/product_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
                                     <a href="./?addproduct">Add Product</a>
                                 </h6>
                                 <span class="text-secondary">Product</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="../../resources/img/myproduct_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <img src="<?php echo $htmlPath; ?>/resources/img/myproduct_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
                                     <a href="./?viewproduct">My Product</a>
                                 </h6>
                                 <span class="text-secondary">My Product</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="../../resources/img/logout_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
-                                    <a href="../../src/process/auth/logout.process.php">Logout</a>
+                                    <img src="<?php echo $htmlPath; ?>/resources/img/logout_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <a href="<?php echo $htmlPath; ?>/src/process/auth/logout.process.php">Logout</a>
                                 </h6>
                                 <span class="text-secondary">Logout</span>
                             </li>
@@ -281,7 +286,7 @@ require '../../includes/user-product.inc.php';
                                 <hr>
                                 <div class="panel-body">
 
-                                    <form action="../../src/process/add-product.process.php" id="form" method="post" enctype="multipart/form-data">
+                                    <form action="<?php echo $htmlPath; ?>/src/process/add-product.process.php" id="form" method="post" enctype="multipart/form-data">
 
 
                                         <div class="form-group">
@@ -304,7 +309,7 @@ require '../../includes/user-product.inc.php';
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <input type="number" class="form-control" name="price" id="name" placeholder="Product Quantity" required>
+                                                        <input type="number" class="form-control" name="price" id="name" placeholder="Product Price" required>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <input type="number" class="form-control" name="quantity" id="name" placeholder="Product Quantity" required>
@@ -368,7 +373,7 @@ require '../../includes/user-product.inc.php';
                                         <div class="form-group">
                                             <label for="about" class="col-sm-6 control-label">Product Description</label>
                                             <div class="col-sm-12">
-                                                <textarea class="form-control" rows="5" name="description" placeholder="Write Description Here." required></textarea>
+                                                <textarea class="form-control" name="description" id="mytextarea" rows="20">Enter Your Thread Here.</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -438,10 +443,33 @@ require '../../includes/user-product.inc.php';
     </div>
 </body>
 <?php
-include "../../templates/footer.php";
-include "../../templates/loadJS.php";
+include $phpPath . "templates/footer.php";
+include $phpPath . "templates/loadJS.php";
 ?>
 <script src="../../resources/js/jquery.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/c7z8wx5m5u6j9yj237a233drpztw21qo2l4k45cxbzch4qov/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        height: 300,
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        menu: {
+            file: {
+                title: 'File',
+                items: 'preview'
+            },
+            insert: {
+                title: 'Insert',
+                items: 'charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime'
+            },
+            format: {
+                title: 'Format',
+                items: 'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat'
+            }
+        },
+        toolbar_mode: 'floating',
+    });
+</script>
 <script>
     $(document).ready(function() {
         var bool;
@@ -458,7 +486,7 @@ include "../../templates/loadJS.php";
             var id = $("#category").val();
             // console.log(id);
             $.ajax({
-                url: '../../src/process/ajax.process.php',
+                url: '<?php echo $htmlPath; ?>/src/process/ajax.process.php',
                 type: 'post',
                 data: {
                     id: id
@@ -475,7 +503,7 @@ include "../../templates/loadJS.php";
 
         $('#form').submit(function(e) {
             if (bool) {
-                e.preventDefault();
+                // e.preventDefault();
             }
         });
 

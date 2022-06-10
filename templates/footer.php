@@ -1,4 +1,5 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 if(!defined("MYSITE"))
 {
 	header("location: ../public/404");
@@ -9,8 +10,7 @@ if(!defined("MYSITE"))
 <div id="newsletter" class="">
 			<!-- container -->
 			<?php 
-    $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-			if(strpos($url, 'index') === true){ ?>
+			if(strpos($GLOBALS['url'], 'index') === true){ ?>
 			<div class="container" >
 				<!-- row -->
 				<div class="row">
@@ -50,10 +50,10 @@ if(!defined("MYSITE"))
 			<!-- top footer -->
 			<div class="section">
 				<!-- container -->
-				<div class="container" style="margin: 30px; width: 100%;">
+				<div class="container" style="padding-left: 50px; width: 100%;">
 					<!-- row -->
 					<div class="row">
-						<div class="col-md-3 col-xs-6">
+						<div class="col-md-3 col-xs-6 ">
 							<div class="footer">
 								<h3 class="footer-title">About Us</h3>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
@@ -62,8 +62,9 @@ if(!defined("MYSITE"))
 									<li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
 									<li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
 								</ul>
+								</div>
 							</div>
-						</div>
+
 
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
@@ -78,8 +79,19 @@ if(!defined("MYSITE"))
 							</div>
 						</div>
 
-						<div class="clearfix visible-xs"></div>
-
+						<!-- <div class="clearfix visible-xs"></div> -->
+						<div class="col-md-3 col-xs-6">
+							<div class="footer">
+								<h3 class="footer-title">Service</h3>
+								<ul class="footer-links">
+									<li><a href="#">My Account</a></li>
+									<li><a href="#">View Cart</a></li>
+									<li><a href="#">Wishlist</a></li>
+									<li><a href="#">Track My Order</a></li>
+									<li><a href="#">Help</a></li>
+								</ul>
+							</div>
+						</div>
 						<div class="col-md-3 col-xs-6">
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
@@ -93,19 +105,9 @@ if(!defined("MYSITE"))
 							</div>
 						</div>
 
-						<div class="col-md-3 col-xs-6">
-							<div class="footer">
-								<h3 class="footer-title">Service</h3>
-								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
-								</ul>
-							</div>
-						</div>
+						
 					</div>
+
 					<!-- /row -->
 				</div>
 				<!-- /container -->

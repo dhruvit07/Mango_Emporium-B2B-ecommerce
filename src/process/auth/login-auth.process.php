@@ -1,7 +1,11 @@
-
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+
 session_start();
-require "../../../includes/class-autoload.inc.php";
+if(!function_exists("Autoloader"))
+{
+  require $phpPath . 'includes/class-autoload.inc.php';
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
