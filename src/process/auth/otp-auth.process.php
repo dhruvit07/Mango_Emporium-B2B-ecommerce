@@ -1,5 +1,10 @@
 <?php
-require "../../../includes/class-autoload.inc.php";
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+if(!function_exists("Autoloader"))
+{
+  require $phpPath . 'includes/class-autoload.inc.php';
+}
+
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -16,8 +21,13 @@ $password = $_SESSION["password"];
 $phone = $_SESSION["phone"];
 $otpv = $_POST['otp'];
 $encrypted_pass = md5($password);
-
-if ($otp == $otpv) {
+$otp_correct = false;
+foreach ($otp as $value) {
+    if ($value == $otpv) {
+        $otp_correct = true;
+    }
+}
+if ($otp_correct) {
     //Query
     $bool = $_register->register($name, $email, $password, $phone);
     if ($bool) {

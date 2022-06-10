@@ -1,10 +1,12 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header("location: ../../public/e404.html");
     exit();
 }
-// session_start();
-// require "../../includes/class-autoload.inc.php";
+if(defined("require")){
+      require $phpPath . "src/classes/config.class.php";
+}
 class auth
 {
     private $name;
@@ -94,9 +96,13 @@ class auth
         $insert_sql = "SELECT otp FROM `otp` WHERE email = '$email';";
         $result = $this->conn->query($insert_sql);
         if ($result->num_rows > 0) {
-            if ($row = $result->fetch_assoc()) {
-                return $row['otp'];
+            $otp = array();
+            $i=0;
+            while ($row = $result->fetch_assoc()) {
+               $otp[$i]=$row['otp'];
+               $i++;
             }
+            return $otp;
         } else {
             return false;
         }
