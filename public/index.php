@@ -1,54 +1,21 @@
 <?php
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 session_start();
+
 define("MYSITE", true);
-include_once "../templates/header.php";
+
+include_once $phpPath . "templates/header.php";
+require $phpPath . 'src/process/index.process.php';
 ?>
 <!-- SECTION -->
+
 <div class="section">
 	<!-- container -->
 	<div class="container">
 		<!-- row -->
 		<div class="row">
 			<!-- shop -->
-			<div class="col-md-4 col-xs-6">
-				<div class="shop">
-					<div class="shop-img">
-						<img src="../resources/img/shop01.png" alt="">
-					</div>
-					<div class="shop-body">
-						<h3>Laptop<br>Collection</h3>
-						<a href="#" class="cta-btn">Visit now <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- /shop -->
-
-			<!-- shop -->
-			<div class="col-md-4 col-xs-6">
-				<div class="shop">
-					<div class="shop-img">
-						<img src="../resources/img/shop03.png" alt="">
-					</div>
-					<div class="shop-body">
-						<h3>Accessories<br>Collection</h3>
-						<a href="#" class="cta-btn">Visit now <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
-				</div>
-			</div>
-			<!-- /shop -->
-
-			<!-- shop -->
-			<div class="col-md-4 col-xs-6">
-				<div class="shop">
-					<div class="shop-img">
-						<img src="../resources/img/shop02.png" alt="">
-					</div>
-					<div class="shop-body">
-						<h3>Cameras<br>Collection</h3>
-						<a href="#" class="cta-btn">Visit now <i class="fa fa-arrow-circle-right"></i></a>
-					</div>
-				</div>
-			</div>
+			<?php echo $collectionHTML; ?>
 			<!-- /shop -->
 		</div>
 		<!-- /row -->
@@ -71,7 +38,7 @@ include_once "../templates/header.php";
 					<div class="section-nav">
 						<ul class="section-tab-nav tab-nav">
 							<li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-							<li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+							<li><a data-toggle="tab" href="#">Smartphones</a></li>
 							<li><a data-toggle="tab" href="#tab1">Cameras</a></li>
 							<li><a data-toggle="tab" href="#tab1">Accessories</a></li>
 						</ul>
@@ -120,7 +87,7 @@ include_once "../templates/header.php";
 								<!-- product -->
 								<div class="product">
 									<div class="product-img">
-										<img src="../resources/img/product02.png" alt="">
+										<img src="<?php echo $htmlPath; ?>/resources/img/product02.png" alt="">
 										<div class="product-label">
 											<span class="new">NEW</span>
 										</div>
@@ -149,7 +116,7 @@ include_once "../templates/header.php";
 								<!-- product -->
 								<div class="product">
 									<div class="product-img">
-										<img src="../resources/img/product03.png" alt="">
+										<img src="<?php echo $htmlPath; ?>/resources/img/product03.png" alt="">
 										<div class="product-label">
 											<span class="sale">-30%</span>
 										</div>
@@ -173,7 +140,7 @@ include_once "../templates/header.php";
 								<!-- product -->
 								<div class="product">
 									<div class="product-img">
-										<img src="../resources/img/product04.png" alt="">
+										<img src="<?php echo $htmlPath; ?>/resources/img/product04.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -199,7 +166,7 @@ include_once "../templates/header.php";
 								<!-- product -->
 								<div class="product">
 									<div class="product-img">
-										<img src="../resources/img/product05.png" alt="">
+										<img src="<?php echo $htmlPath; ?>/resources/img/product05.png" alt="">
 									</div>
 									<div class="product-body">
 										<p class="product-category">Category</p>
@@ -308,9 +275,9 @@ include_once "../templates/header.php";
 								<!-- product -->
 								<div class="product">
 									<div class="product-img">
-										<img src="../resources/img/product06.png" alt="">
+										<img src="<?php echo $htmlPath; ?>/resources/img/product06.png" alt="">
 										<div class="product-label">
-											<span class="sale">-30%</span>
+											<!-- <span class="sale">-30%</span> -->
 											<span class="new">NEW</span>
 										</div>
 									</div>
@@ -318,137 +285,18 @@ include_once "../templates/header.php";
 										<p class="product-category">Category</p>
 										<h3 class="product-name"><a href="#">product name goes here</a></h3>
 										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
+
+										<!-- <div class="product-btns"> -->
+										<div id="button" style="text-align: center; width: 50%; margin: 10px 25%;">
+											<div id="translate"></div>
+											<button type="button" id="filter_button" name="filter" class="button" style="width:98%"> View</button>
 										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
+										<!-- </div> -->
 									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
+
 								</div>
 								<!-- /product -->
 
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="../resources/img/product07.png" alt="">
-										<div class="product-label">
-											<span class="new">NEW</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="../resources/img/product08.png" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="../resources/img/product09.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="../resources/img/product01.png" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Category</p>
-										<h3 class="product-name"><a href="#">product name goes here</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
-								</div>
-								<!-- /product -->
 							</div>
 							<div id="slick-nav-2" class="products-slick-nav"></div>
 						</div>
@@ -483,7 +331,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product07.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product07.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Electronics</p>
@@ -496,7 +344,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product08.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product08.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Accessories</p>
@@ -509,7 +357,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product09.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product09.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -524,7 +372,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product01.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product01.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -537,7 +385,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product02.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product02.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -550,7 +398,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product03.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product03.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -576,7 +424,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product04.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product04.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -602,7 +450,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product06.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product06.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -617,7 +465,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product07.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product07.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -630,7 +478,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product08.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product08.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -643,7 +491,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product09.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product09.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -671,7 +519,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product01.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product01.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -684,7 +532,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product02.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product02.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -697,7 +545,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product03.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product03.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -712,7 +560,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product04.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product04.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -738,7 +586,7 @@ include_once "../templates/header.php";
 						<!-- product widget -->
 						<div class="product-widget">
 							<div class="product-img">
-								<img src="../resources/img/product06.png" alt="">
+								<img src="<?php echo $htmlPath; ?>/resources/img/product06.png" alt="">
 							</div>
 							<div class="product-body">
 								<p class="product-category">Category</p>
@@ -758,8 +606,8 @@ include_once "../templates/header.php";
 </div>
 <!-- /SECTION -->
 
-<?php include_once "../templates/footer.php"; 
-	  include_once "../templates/loadJS.php";
+<?php include_once $phpPath . "templates/footer.php";
+include_once $phpPath . "templates/loadJS.php";
 ?>
 <!-- jQuery Plugins -->
 
