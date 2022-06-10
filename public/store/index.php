@@ -1,60 +1,92 @@
 <?php
-session_start();
+require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+// session_start();
 define("MYSITE", true);
-include_once "../../templates/header.php";
-require '../../includes/class-autoload.inc.php';
-require '../../src/process/store.process.php';
+include_once $phpPath . "templates/header.php";
+if (!function_exists("Autoloader")) {
+	require $phpPath . 'includes/class-autoload.inc.php';
+}
+require $phpPath . 'src/process/store.process.php';
 ?>
 <style>
-	@media screen and (max-width: 960px) {
-		#aside {
-			display: none;
+	@media screen and (max-width: 991px) {
+		.filter-close {
+			/* display: none; */
+			height: 0;
+			transition: 0.5s;
+			overflow: hidden;
+		}
+
+		.filter-open {
+			transition: 0.5s;
+			height: 900px;
 		}
 	}
 
-	input[type="checkbox"] {
-		float: left;
-		margin: 0 auto;
-		width: 100%;
+	.modal-window {
+		position: fixed;
+		background-color: rgba(10, 10, 10, 0.4);
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 999;
+		visibility: hidden;
+		opacity: 0;
+		pointer-events: none;
+		transition: all 0.3s;
 	}
 
-	button,
-	input[type="submit"],
-	input[type="reset"] {
-		background: none;
-		color: inherit;
-		/* border: none; */
-		padding: 0;
-		font: inherit;
-		cursor: pointer;
-		outline: inherit;
+	.modal-window:target {
+		visibility: visible;
+		opacity: 1;
+		pointer-events: auto;
 	}
 
-	.button {
-		/* margin-top: 20px; */
-		border: none;
-		padding: 10px;
-	}
-
-	.button:hover {
-		border: 4px solid gainsboro !important;
-		/* margin-top: 20px; */
-		/* width: 100%; */
-		padding: 10px;
-	}
-
-	.pl-0 {
-		padding-left: 0;
-	}
-
-	.position-unset {
-		position: unset;
-	}
-
-	.product-btnn {
+	.modal-window>div {
+		width: 400px;
 		position: absolute;
-		bottom: 20px;
-		right: 20px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 2em;
+		background: white;
+		/* box-shadow: 0px 0px 13px 1px rgba(158,153,158,0.76); */
+	}
+
+	.modal-window header {
+		font-weight: bold;
+	}
+
+	.modal-window h1 {
+		font-size: 150%;
+		margin: 0 0 15px;
+	}
+
+
+	.modal-close {
+		color: #aaa;
+		line-height: 50px;
+		font-size: 80%;
+		position: absolute;
+		right: -5px;
+		text-align: center;
+		top: 10px;
+		width: 70px;
+		text-decoration: none;
+	}
+
+	.modal-close:hover {
+		color: black;
+	}
+
+
+	.modal-window>div {
+		border-radius: 3px;
+	}
+
+	.modal-window div:not(:last-of-type) {
+		margin-bottom: 15px;
 	}
 </style>
 
@@ -66,8 +98,8 @@ require '../../src/process/store.process.php';
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="breadcrumb-tree">
-					<li><a href="../../public/">Home</a></li>
-					<li class="active">store (<?php echo $totalProduct;  ?> Results)</li>
+					<li><a href="<?php echo $htmlPath; ?>/public/">Home</a></li>
+					<li class="active">Store</li>
 				</ul>
 			</div>
 		</div>
@@ -84,12 +116,14 @@ require '../../src/process/store.process.php';
 		<!-- row -->
 		<div class="row justify-content-center">
 			<!-- ASIDE -->
-			<div id="aside" class="col-md-3 col-sm-12  text-center">
+			<div id="aside" class=" filter-close col-md-3 col-sm-12  text-center">
 				<!-- aside Widget -->
-				<form id="fliter" method="post">
+				<form id="filter_form" method="post">
 					<div class="aside">
 						<h3 class="aside-title">Categories</h3>
-						<?php echo $category_html; ?>
+						<div class="checkbox-filter">
+							<?php echo $category_html; ?>
+						</div>
 					</div>
 
 					<div class="aside">
@@ -124,12 +158,15 @@ require '../../src/process/store.process.php';
 							</div>
 						</div>
 					</div>
+					<div class="aside">
+						<div id="button">
+							<div id="translate"></div>
+							<button type="button" id="filter_button" name="filter" class="button" style="width:98%"> Apply Filter</button>
+						</div>
+					</div>
 					<!-- /aside Widget -->
 
 					<!-- aside Widget -->
-					<div class="aside">
-						<button type="button" class="button btn-color" style="width:98%"> Apply Filter</button>
-					</div>
 					<!-- /aside Widget -->
 				</form>
 
@@ -139,7 +176,7 @@ require '../../src/process/store.process.php';
 			<!-- /ASIDE -->
 
 			<!-- STORE -->
-			<div id="store" class="col-md-9 col-sm-12 col-xs-12">
+			<div id="store" class="col-md-9 col-sm-12 col-xs-12 ">
 				<!-- store top filter -->
 				<div class="store-filter clearfix">
 					<div class="store-sort">
@@ -150,42 +187,37 @@ require '../../src/process/store.process.php';
 								<option value="1">Position</option>
 							</select>
 						</label>
-
-						<label>
-							Show:
-							<select class="input-select">
-								<option value="0">20</option>
-								<option value="1">50</option>
-							</select>
-						</label>
 					</div>
 					<ul class="store-grid" id="filter">
 						Filter:
-						<li><a href="#" class="active"><i class="fa fa-th-list"></i></a></li>
+						<li><a class="active"><i class="fa fa-th-list"></i></a></li>
 					</ul>
 				</div>
 				<!-- /store top filter -->
 
 				<!-- store products -->
 				<!-- product -->
-				<?php echo $product; ?>
+				<div class="body">
+					<div class="" id="loader">
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+				</div>
+				<div id="pruduct_html">
+					<?php
+					if (isset($_GET['category']) && isset($_GET['sub']) && $_GET['sub'] != "" && $_GET['category'] != "") {
+						echo $product;
+					}
+					?>
+				</div>
 				<!-- /product -->
-				<div class="clearfix visible-sm visible-xs"></div>
 				<!-- /product -->
 
 				<!-- /store products -->
 
 				<!-- store bottom filter -->
-				<div class="store-filter clearfix">
-					<span class="store-qty">Showing 20-100 products</span>
-					<ul class="store-pagination">
-						<li class="active">1</li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-					</ul>
-				</div>
+
 				<!-- /store bottom filter -->
 			</div>
 			<!-- /STORE -->
@@ -194,28 +226,149 @@ require '../../src/process/store.process.php';
 	</div>
 	<!-- /container -->
 </div>
+
+
 <!-- /SECTION -->
+</body>
+
+
+<div id="open-modal" class="modal-window">
+	<div>
+		<a href="#" title="Close" class="modal-close">
+			<svg version="1.1" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+				<g>
+					<path d="M962.2,13.3l24.4,24.4L34.4,989.8L10,965.5L962.2,13.3z" />
+					<path d="M39.2,10L990,960.9L960.9,990L10.1,39.1L39.2,10L39.2,10z" />
+				</g>
+			</svg>
+		</a>
+	</div>
+</div>
 
 
 
 <!-- FOOTER -->
+<?php
+include_once $phpPath . "templates/footer.php";
 
+include_once $phpPath . "templates/loadJS.php";
+?>
 <!-- /FOOTER -->
 
 <!-- jQuery Plugins -->
-</body>
-
-<?php
-include_once "../../templates/footer.php";
-
-include_once "../../templates/loadJS.php";
-?>
-
 <script>
 	$(document).ready(function() {
+		var page_id = 1;
+		<?php
+		if (isset($_GET['category']) && isset($_GET['sub']) && $_GET['sub'] != "" && $_GET['category'] != "") {
+		} else {
+		?>
+			loadProduct(page_id);
+		<?php } ?>
 		$('#filter').click(function() {
-			$('#aside').toggle();
+			if ($(document).width() < 991) {
+
+				if ($('#aside').hasClass('filter-close')) {
+					$('#aside').removeClass('filter-close');
+					$('#aside').addClass('filter-open');
+
+					$('html, body').animate({
+						scrollTop: 400
+					}, 700);
+
+				} else if ($('#aside').hasClass('filter-open')) {
+
+					$('html, body').animate({
+						scrollTop: 0
+					}, 900);
+
+					$('#aside').removeClass('filter-open');
+					$('#aside').addClass('filter-close');
+
+				}
+			}
 		});
+
+		$('#filter_button').click(function() {
+
+			$("#loader").addClass('loading');
+			$("#pruduct_html").html("");
+
+			var location = new getChecked("location");
+			var sellerType = new getChecked("sellertype");
+			var category = new getChecked("category");
+			var filter = $('#filter_button').val();
+			var priceMin = $('#price-min').val();
+			var priceMax = $('#price-max').val();
+
+			function getChecked(name) {
+				var arr = new Array();
+				$("input:checkbox[name=" + name + "]:checked").each(function() {
+					arr.push($(this).val());
+				});
+				return arr;
+			}
+			
+			$.ajax({
+				url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
+				type: 'post',
+				data: {
+					category: category,
+					sellerType: sellerType,
+					location: location,
+					filter: filter,
+					priceMin: priceMin,
+					priceMax: priceMax,
+					page_no: 1
+				},
+				success: function(result) {
+					console.log(result);
+					setTimeout(function() {
+						$("#loader").removeClass('loading');
+						$("#pruduct_html").html(result);
+					}, 500);
+
+
+				}
+			});
+		});
+
+		$('.modal-close').click(function() {
+			window.location.href = "#";
+		});
+
+		$(document).on("click", "#pagination li a", function(e) {
+
+			$("#loader").addClass('loading');
+			$("#pruduct_html").html("");
+
+			$('html, body').animate({
+				scrollTop: 300
+			}, 1000);
+
+			e.preventDefault();
+			page_id = $(this).attr("id");
+			loadProduct(page_id);
+
+		});
+
+		function loadProduct(page_id) {
+
+			$.ajax({
+				url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
+				type: 'post',
+				data: {
+					page_no: page_id
+				},
+				success: function(result) {
+					setTimeout(function() {
+						$("#loader").removeClass('loading');
+						$("#pruduct_html").html(result);
+					}, 500);
+				}
+			});
+			
+		}
 	});
 </script>
 
