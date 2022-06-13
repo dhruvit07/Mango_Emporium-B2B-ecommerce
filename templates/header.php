@@ -49,6 +49,10 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
  		<![endif]-->
 	<style>
 		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+		a{
+			color: black;
+			all: unset;
+		}
 	</style>
 </head>
 
@@ -82,17 +86,17 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 				<!-- row -->
 				<div class="row">
 					<!-- LOGO -->
-					<div class="col-md-3">
-						<div class="header-logo">
-							<a href="#" class="logo img-responsive">
-								<img style="height:70px;width:220px;object-fit:cover;" src="<?php echo $htmlPath; ?>/resources/img/logo.svg" alt="">
+					<div class="col-md-6" style="margin: 0 25%;">
+						<!-- <div class="header-logo" style="margin: 0 25%;"> -->
+							<a href="#" class="logo ">
+								<img style="margin: 0 auto;height:100px;width:300px;object-fit:cover;" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.svg" alt="">
 							</a>
-						</div>
+						<!-- </div> -->
 					</div>
 					<!-- /LOGO -->
 
 					<!-- SEARCH BAR -->
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<div class="header-search">
 							<form>
 								<select class="input-select">
@@ -100,7 +104,7 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 									<?php echo $searchBarCategoryOptionHTML; ?>
 								</select>
 								<input class="input" placeholder="Search here">
-								<button class="search-btn" style="text-align:center;">Search</button>
+								<button class="search-btn" style="text-align:center; height:41px;margin-bottom:1px;">Search</button>
 							</form>
 						</div>
 					</div>
@@ -109,15 +113,7 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 					<!-- ACCOUNT -->
 					<div class="col-md-3 clearfix">
 						<div class="header-ctn">
-							<!-- Wishlist -->
-							<div>
-								<a href="#">
-									<i class="fa fa-heart-o"></i>
-									<span>Your Wishlist</span>
-									<div class="qty">2</div>
-								</a>
-							</div>
-							<!-- /Wishlist -->
+
 
 							<!-- Menu Toogle -->
 							<div class="menu-toggle">
@@ -151,15 +147,23 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 					if (strpos($_url, 'store') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li class="active"><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>';
+								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
+								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					} else if (strpos($_url, 'category') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 							<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-							<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>';
+							<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>
+							<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
+					} else if (strpos($_url, 'content') !== false) {
+						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+							<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
+							<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
+							<li class="active"><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					} else if (strpos($_url, 'public') !== false) {
 						echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
 							<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-							<li><a href="' . $htmlPath . '/public/category">Categories</a></li>';
+							<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
+							<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					}
 					?>
 
