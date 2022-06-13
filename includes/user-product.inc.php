@@ -32,9 +32,9 @@ if ($item->num_rows == 0) {
         $category = $product->getProductCategory($row['product_category']);
         $location = $product->getProductLocation($row['location']);
         $status = $row['status'] == 1 ? "Approved" : "Pending";
-        $status_class = $row['status'] == 1 ? "duccess" : "danger";
+        $status_class = $row['status'] == 1 ? "success" : "danger";
         $userProducts_html .= '<tr>
-    <td ><a href="'.$htmlPath.'/public/store/product.php?id=' . $row['id'] . '">' . $row["product_name"] . '</a></td>
+    <td ><a href="'.$htmlPath.'/public/store/product?id=' . $row['id'] . '">' . $row["product_name"] . '</a></td>
     <td >' . $row["product_quantity"] . '</td>
     <td class="text-center">' . $category['category_name'] . '</td>
     <td class="text-center">' . $location['location'] . '</td>
