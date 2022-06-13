@@ -32,7 +32,7 @@ include_once $phpPath . "templates/header.php";
 	}
 
 	a {
-		color: #0da9ef;
+		/* color: #0da9ef; */
 		text-decoration: none !important;
 	}
 

@@ -39,6 +39,8 @@ require $phpPath . 'includes/user-product.inc.php';
     <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/style.css" />
 
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css rel="stylesheet" />
     <title>Profile</title>
     <style>
         a,
@@ -417,7 +419,7 @@ require $phpPath . 'includes/user-product.inc.php';
                             <div class="card-body ">
 
                                 <div class="container table-responsive py-5">
-                                    <table class="table table-bordered table-hover">
+                                    <table id="table" class=" table-striped table table-bordered table-hover">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th scope="col">Product Name</th>
@@ -448,7 +450,12 @@ include $phpPath . "templates/loadJS.php";
 ?>
 <script src="../../resources/js/jquery.min.js"></script>
 <script src="https://cdn.tiny.cloud/1/c7z8wx5m5u6j9yj237a233drpztw21qo2l4k45cxbzch4qov/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js" referrerpolicy="origin"></script>
 <script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
     tinymce.init({
         selector: 'textarea',
         height: 300,

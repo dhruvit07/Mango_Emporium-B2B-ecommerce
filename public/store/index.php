@@ -1,12 +1,11 @@
 <?php
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
-// session_start();
 define("MYSITE", true);
-include_once $phpPath . "templates/header.php";
 if (!function_exists("Autoloader")) {
 	require $phpPath . 'includes/class-autoload.inc.php';
 }
-require $phpPath . 'src/process/store.process.php';
+require $phpPath . 'includes/store.inc.php';
+include_once $phpPath . "templates/header.php";
 ?>
 <style>
 	@media screen and (max-width: 991px) {
@@ -25,7 +24,7 @@ require $phpPath . 'src/process/store.process.php';
 
 	.modal-window {
 		position: fixed;
-		background-color: rgba(10, 10, 10, 0.4);
+		background-color: rgba(10, 10, 10, 0.7);
 		top: 0;
 		right: 0;
 		bottom: 0;
@@ -34,7 +33,7 @@ require $phpPath . 'src/process/store.process.php';
 		visibility: hidden;
 		opacity: 0;
 		pointer-events: none;
-		transition: all 0.3s;
+		transition: all 0.5s;
 	}
 
 	.modal-window:target {
@@ -44,7 +43,7 @@ require $phpPath . 'src/process/store.process.php';
 	}
 
 	.modal-window>div {
-		width: 400px;
+		width: 50%;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -242,6 +241,24 @@ require $phpPath . 'src/process/store.process.php';
 				</g>
 			</svg>
 		</a>
+		<div class="input-group">
+			<i class='bx bx-mail-send'></i>
+			<label for="email"> Email*</label>
+			<input type="email" name="email" id="email" placeholder="Email">
+			<small>Content</small>
+		</div>
+		<div class="input-group">
+			<i class='bx bxs-user'></i>
+			<label for="number"> Number*</label>
+			<input type="name" name="number" id="number" placeholder="Number">
+			<small>Content</small>
+		</div>
+		<div class="input-group">
+			<i class='bx bxs-user'></i>
+			<label for="description"> Describe in Few Words*</label>
+			<textarea class="form-control" id="description" placeholder=" Please include product name, order quantity, usage, special requests if any in your inquiry." rows="3"></textarea>
+			<small>Content</small>
+		</div>
 	</div>
 </div>
 
@@ -260,11 +277,15 @@ include_once $phpPath . "templates/loadJS.php";
 	$(document).ready(function() {
 		var page_id = 1;
 		<?php
-		if (isset($_GET['category']) && isset($_GET['sub']) && $_GET['sub'] != "" && $_GET['category'] != "") {
+		if (isset($_GET['category']) && isset($_GET['sub']) && ($_GET['sub'] != "" || $_GET['category'] != "")) {
 		} else {
 		?>
 			loadProduct(page_id);
 		<?php } ?>
+		$(document).on("click", "#button .redirect", function() {
+			console.log('hello');
+			window.location.href = "<?php echo $htmlPath; ?>/public/auth";
+		});
 		$('#filter').click(function() {
 			if ($(document).width() < 991) {
 
@@ -308,7 +329,7 @@ include_once $phpPath . "templates/loadJS.php";
 				});
 				return arr;
 			}
-			
+
 			$.ajax({
 				url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
 				type: 'post',
@@ -367,7 +388,7 @@ include_once $phpPath . "templates/loadJS.php";
 					}, 500);
 				}
 			});
-			
+
 		}
 	});
 </script>
