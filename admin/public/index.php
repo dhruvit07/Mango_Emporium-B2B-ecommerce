@@ -9,13 +9,23 @@ if (!function_exists("Autoloader")) {
     require $phpPath . 'includes/class-autoload.inc.php';
 }
 $pageTitle = "Dashboard";
-
 if (isset($_GET["product"])) {
     $pageTitle = "Product";
 } else if (isset($_GET["category"])) {
     $pageTitle = "Category";
+} else if (isset($_GET["subCategory"])) {
+    $pageTitle = "Sub Category";
+} else if (isset($_GET["location"])) {
+    $pageTitle = "Location";
+} else if (isset($_GET["sellerType"])) {
+    $pageTitle = "Business Type";
+} else if (isset($_GET["users"])) {
+    $pageTitle = "Users";
+} else if (isset($_GET["content"])) {
+    $pageTitle = "Content";
+} else if (isset($_GET["inquiry"])) {
+    $pageTitle = "Inquiry";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +54,18 @@ if (isset($_GET["product"])) {
                 require $phpPath . "public/modules/product.module.php";
             } else if (isset($_GET["category"])) {
                 require $phpPath . "public/modules/category.module.php";
+            } else if (isset($_GET["subCategory"])) {
+                require $phpPath . "public/modules/subcategory.module.php";
+            } else if (isset($_GET["location"])) {
+                require $phpPath . "public/modules/location.module.php";
+            } else if (isset($_GET["sellerType"])) {
+                require $phpPath . "public/modules/sellertype.module.php";
+            } else if (isset($_GET["users"])) {
+                require $phpPath . "public/modules/user.module.php";
+            } else if (isset($_GET["content"])) {
+                require $phpPath . "public/modules/content.module.php";
+            } else if (isset($_GET["inquiry"])) {
+                require $phpPath . "public/modules/inquiry.module.php";
             }
             ?>
 
@@ -122,6 +144,7 @@ if (isset($_GET["product"])) {
     </div>
     <?php require $phpPath . 'templates/loadJS.php'; ?>
 
+    <!-- Fixed Plugin Script -->
     <script>
         $(document).ready(function() {
             $().ready(function() {
@@ -302,6 +325,7 @@ if (isset($_GET["product"])) {
 
         });
     </script>
+    <!-- DataTable script -->
     <script>
         $(document).ready(function() {
             $('#datatables').DataTable({
@@ -317,26 +341,39 @@ if (isset($_GET["product"])) {
                 }
             });
 
-            var table = $('#datatable').DataTable();
 
-            // Edit record
-            table.on('click', '.edit', function() {
-                $tr = $(this).closest('tr');
-                var data = table.row($tr).data();
-                alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-            });
+            var table = $('#datatables').DataTable();
 
-            // Delete a record
-            table.on('click', '.remove', function(e) {
-                $tr = $(this).closest('tr');
-                table.row($tr).remove().draw();
-                e.preventDefault();
-            });
+            <?php
+            if (isset($_GET["search"])) {
+            ?>
+                table.search(<?php echo $_GET['search'] ?>).draw();
+            <?php
+            } ?>
 
-            //Like record
-            table.on('click', '.like', function() {
-                alert('You clicked on Like button');
+            
+        });
+    </script>
+    <!-- Form Validation script -->
+    <script>
+        function setFormValidation(id) {
+            $(id).validate({
+                highlight: function(element) {
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-danger');
+                    $(element).closest('.form-check').removeClass('has-success').addClass('has-danger');
+                },
+                success: function(element) {
+                    $(element).closest('.form-group').removeClass('has-danger').addClass('has-success');
+                    $(element).closest('.form-check').removeClass('has-danger').addClass('has-success');
+                },
+                errorPlacement: function(error, element) {
+                    $(element).closest('.form-group').append(error);
+                },
             });
+        }
+
+        $(document).ready(function() {
+            setFormValidation('#TypeValidation');
         });
     </script>
 </body>

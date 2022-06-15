@@ -54,35 +54,36 @@
                     <p> Dashboard </p>
                 </a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item <?php echo $pageTitle == "Category" || $pageTitle == "Sub Category" ||
+                                    $pageTitle == "Location" || $pageTitle == "Business Type" ? "active" : "" ?>">
                 <a class="nav-link" data-toggle="collapse" href="#categories">
-                    <i class="material-icons">apps</i>
+                    <i class="material-icons">category</i>
                     <p> Categories
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse" id="categories">
                     <ul class="nav">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/components/buttons.html">
+                        <li class="nav-item <?php echo strpos($url, 'category') ? "active" : "" ?>">
+                            <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?category">
                                 <span class="sidebar-mini"> C </span>
                                 <span class="sidebar-normal"> Categories </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/components/grid.html">
+                        <li class="nav-item <?php echo strpos($url, 'subCategory') ? "active" : "" ?>">
+                            <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?subCategory">
                                 <span class="sidebar-mini"> SC </span>
                                 <span class="sidebar-normal"> Sub Category </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/components/panels.html">
+                        <li class="nav-item <?php echo strpos($url, 'location') ? "active" : "" ?>">
+                            <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?location">
                                 <span class="sidebar-mini"> L </span>
                                 <span class="sidebar-normal"> Locations </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="../examples/components/sweet-alert.html">
+                        <li class="nav-item <?php echo strpos($url, 'sellerType') ? "active" : "" ?>">
+                            <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?sellerType">
                                 <span class="sidebar-mini"> BT </span>
                                 <span class="sidebar-normal"> Business Type </span>
                             </a>
@@ -92,21 +93,21 @@
             </li>
             <li class="nav-item <?php echo $pageTitle == "Product" ? "active" : "" ?>">
                 <a class="nav-link" data-toggle="collapse" href="#products">
-                    <i class="material-icons">apps</i>
+                    <i class="material-icons">shopping_cart</i>
                     <p> Products
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse" id="products">
                     <ul class="nav">
-                        <li class="nav-item ">
+                        <li class="nav-item">
                             <a class="nav-link" href="">
                                 <span class="sidebar-mini"> OP </span>
                                 <span class="sidebar-normal"> Our Products </span>
                             </a>
                         </li>
 
-                        <li class="nav-item ">
+                        <li class="nav-item <?php echo strpos($url, 'product') ? "active" : "" ?>">
                             <a class="nav-link " data-toggle="collapse" href="#vendor-product">
                                 <span class="sidebar-mini"> VP </span>
                                 <span class="sidebar-normal"> Vendors Products
@@ -115,13 +116,13 @@
                             </a>
                             <div class="collapse" id="vendor-product">
                                 <ul class="nav">
-                                    <li class="nav-item ">
+                                    <li class="nav-item <?php echo strpos($url, 'product') && !strpos($url, 'approved') ? "active" : "" ?>">
                                         <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product">
                                             <span class="sidebar-mini"> PP </span>
                                             <span class="sidebar-normal"> Pending Product </span>
                                         </a>
                                     </li>
-                                    <li class="nav-item ">
+                                    <li class="nav-item <?php echo strpos($url, 'approved') ? "active" : "" ?>">
                                         <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product&approved">
                                             <span class="sidebar-mini"> AP </span>
                                             <span class="sidebar-normal"> Approved Product </span>
@@ -132,6 +133,24 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+            <li class="nav-item <?php echo $pageTitle == "Users" ? "active" : "" ?> ">
+                <a class="nav-link" href="<?php echo $htmlPath ?>/public/?users">
+                    <i class="material-icons">person</i>
+                    <p> Users </p>
+                </a>
+            </li>
+            <li class="nav-item <?php echo $pageTitle == "Content" ? "active" : "" ?> ">
+                <a class="nav-link" href="<?php echo $htmlPath ?>/public/?content">
+                    <i class="material-icons">subscriptions</i>
+                    <p> Content </p>
+                </a>
+            </li>
+            <li class="nav-item <?php echo $pageTitle == "Inquiry" ? "active" : "" ?> ">
+                <a class="nav-link" href="<?php echo $htmlPath ?>/public/?inquiry">
+                    <i class="material-icons">info</i>
+                    <p> Inquiries </p>
+                </a>
             </li>
 
         </ul>
