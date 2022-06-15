@@ -1,11 +1,8 @@
 <?php
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("location: ../../public/e404.html");
-    exit();
-}
-if(defined("require")){
-      require $phpPath . "src/classes/config.class.php";
+
+if (defined("require")) {
+    require $phpPath . "src/classes/config.class.php";
 }
 class auth
 {
@@ -61,7 +58,7 @@ class auth
         }
     }
 
-    public function register($name, $email, $password, $phone)
+    public function register($name, $email, $password, $phone, $businessType)
     {
         $this->name = $name;
         $this->phone = $phone;
@@ -69,15 +66,15 @@ class auth
         $this->password = $password;
         $this->encrypted_pass = md5($this->password);
 
-        $insert_sql = "INSERT INTO `user`(`u_name`,`u_contact`, `u_email`,`u_password`) VALUES
-        ('$this->name','$this->phone','$this->email','$this->encrypted_pass')";
+        $insert_sql = "INSERT INTO `user`(`u_name`,`business_type`,`u_contact`, `u_email`,`u_password`) VALUES
+        ('$this->name','$businessType','$this->phone','$this->email','$this->encrypted_pass')";
 
         $result = $this->conn->query($insert_sql);
 
         if ($result) {
             return  true;
         } else {
-            return false;
+            return $this->conn;
         }
     }
 
@@ -97,10 +94,10 @@ class auth
         $result = $this->conn->query($insert_sql);
         if ($result->num_rows > 0) {
             $otp = array();
-            $i=0;
+            $i = 0;
             while ($row = $result->fetch_assoc()) {
-               $otp[$i]=$row['otp'];
-               $i++;
+                $otp[$i] = $row['otp'];
+                $i++;
             }
             return $otp;
         } else {
@@ -150,6 +147,13 @@ class auth
 
         if ($result = $this->conn->query("UPDATE `user` set  u_password='$password' WHERE  u_email='$email'"))
             return true;
+        else
+            return false;
+    }
+    public function getBusinessType()
+    {
+        if ($result = $this->conn->query("SELECT * FROM `business_type`;"))
+            return $result;
         else
             return false;
     }

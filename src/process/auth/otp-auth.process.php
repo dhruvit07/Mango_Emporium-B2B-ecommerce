@@ -1,8 +1,7 @@
 <?php
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
-if(!function_exists("Autoloader"))
-{
-  require $phpPath . 'includes/class-autoload.inc.php';
+if (!function_exists("Autoloader")) {
+    require $phpPath . 'includes/class-autoload.inc.php';
 }
 
 session_start();
@@ -16,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 $_register = new auth();
 $name = $_SESSION["name"];
 $email = $_SESSION["email"];
+$businessType = $_SESSION["business-type"];
 $otp = $_register->otpFetch($email);
 $password = $_SESSION["password"];
 $phone = $_SESSION["phone"];
@@ -29,7 +29,7 @@ foreach ($otp as $value) {
 }
 if ($otp_correct) {
     //Query
-    $bool = $_register->register($name, $email, $password, $phone);
+    $bool = $_register->register($name, $email, $password, $phone, $businessType);
     if ($bool) {
         // echo "";
         $_SESSION['error'] = " Registered Sucessfully!";
@@ -37,7 +37,7 @@ if ($otp_correct) {
         header("location: ../../../public/auth/?error");
     } else {
         $error = true;
-        $_SESSION['error'] = "Registration Error!";
+        $_SESSION['error'] = $bool->error;
         header("location: ../../../public/auth/?error");
         exit();
     }

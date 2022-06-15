@@ -7,6 +7,8 @@ if (defined("require")) {
 class product
 {
     private $conn;
+    use productFunction;
+    use functions;
     public function __construct()
     {
 
@@ -14,6 +16,9 @@ class product
         $db = new config();
         $this->conn = $db->conn;
     }
+}
+trait productFunction
+{
 
     public function runQuery($sql)
     {
@@ -62,10 +67,10 @@ class product
             return false;
         }
     }
-    public function getProductById($id,$status = 1)
+    public function getProductById($id, $status = 1)
     {
         $sql = "SELECT * FROM `product` WHERE id='$id' AND status = '$status';";
-    
+
         if ($result = $this->conn->query($sql)) {
             return $result->fetch_assoc();
         } else {

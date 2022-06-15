@@ -2,9 +2,8 @@
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 // Imports
 session_start();
-if(!function_exists("Autoloader"))
-{
-  require $phpPath . 'includes/class-autoload.inc.php';
+if (!function_exists("Autoloader")) {
+    require $phpPath . 'includes/class-autoload.inc.php';
 }
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     header("location: ../../../public/e404.html");
@@ -19,6 +18,7 @@ if (isset($_POST['submit'])) {
     //Data Fetch
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $businessType = $_POST['business-type'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm-password'];
     $phone = $_POST['number'];
@@ -34,6 +34,7 @@ if (isset($_POST['submit'])) {
         // OTP Generation
         $_SESSION["name"] = $name;
         $_SESSION["email"] = $email;
+        $_SESSION["business-type"] = $businessType;
         $_SESSION["password"] = $password;
         $_SESSION["phone"] = $phone;
         email:
@@ -43,7 +44,7 @@ if (isset($_POST['submit'])) {
         if ($bool) {
             try {
                 // Sending Otp Through Mail
-                  require $phpPath . 'src/phpmail/emailconfig.inc.php';
+                require $phpPath . 'src/phpmail/emailconfig.inc.php';
 
                 $mail->addAddress($email, 'Person Name'); // Add a recipient
 

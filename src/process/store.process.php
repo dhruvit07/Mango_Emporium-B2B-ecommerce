@@ -4,8 +4,6 @@ if (isset($_POST['filter']) || isset($_POST['page_no'])) {
     define("require", true);
     require $phpPath . 'src/classes/product.class.php';
 }
-if (!isset($_COOKIE["PHPSESSID"]))
-    session_start();
 
 $product_obj = new product();
 $limit_per_page = 2;
@@ -60,17 +58,17 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
         $productCategory = $_row['category_name'];
         $_row = $product_obj->getProductLocation($row['location']);
         $productLocation = $_row['location'];
-        if (isset($_SESSION['u_id']))
-            $button = '<button type="button" class="button query"><a class="btn button" style="all: unset;" href="#open-modal"> Send Inquiry</a></button>';
-        else
-            $button = '<button type="button" class="button redirect"><a class="btn button" style="all: unset;" href="#open-modal"> Contact Info</a></button>';
+        if (session_id() == '')
+            session_start();
+
+            $button = '<button type="button" name="inquiry" id="' . $row['id'] . '" class="button"><a class="btn button click" id="' . $row['id'] . '" style="all: unset;" href="#open-modal"> Send Inquiry</a></button>';
 
         $product .= '
         <div class="product col-md-12 col-sm-12 col-xs-12 col-12 pl-0">
         <div class="product-img col-md-5 col-sm-5 col-xs-5 pl-0">
         <img src="' . $htmlPath . '/uploads/products/' . $productImage . '" class="img-responsive" alt="">
         </div>
-
+                        
                         <div class="product-body col-md-7 col-sm-7 col-xs-7 position-unset">
                         <p class="product-category">' . $productCategory . '</p>
                         <p class="product-category">' . $productLocation . '</p>
@@ -82,6 +80,7 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
                             </ul>
                             </p>
                             <div class="product-btnn">
+                            <form>
                             <div id="button">
 							<div id="translate"></div>
                                 ' . $button . '
@@ -94,9 +93,7 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
                         </div>
                     </div>';
     }
-    $product .= '
-    
-    <div class="store-filter clearfix">
+    $product .= '<div class="store-filter clearfix">
                     <span class="store-qty">Showing ' . $fetchedProductCount . '-' . $totalProduct . ' products</span>
                     <ul class="store-pagination" id="pagination">';
 

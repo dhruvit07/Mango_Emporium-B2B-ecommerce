@@ -37,10 +37,10 @@ require $phpPath . 'includes/user-product.inc.php';
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/style.css" />
-
+    <link href = "https://fonts.googleapis.com/icon?family=Material+Icons" rel = "stylesheet">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css rel=" stylesheet" />
     <title>Profile</title>
     <style>
         a,
@@ -136,6 +136,143 @@ require $phpPath . 'includes/user-product.inc.php';
         .shadow-none {
             box-shadow: none !important;
         }
+
+        .profile-pic-wrapper {
+            width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pic-holder {
+            text-align: center;
+            position: relative;
+            border-radius: 1%;
+            width: 300px;
+            height: 150px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .pic-holder .pic {
+            height: auto;
+            width: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            -o-object-position: center;
+            object-position: center;
+        }
+
+        .pic-holder .upload-file-block,
+        .pic-holder .upload-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(90, 92, 105, 0.7);
+            color: #f8f9fc;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .pic-holder .upload-file-block {
+            cursor: pointer;
+        }
+
+        .pic-holder:hover .upload-file-block,
+        .uploadProfileInput:focus~.upload-file-block {
+            opacity: 1;
+        }
+
+        .pic-holder.uploadInProgress .upload-file-block {
+            display: none;
+        }
+
+        .pic-holder.uploadInProgress .upload-loader {
+            opacity: 1;
+        }
+
+        /* Snackbar css */
+        .snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+            transform: translateX(-50%);
+        }
+
+        .snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -143,6 +280,7 @@ require $phpPath . 'includes/user-product.inc.php';
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
+
                 <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
                 <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
@@ -177,6 +315,25 @@ require $phpPath . 'includes/user-product.inc.php';
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <div class="mt-3">
+                                    <div class="profile-pic-wrapper">
+                                        <div class="pic-holder">
+                                            <!-- uploaded pic shown here -->
+                                            <img id="profilePic" class="pic" src="<?php echo $htmlPath; ?>/uploads/profile/<?php echo $user['image'] == "" ? "" : $user['image']; ?>">
+                                            <input class="uploadProfileInput" type="file" name="profile_pic" id="newProfilePhoto" accept="image/*" style="opacity: 0;" />
+                                            <label for="newProfilePhoto" class="upload-file-block">
+                                                <div class="text-center">
+                                                    <div class="mb-2">
+                                                        <i class="fa fa-camera fa-2x"></i>
+                                                    </div>
+                                                    <div class="text-uppercase">
+                                                        Update <br /> Profile Photo
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+
+                                        </hr>
+                                    </div>
                                     <h4><?php echo $user['u_name']; ?></h4>
                                     <p class="text-secondary mb-1"><?php echo $user['u_contact']; ?></p>
                                     <p class="text-muted font-size-sm"><?php echo $user['u_email']; ?></p>
@@ -190,14 +347,14 @@ require $phpPath . 'includes/user-product.inc.php';
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="<?php echo $htmlPath; ?>/resources/img/profile_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="34"></img>
+                                    <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">add</i>
                                     <a href="./?profile">Profile</a>
                                 </h6>
                                 <span class="text-secondary">Profile</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="<?php echo $htmlPath; ?>/resources/img/product_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                    <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">add</i>
                                     <a href="./?addproduct">Add Product</a>
                                 </h6>
                                 <span class="text-secondary">Product</span>
@@ -516,6 +673,82 @@ include $phpPath . "templates/loadJS.php";
 
     });
 </script>
+<!-- Profile Upload Script -->
+<script>
+    $(document).on("change", ".uploadProfileInput", function() {
 
+        var formData = new FormData();
+        formData.append('profile_pic', $('#newProfilePhoto')[0].files[0]);
+
+        var triggerInput = this;
+        var currentImg = $(this).closest(".pic-holder").find(".pic").attr("src");
+        var holder = $(this).closest(".pic-holder");
+        var wrapper = $(this).closest(".profile-pic-wrapper");
+        $(wrapper).find('[role="alert"]').remove();
+        triggerInput.blur();
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) {
+            return;
+        }
+        if (/^image/.test(files[0].type)) {
+            // only image file
+            var reader = new FileReader(); // instance of the FileReader
+            reader.readAsDataURL(files[0]); // read the local file
+
+            reader.onloadend = function() {
+                var img = this.result;
+                $(holder).addClass("uploadInProgress");
+                $(holder).append(
+                    '<div class="upload-loader"><div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div></div>'
+                );
+
+                // Dummy timeout; call API or AJAX below
+                $.ajax({
+                    url: '<?php echo $htmlPath; ?>/src/process/ajax.process.php',
+                    type: 'post',
+                    data: formData,
+                    processData: false, // tell jQuery not to process the data
+                    contentType: false,
+                    success: function(result) {
+                        $(holder).removeClass("uploadInProgress");
+                        $(holder).find(".upload-loader").remove();
+                        if ($(result).filter('#res').text() !== "")
+                            $(holder).find(".pic").attr("src", img);
+                        $(result).filter('#res').appendTo(wrapper);
+                        $(result).filter('#err').appendTo(wrapper);
+                        // Clear input after upload
+                        $(triggerInput).val("");
+
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+                    },
+                    error: function() {
+
+                        $(holder).find(".pic").attr("src", currentImg);
+                        $(wrapper).append(
+                            '<div class="snackbar show" role="alert"><i class="fa fa-times-circle text-danger"></i> There is an error while uploading! Please try again later.</div>'
+                        );
+
+                        // Clear input after upload
+                        $(triggerInput).val("");
+                        setTimeout(() => {
+                            $(wrapper).find('[role="alert"]').remove();
+                        }, 3000);
+
+                    }
+                });
+
+            };
+        } else {
+            $(wrapper).append(
+                '<div class="alert alert-danger d-inline-block p-2 small" role="alert">Please choose the valid image.</div>'
+            );
+            setTimeout(() => {
+                $(wrapper).find('role="alert"').remove();
+            }, 3000);
+        }
+    });
+</script>
 
 </html>

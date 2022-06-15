@@ -61,3 +61,9 @@ if (isset($_GET['category']) && isset($_GET['sub']) && $_GET['sub'] != "" && $_G
             echo $product;
     }
 }
+
+$formFillUp = "";
+if (isset($_SESSION['u_id'])) {
+    $userObj = new user();
+    $formFillUp = $userObj->getUser($_SESSION['u_id']);
+}

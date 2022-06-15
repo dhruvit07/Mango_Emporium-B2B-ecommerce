@@ -6,6 +6,10 @@ define("MYSITE", true);
 if (isset($_SESSION['loggedin'])) {
   header('location: ../index.php');
 }
+if (!function_exists("Autoloader")) {
+  require $phpPath . 'includes/class-autoload.inc.php';
+}
+require $phpPath . "includes/auth.inc.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +21,7 @@ if (isset($_SESSION['loggedin'])) {
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <title>Mango Emporium</title>
-	<link rel="icon" type="image/x-icon" href="<?php echo $htmlPath; ?>/resources/img/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<?php echo $htmlPath; ?>/resources/img/favicon.png">
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -44,7 +48,6 @@ if (isset($_SESSION['loggedin'])) {
  		<![endif]-->
   <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-    
   </style>
 </head>
 
@@ -75,8 +78,15 @@ if (isset($_SESSION['loggedin'])) {
             <div class="_form sign-up">
               <div class="input-group">
                 <i class='bx bxs-user'></i>
-                <input type="name" name="name" id="name" placeholder="Name">
+                <input type="name" name="name" id="name" placeholder="Company Name">
                 <small>Content</small>
+              </div>
+              <div class="input-group">
+                <i class='bx bx-mail-send'></i>
+                <select class="form-control" id="category" name="business-type" placeholder="" required>
+                  <option value="">Business Type</option>
+                  <?php echo $businessTypeHTML; ?>
+                </select>
               </div>
               <div class="input-group">
                 <i class='bx bx-mail-send'></i>
@@ -230,7 +240,7 @@ if (isset($_SESSION['loggedin'])) {
 
   <!-- FOOTER -->
   <?php
-    include_once $phpPath . "templates/footer.php";
+  include_once $phpPath . "templates/footer.php";
   ?>
   <!-- /FOOTER -->
 

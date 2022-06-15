@@ -122,7 +122,7 @@ form.addEventListener('submit', function (e) {
   // console.log(checkRequired([username, email, password, password2]));
   if (checkPhone(number)
     && checkRequired([username, email, password, password2,number])
-    && checkLength(username, 3, 15)
+    && checkLength(username, 3, 50)
     && checkLength(password, 8, 25)
     && checkEmail(email)
     && checkPasswordMatch(password, password2)

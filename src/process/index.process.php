@@ -8,8 +8,7 @@ $product_obj = new product();
 
 $collectionHTML = "";
 $result = $product_obj->getCategory();
-for ($i = 0; $i < 3; $i++) {
-    $row = $result->fetch_assoc();
+while ($row = $result->fetch_assoc()) {
 
     $collectionHTML .= '
     <div class="col-md-4 col-xs-6">
@@ -19,7 +18,7 @@ for ($i = 0; $i < 3; $i++) {
         </div>
         <div class="shop-body">
             <h3>' . $row['category_name'] . '<br>Collection</h3>
-            <a href="<' . $htmlPath . '/public/category/?id=' . $row['id'] . '" class="cta-btn">Visit now <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="' . $htmlPath . '/public/category/?id=' . $row['id'] . '" class="cta-btn">Visit now <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 </div>';

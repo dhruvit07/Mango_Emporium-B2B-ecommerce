@@ -6,6 +6,7 @@ if (!function_exists("Autoloader")) {
 }
 require $phpPath . 'includes/store.inc.php';
 include_once $phpPath . "templates/header.php";
+
 ?>
 <style>
 	@media screen and (max-width: 991px) {
@@ -176,6 +177,18 @@ include_once $phpPath . "templates/header.php";
 
 			<!-- STORE -->
 			<div id="store" class="col-md-9 col-sm-12 col-xs-12 ">
+				<?php
+				if (isset($_GET['msg']) && isset($_SESSION['msg'])) {
+					echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
+            <strong>' . $_SESSION["msg"] . '</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>';
+					unset($_SESSION['msg']);
+				}
+				?>
+
 				<!-- store top filter -->
 				<div class="store-filter clearfix">
 					<div class="store-sort">
@@ -241,24 +254,31 @@ include_once $phpPath . "templates/header.php";
 				</g>
 			</svg>
 		</a>
-		<div class="input-group">
-			<i class='bx bx-mail-send'></i>
-			<label for="email"> Email*</label>
-			<input type="email" name="email" id="email" placeholder="Email">
-			<small>Content</small>
-		</div>
-		<div class="input-group">
-			<i class='bx bxs-user'></i>
-			<label for="number"> Number*</label>
-			<input type="name" name="number" id="number" placeholder="Number">
-			<small>Content</small>
-		</div>
-		<div class="input-group">
-			<i class='bx bxs-user'></i>
-			<label for="description"> Describe in Few Words*</label>
-			<textarea class="form-control" id="description" placeholder=" Please include product name, order quantity, usage, special requests if any in your inquiry." rows="3"></textarea>
-			<small>Content</small>
-		</div>
+		<form action="<?php echo $htmlPath; ?>/src/process/inquiry.process.php" method="post">
+			<div class="input-group">
+				<i class='bx bx-mail-send'></i>
+				<label for="email"> Email*</label>
+				<input type="email" name="email" <?php echo $formFillUp == "" ? "" : 'readonly="readonly"'; ?> id="email" value="<?php echo $formFillUp == "" ? "" : $formFillUp['u_email']; ?>" placeholder="Email">
+				<small>Content</small>
+			</div>
+			<div class="input-group">
+				<i class='bx bxs-user'></i>
+				<label for="number"> Number*</label>
+				<input type="name" name="number" id="number" <?php echo $formFillUp == "" ? "" :  'readonly="readonly"'; ?> value="<?php echo $formFillUp == "" ? "" : $formFillUp['u_contact'] ?>" placeholder="Number">
+				<small>Content</small>
+			</div>
+			<div class="input-group">
+				<i class='bx bxs-user'></i>
+				<label for="description"> Describe in Few Words*</label>
+				<textarea class="form-control" id="description" name="description" placeholder=" Please include product name, order quantity, usage, special requests if any in your inquiry." rows="3"></textarea>
+				<small>Content</small>
+			</div>
+			<input type="hidden" name="id" id="product-id" placeholder="Number">
+			<div class="input-group">
+				<input type="submit" name="submit" id="submit-button" style="background-color:var(--primary-color); height:50px; ">
+			</div>
+		</form>
+
 	</div>
 </div>
 
@@ -275,6 +295,10 @@ include_once $phpPath . "templates/loadJS.php";
 <!-- jQuery Plugins -->
 <script>
 	$(document).ready(function() {
+		$(document).on('click', ".button", function() {
+			var id = $(this).attr('id');
+			$('#product-id').val(id);
+		});
 		var page_id = 1;
 		<?php
 		if (isset($_GET['category']) && isset($_GET['sub']) && ($_GET['sub'] != "" || $_GET['category'] != "")) {
@@ -282,10 +306,10 @@ include_once $phpPath . "templates/loadJS.php";
 		?>
 			loadProduct(page_id);
 		<?php } ?>
-		$(document).on("click", "#button .redirect", function() {
-			console.log('hello');
-			window.location.href = "<?php echo $htmlPath; ?>/public/auth";
-		});
+		// $(document).on("click", "#button .redirect", function() {
+		// 	console.log('hello');
+		// 	window.location.href = "<?php echo $htmlPath; ?>/public/auth";
+		// });
 		$('#filter').click(function() {
 			if ($(document).width() < 991) {
 

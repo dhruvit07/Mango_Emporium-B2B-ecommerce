@@ -49,7 +49,8 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
  		<![endif]-->
 	<style>
 		@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-		a{
+
+		a {
 			color: black;
 			all: unset;
 		}
@@ -88,48 +89,47 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 					<!-- LOGO -->
 					<div class="col-md-6" style="margin: 0 25%;">
 						<!-- <div class="header-logo" style="margin: 0 25%;"> -->
-							<a href="#" class="logo ">
-								<img style="margin: 0 auto;height:100px;width:300px;object-fit:cover;" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.svg" alt="">
-							</a>
+						<a href="#" class="logo ">
+							<img style="margin: 0 auto;height:100px;width:300px;object-fit:cover;" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
+						</a>
 						<!-- </div> -->
 					</div>
 					<!-- /LOGO -->
 
 					<!-- SEARCH BAR -->
-					<div class="col-md-12">
-						<div class="header-search">
+					<div class="col-md-12" style="margin: 20px; position: absolute; top: 40%; left: 0%; right: 0%;transform: translateY(-40%);">
+						<div class="header-search col-md-12">
 							<form>
-								<select class="input-select">
-									<option value="0">All Categories</option>
+								<select class="input-select " style="width:120px">
+									<option value="0">Category</option>
 									<?php echo $searchBarCategoryOptionHTML; ?>
 								</select>
-								<input class="input" placeholder="Search here">
-								<button class="search-btn" style="text-align:center; height:41px;margin-bottom:1px;">Search</button>
+								<input class="input" style="" placeholder="Search here">
+								<button class="search-btn" style="width:100px;height:41px;text-align:center;margin-bottom:1px;">Search</button>
 							</form>
 						</div>
 					</div>
 					<!-- /SEARCH BAR -->
 
 					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
-						<div class="header-ctn">
+					<div class="header-ctn">
 
 
-							<!-- Menu Toogle -->
-							<div class="menu-toggle">
-								<a href="#">
-									<i class="fa fa-bars"></i>
-									<span>Menu</span>
-								</a>
-							</div>
-							<!-- /Menu Toogle -->
+						<!-- Menu Toogle -->
+						<div class="menu-toggle">
+							<a href="#">
+								<i class="fa fa-bars"></i>
+								<span>Menu</span>
+							</a>
 						</div>
+						<!-- /Menu Toogle -->
 					</div>
-					<!-- /ACCOUNT -->
 				</div>
-				<!-- row -->
+				<!-- /ACCOUNT -->
 			</div>
-			<!-- container -->
+			<!-- row -->
+		</div>
+		<!-- container -->
 		</div>
 		<!-- /MAIN HEADER -->
 	</header>

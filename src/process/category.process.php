@@ -31,7 +31,7 @@ if (isset($_GET['id']) && $_GET['id'] != "") {
 <div class="col-md-2 col-sm-3 col-xs-4 col-6">
     <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
             <div class="inner">
-                <div class="main-img"><img src="' . $htmlPath . '/uploads/products/' . $row['image'] . '" alt="Category"></div>
+                <div class="main-img"><img src="' . $htmlPath . '/uploads/category/' . $row['image'] . '" alt="Category"></div>
             </div>
         </a>
         <div class="card-body text-center">
