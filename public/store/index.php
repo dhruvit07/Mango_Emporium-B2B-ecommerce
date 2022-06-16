@@ -118,7 +118,7 @@ include_once $phpPath . "templates/header.php";
 			<!-- ASIDE -->
 			<div id="aside" class=" filter-close col-md-3 col-sm-12  text-center">
 				<!-- aside Widget -->
-				<form id="filter_form" method="post">
+				<form id="filter_form" action="./" method="get">
 					<div class="aside">
 						<h3 class="aside-title">Categories</h3>
 						<div class="checkbox-filter">
@@ -140,19 +140,19 @@ include_once $phpPath . "templates/header.php";
 					</div>
 					<!-- /aside Widget -->
 
-					<!-- aside Widget -->
+					<!-- aside 	 Widget -->
 					<div class="aside">
 						<h3 class="aside-title">Price</h3>
 						<div class="price-filter">
 							<div id="price-slider"></div>
 							<div class="input-number price-min">
-								<input id="price-min" type="number">
+								<input id="price-min" name="priceMin" type="number">
 								<span class="qty-up">+</span>
 								<span class="qty-down">-</span>
 							</div>
 							<!-- <span>-</span> -->
 							<div class="input-number price-max">
-								<input id="price-max" type="number">
+								<input id="price-max" name="priceMax" type="number">
 								<span class="qty-up">+</span>
 								<span class="qty-down">-</span>
 							</div>
@@ -161,7 +161,7 @@ include_once $phpPath . "templates/header.php";
 					<div class="aside">
 						<div id="button">
 							<div id="translate"></div>
-							<button type="button" id="filter_button" name="filter" class="button" style="width:98%"> Apply Filter</button>
+							<button type="submit" id="filter_button" name="filter" class="button" style="width:98%"> Apply Filter</button>
 						</div>
 					</div>
 					<!-- /aside Widget -->
@@ -218,9 +218,7 @@ include_once $phpPath . "templates/header.php";
 				</div>
 				<div id="pruduct_html">
 					<?php
-					if (isset($_GET['category']) && isset($_GET['sub']) && $_GET['sub'] != "" && $_GET['category'] != "") {
-						echo $product;
-					}
+					echo $product;
 					?>
 				</div>
 				<!-- /product -->
@@ -295,21 +293,20 @@ include_once $phpPath . "templates/loadJS.php";
 <!-- jQuery Plugins -->
 <script>
 	$(document).ready(function() {
+		// form id Fill Up 
 		$(document).on('click', ".button", function() {
 			var id = $(this).attr('id');
 			$('#product-id').val(id);
 		});
+
 		var page_id = 1;
 		<?php
-		if (isset($_GET['category']) && isset($_GET['sub']) && ($_GET['sub'] != "" || $_GET['category'] != "")) {
+		if (isset($_GET['category']) && isset($_GET['sub']) && ($_GET['sub'] != "" && $_GET['category'] != "")) {
 		} else {
 		?>
 			loadProduct(page_id);
 		<?php } ?>
-		// $(document).on("click", "#button .redirect", function() {
-		// 	console.log('hello');
-		// 	window.location.href = "<?php echo $htmlPath; ?>/public/auth";
-		// });
+		// fiter hide show script
 		$('#filter').click(function() {
 			if ($(document).width() < 991) {
 
@@ -334,86 +331,86 @@ include_once $phpPath . "templates/loadJS.php";
 			}
 		});
 
-		$('#filter_button').click(function() {
+		// $('#filter_button').click(function() {
 
-			$("#loader").addClass('loading');
-			$("#pruduct_html").html("");
+		// 	$("#loader").addClass('loading');
+		// 	$("#pruduct_html").html("");
+		// 	<?php if (isset($_GET['location'])) ?>
+		// 	var location = new getChecked("location");
+		// 	var sellerType = new getChecked("sellertype");
+		// 	var category = new getChecked("category");
+		// 	var filter = $('#filter_button').val();
+		// 	var priceMin = $('#price-min').val();
+		// 	var priceMax = $('# -max').val();
 
-			var location = new getChecked("location");
-			var sellerType = new getChecked("sellertype");
-			var category = new getChecked("category");
-			var filter = $('#filter_button').val();
-			var priceMin = $('#price-min').val();
-			var priceMax = $('#price-max').val();
+		// 	function getChecked(name) {
+		// 		var arr = new Array();
+		// 		$("input:checkbox[name=" + name + "]:checked").each(function() {
+		// 			arr.push($(this).val());
+		// 		});
+		// 		return arr;
+		// 	}
 
-			function getChecked(name) {
-				var arr = new Array();
-				$("input:checkbox[name=" + name + "]:checked").each(function() {
-					arr.push($(this).val());
-				});
-				return arr;
-			}
-
-			$.ajax({
-				url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
-				type: 'post',
-				data: {
-					category: category,
-					sellerType: sellerType,
-					location: location,
-					filter: filter,
-					priceMin: priceMin,
-					priceMax: priceMax,
-					page_no: 1
-				},
-				success: function(result) {
-					console.log(result);
-					setTimeout(function() {
-						$("#loader").removeClass('loading');
-						$("#pruduct_html").html(result);
-					}, 500);
+		// 	$.ajax({
+		// 		url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
+		// 		type: 'post',
+		// 		data: {
+		// 			category: category,
+		// 			sellerType: sellerType,
+		// 			location: location,
+		// 			filter: filter,
+		// 			priceMin: priceMin,
+		// 			priceMax: priceMax,
+		// 			page_no: 1
+		// 		},
+		// 		success: function(result) {
+		// 			console.log(result);
+		// 			setTimeout(function() {
+		// 				$("#loader").removeClass('loading');
+		// 				$("#pruduct_html").html(result);
+		// 			}, 500);
 
 
-				}
-			});
-		});
+		// 		}
+		// 	});
+		// });
 
 		$('.modal-close').click(function() {
-			window.location.href = "#";
+			window.location.href = "javascript:void(0)";
 		});
 
-		$(document).on("click", "#pagination li a", function(e) {
+		// $(document).on("click", "#pagination li a", function(e) {
 
-			$("#loader").addClass('loading');
-			$("#pruduct_html").html("");
+		// 	$("#loader").addClass('loading');
+		// 	$("#pruduct_html").html("");
 
-			$('html, body').animate({
-				scrollTop: 300
-			}, 1000);
+		// 	$('html, body').animate({
+		// 		scrollTop: 600
+		// 	}, 1000);
 
-			e.preventDefault();
-			page_id = $(this).attr("id");
-			loadProduct(page_id);
+		// 	e.preventDefault();
+		// 	page_id = $(this).attr("id");
+		// 	loadProduct(page_id);
 
-		});
+		// });
 
-		function loadProduct(page_id) {
+		// function loadProduct(page_id) {
 
-			$.ajax({
-				url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
-				type: 'post',
-				data: {
-					page_no: page_id
-				},
-				success: function(result) {
-					setTimeout(function() {
-						$("#loader").removeClass('loading');
-						$("#pruduct_html").html(result);
-					}, 500);
-				}
-			});
+		// 	$.ajax({
+		// 		url: '<?php echo $htmlPath; ?>/src/process/store.process.php',
+		// 		type: 'get',
+		// 		data: {
+		// 			page: page_id
+		// 		},
+		// 		success: function(result) {
+		// 			setTimeout(function() {
+		// 				$("#loader").removeClass('loading');
+		// 				$("#pruduct_html").html(result);
+		// 			}, 500);
+		// 		}
+		// 	});
 
-		}
+		// }
 	});
 </script>
 

@@ -36,7 +36,7 @@ if (isset($_GET['id']) && $_GET['id'] != "") {
         </a>
         <div class="card-body text-center">
             <h4 class="card-title">' . $row["sub_category_name"] . '</h4>
-            <a class="btn btn-outline-primary btn-sm" href="../store/?category=' . $_GET['id'] . '&sub=' . $row['id'] . '" data-abc="true">View Products</a>
+            <a class="btn btn-outline-primary btn-sm" href="../store/?filter&category[]=' . $_GET['id'] . '&sub=' . $row['id'] . '" data-abc="true">View Products</a>
         </div>
     </div>
 </div>

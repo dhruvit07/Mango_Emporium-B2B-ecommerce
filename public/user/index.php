@@ -347,7 +347,7 @@ require $phpPath . 'includes/user-product.inc.php';
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">add</i>
+                                    <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">person</i>
                                     <a href="./?profile">Profile</a>
                                 </h6>
                                 <span class="text-secondary">Profile</span>
@@ -361,15 +361,15 @@ require $phpPath . 'includes/user-product.inc.php';
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="<?php echo $htmlPath; ?>/resources/img/myproduct_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
+                                <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">shopping_cart</i>
                                     <a href="./?viewproduct">My Product</a>
                                 </h6>
                                 <span class="text-secondary">My Product</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                    <img src="<?php echo $htmlPath; ?>/resources/img/logout_icon.png" class="feather feather-globe mr-2 icon-inline" width="35" height="35"></img>
-                                    <a href="<?php echo $htmlPath; ?>/src/process/auth/logout.process.php">Logout</a>
+                                <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">logout</i>
+                                <a href="<?php echo $htmlPath; ?>/src/process/auth/logout.process.php">Logout</a>
                                 </h6>
                                 <span class="text-secondary">Logout</span>
                             </li>

@@ -4,6 +4,9 @@ require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 if (defined("require")) {
     require $phpPath . "src/classes/config.class.php";
 }
+if (!function_exists("Autoloader")) {
+    require $phpPath . 'includes/class-autoload.inc.php';
+}
 class product
 {
     private $conn;
@@ -77,7 +80,7 @@ trait productFunction
             return false;
         }
     }
-    public function getFilteredProduct($category, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page)
+    public function getFilteredProduct($category, $subCategory, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, $count = false)
     {
         $sql = "SELECT * FROM `product` WHERE status='1'";
         if ($priceMin != "" && $priceMax != "") {
@@ -87,31 +90,8 @@ trait productFunction
             $categoryFilter = implode(',', $category);
             $sql .= " AND product_category IN ($categoryFilter)";
         }
-        if ($location != "") {
-            $locationFilter = implode(',', $location);
-            $sql .= " AND location IN ($locationFilter)";
-        }
-        if ($sellerType != "") {
-            $sellerTypeFilter = implode(',', $sellerType);
-            $sql .= " AND seller_type IN ($sellerTypeFilter)";
-        }
-        $sql .= " LIMIT {$offset},{$limit_per_page};";
-        if ($result = $this->conn->query($sql)) {
-            // echo $sql;
-            return $result;
-        } else {
-            return false;
-        }
-    }
-    public function getFilteredProductCount($category, $location, $sellerType, $priceMin, $priceMax)
-    {
-        $sql = "SELECT * FROM `product` WHERE status='1'";
-        if ($priceMin != "" && $priceMax != "") {
-            $sql .= " AND product_price BETWEEN $priceMin AND $priceMax";
-        }
-        if ($category != "") {
-            $categoryFilter = implode(',', $category);
-            $sql .= " AND product_category IN ($categoryFilter)";
+        if ($subCategory != "") {
+            $sql .= " AND product_sub_category = '$subCategory'";
         }
         if ($location != "") {
             $locationFilter = implode(',', $location);
@@ -121,9 +101,13 @@ trait productFunction
             $sellerTypeFilter = implode(',', $sellerType);
             $sql .= " AND seller_type IN ($sellerTypeFilter)";
         }
-        $sql .= ";";
+        if ($count == false)
+            $sql .= " LIMIT {$offset},{$limit_per_page};";
+        else
+            $sql .= ";";
+
         if ($result = $this->conn->query($sql)) {
-            return $result->num_rows;
+            return $count == false ? $result : $result->num_rows;
         } else {
             return false;
         }
