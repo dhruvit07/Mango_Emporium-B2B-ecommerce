@@ -7,7 +7,7 @@ if (!defined("MYSITE")) {
 }
 $_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
-
+$contact = $product_obj->getContact();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,32 +86,6 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					<!-- LOGO -->
-					<div class="col-md-6" style="margin: 0 25%;">
-						<!-- <div class="header-logo" style="margin: 0 25%;"> -->
-						<a href="#" class="logo ">
-							<img style="margin: 0 auto;height:100px;width:300px;object-fit:cover;" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
-						</a>
-						<!-- </div> -->
-					</div>
-					<!-- /LOGO -->
-
-					<!-- SEARCH BAR -->
-					<div class="col-md-12" style="margin: 20px; position: absolute; top: 40%; left: 0%; right: 0%;transform: translateY(-40%);">
-						<div class="header-search col-md-12">
-							<form>
-								<select class="input-select " style="width:120px">
-									<option value="0">Category</option>
-									<?php echo $searchBarCategoryOptionHTML; ?>
-								</select>
-								<input class="input" style="" placeholder="Search here">
-								<button class="search-btn" style="width:100px;height:41px;text-align:center;margin-bottom:1px;">Search</button>
-							</form>
-						</div>
-					</div>
-					<!-- /SEARCH BAR -->
-
-					<!-- ACCOUNT -->
 					<div class="header-ctn">
 
 
@@ -124,6 +98,33 @@ require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
 						</div>
 						<!-- /Menu Toogle -->
 					</div>
+					<!-- LOGO -->
+					<div class="col-md-6" style="margin: 0 25%;">
+						<!-- <div class="header-logo" style="margin: 0 25%;"> -->
+						<a href="#" class="logo ">
+							<img style="margin: 0 auto;height:100px;width:300px;object-fit:cover;" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
+						</a>
+						<!-- </div> -->
+					</div>
+					<!-- /LOGO -->
+
+					<!-- SEARCH BAR -->
+					<div class="col-md-12">
+						<div class="header-search col-md-12">
+							<form>
+								<select class="input-select " style="width:120px">
+									<option value="0">Category</option>
+									<?php echo $searchBarCategoryOptionHTML; ?>
+								</select>
+								<input class="input" placeholder="Search here">
+								<button class="search-btn" style="width:100px;height:41px;text-align:center;margin-bottom:1px;">Search</button>
+							</form>
+						</div>
+					</div>
+					<!-- /SEARCH BAR -->
+
+					<!-- ACCOUNT -->
+
 				</div>
 				<!-- /ACCOUNT -->
 			</div>
