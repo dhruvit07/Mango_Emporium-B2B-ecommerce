@@ -13,10 +13,12 @@ $result = $product_obj->getCategory();
 $category_html = getFilterHTML($result, $product_obj,  'category_name', 'category');
 
 $result = $product_obj->getSellerType();
-$seller_type_html = getFilterHTML($result, $product_obj, 'seller_type', 'sellertype');
+$seller_type_html = getFilterHTML($result, $product_obj, 'seller_type', 'sellerType');
 
 $result = $product_obj->getLocation();
 $location_html = getFilterHTML($result, $product_obj,  'location', 'location');
+$result = $product_obj->getBusinessType();
+$business_type_html = getFilterHTML($result, $product_obj, 'name', 'business-type');
 
 function getFilterHTML($result, $product_obj, $string, $_name)
 {
@@ -30,8 +32,7 @@ function getFilterHTML($result, $product_obj, $string, $_name)
 									<span></span>
 									' . $name . '
 									<small>(' . ($string == "sellertype" ? $product_obj->getProductCountBySellerType($row['id']) : ($string == "location" ?
-            $product_obj->getProductCountByLocation($row['id']) :
-            $product_obj->getProductCountByCategory($row['id']))) . ')    </small>
+            $product_obj->getProductCountByLocation($row['id']) : ($string == "category_name" ? $product_obj->getProductCountByCategory($row['id']) : $product_obj->getProductCountByBusinessType($row['id'])))) . ')    </small>
 								</label>
 							</div>';
         $i++;
@@ -49,17 +50,18 @@ $limit_per_page = 20;
 $offset = ($page - 1) * $limit_per_page;
 $product = "";
 
-if (isset($_GET['filter']) && (isset($_GET['category']) || (isset($_GET['sub']) && isset($_GET['category'])) || isset($_GET['location']) || isset($_GET['sellerType']) || isset($_GET['priceMin']) || isset($_GET['priceMax']))) {
+if (isset($_GET['filter']) && (isset($_GET['category']) || isset($_GET['business-type']) || (isset($_GET['sub']) && isset($_GET['category'])) || isset($_GET['location']) || isset($_GET['sellerType']) || isset($_GET['priceMin']) || isset($_GET['priceMax']))) {
 
     $category = isset($_GET['category']) ? $_GET['category'] : "";
+    $businessType = isset($_GET['business-type']) ? $_GET['business-type'] : "";
     $sub = isset($_GET['sub']) ? $_GET['sub'] : "";
     $location = isset($_GET['location']) ? $_GET['location'] : "";
     $sellerType = isset($_GET['sellerType']) ? $_GET['sellerType'] : "";
     $priceMin = isset($_GET['priceMin']) ? $_GET['priceMin'] : "";
     $priceMax = isset($_GET['priceMax']) ? $_GET['priceMax'] : "";
 
-    $result = $product_obj->getFilteredProduct($category, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page);
-    $totalProduct = $product_obj->getFilteredProduct($category, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, true);
+    $result = $product_obj->getFilteredProduct($category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page);
+    $totalProduct = $product_obj->getFilteredProduct($category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, true);
 } else {
 
     $result = $product_obj->getAllProduct($offset, $limit_per_page);
@@ -88,7 +90,7 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
         if (session_id() == '')
             session_start();
 
-        $button = '<button type="button" name="inquiry" id="' . $row['id'] . '" class="button"><a class="btn button click" id="' . $row['id'] . '" style="all: unset;" href="#open-modal"> Send Inquiry</a></button>';
+        $button = '<button type="button" name="inquiry" id="' . $row['id'] . '" class="inquiry button">Send Inquiry</button>';
 
         $product .= '
         <div class="product col-md-12 col-sm-12 col-xs-12 col-12 pl-0">

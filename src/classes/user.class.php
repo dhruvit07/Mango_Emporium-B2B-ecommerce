@@ -13,6 +13,14 @@ class user
         $db = new config();
         $this->conn = $db->conn;
     }
+    public function getBusinessTypeById($id)
+    {
+        if ($result = $this->conn->query("SELECT * FROM `business_type` WHERE id='$id';")) {
+            $row = $result->fetch_assoc();
+            return $row['name'];
+        } else
+            return false;
+    }
 
     public function getUser($id)
     {

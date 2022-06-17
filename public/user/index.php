@@ -37,7 +37,7 @@ require $phpPath . 'includes/user-product.inc.php';
 
     <!-- Custom stlylesheet -->
     <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/style.css" />
-    <link href = "https://fonts.googleapis.com/icon?family=Material+Icons" rel = "stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css rel=" stylesheet" />
@@ -337,6 +337,7 @@ require $phpPath . 'includes/user-product.inc.php';
                                     <h4><?php echo $user['u_name']; ?></h4>
                                     <p class="text-secondary mb-1"><?php echo $user['u_contact']; ?></p>
                                     <p class="text-muted font-size-sm"><?php echo $user['u_email']; ?></p>
+                                    <p class="text-muted font-size-sm"><?php echo $business_type; ?></p>
                                     <!-- <button class="btn btn-primary">Follow</button> -->
                                     <!-- <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
@@ -361,15 +362,15 @@ require $phpPath . 'includes/user-product.inc.php';
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">shopping_cart</i>
+                                    <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">shopping_cart</i>
                                     <a href="./?viewproduct">My Product</a>
                                 </h6>
                                 <span class="text-secondary">My Product</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                 <h6 class="mb-0">
-                                <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">logout</i>
-                                <a href="<?php echo $htmlPath; ?>/src/process/auth/logout.process.php">Logout</a>
+                                    <i class="material-icons mr-2" style="font-size:35px; vertical-align:middle">logout</i>
+                                    <a href="<?php echo $htmlPath; ?>/src/process/auth/logout.process.php">Logout</a>
                                 </h6>
                                 <span class="text-secondary">Logout</span>
                             </li>
@@ -415,7 +416,15 @@ require $phpPath . 'includes/user-product.inc.php';
                                     </div>
                                 </div>
                                 <hr>
-
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Business Type</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <?php echo $business_type; ?>
+                                    </div>
+                                </div>
+                                <hr>
 
                                 <!-- <div class="row">
                                 <div class="col-sm-12">

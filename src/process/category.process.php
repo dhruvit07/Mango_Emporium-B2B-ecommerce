@@ -52,4 +52,3 @@ while ($row = $result->fetch_assoc()) {
 ';
 }
 
-$contact = $product_obj->getContact();

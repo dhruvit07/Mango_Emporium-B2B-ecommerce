@@ -5,7 +5,7 @@ $user_obj = new user();
 $product = new product();
 $user = $user_obj->getUser($_SESSION['u_id']);
 $item = $product->getProduct($_SESSION['u_id']);
-
+$business_type = $user_obj->getBusinessTypeById($user['business_type']);
 $location_html = "";
 $result = $product->getLocation();
 while ($row = $result->fetch_assoc()) {
@@ -34,7 +34,7 @@ if ($item->num_rows == 0) {
         $status = $row['status'] == 1 ? "Approved" : "Pending";
         $status_class = $row['status'] == 1 ? "success" : "danger";
         $userProducts_html .= '<tr>
-    <td ><a href="'.$htmlPath.'/public/store/product?id=' . $row['id'] . '">' . $row["product_name"] . '</a></td>
+    <td ><a href="' . $htmlPath . '/public/store/product?id=' . $row['id'] . '">' . $row["product_name"] . '</a></td>
     <td >' . $row["product_quantity"] . '</td>
     <td class="text-center">' . $category['category_name'] . '</td>
     <td class="text-center">' . $location['location'] . '</td>

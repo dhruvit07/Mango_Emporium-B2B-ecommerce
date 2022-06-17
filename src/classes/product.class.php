@@ -39,10 +39,10 @@ trait productFunction
     }
 
 
-    public function addProuct($id, $price, $name, $quantity, $category, $subCategory, $location, $seller_type, $desc)
+    public function addProuct($id, $business_type, $price, $name, $quantity, $category, $subCategory, $location, $seller_type, $desc)
     {
-        $sql = "INSERT INTO `product` (`user_id`, `seller_type`, `product_category`, `product_sub_category`, `location`, `product_name`,`product_price`, `product_desc`, `product_quantity`,`product_date`, `status`) 
-                VALUES ('$id', '$seller_type', '$category', '$subCategory', '$location', '$name','$price', '$desc', '$quantity', current_timestamp(), '0');";
+        $sql = "INSERT INTO `product` (`user_id`,`business_type`, `seller_type`, `product_category`, `product_sub_category`, `location`, `product_name`,`product_price`, `product_desc`, `product_quantity`,`product_date`, `status`) 
+                VALUES ('$id','$business_type', '$seller_type', '$category', '$subCategory', '$location', '$name','$price', '$desc', '$quantity', current_timestamp(), '0');";
         if ($this->conn->query($sql)) {
             return $this->conn->insert_id;
         } else {
@@ -80,7 +80,14 @@ trait productFunction
             return false;
         }
     }
-    public function getFilteredProduct($category, $subCategory, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, $count = false)
+    public function getBusinessType()
+    {
+        if ($result = $this->conn->query("SELECT * FROM `business_type`;"))
+            return $result;
+        else
+            return false;
+    }
+    public function getFilteredProduct($category, $business_type, $subCategory, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, $count = false)
     {
         $sql = "SELECT * FROM `product` WHERE status='1'";
         if ($priceMin != "" && $priceMax != "") {
@@ -89,6 +96,10 @@ trait productFunction
         if ($category != "") {
             $categoryFilter = implode(',', $category);
             $sql .= " AND product_category IN ($categoryFilter)";
+        }
+        if ($business_type != "") {
+            $businessTypeFilter = implode(',', $business_type);
+            $sql .= " AND business_type IN ($businessTypeFilter)";
         }
         if ($subCategory != "") {
             $sql .= " AND product_sub_category = '$subCategory'";
@@ -226,6 +237,16 @@ trait productFunction
     public function getProductCountBySubCategory($id1, $id2)
     {
         $sql = "SELECT * FROM `product` WHERE product_category='$id1' AND product_sub_category='$id2' AND status='1';";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return $result->num_rows;
+        } else {
+            return false;
+        }
+    }
+    public function getProductCountByBusinessType($id)
+    {
+        $sql = "SELECT * FROM `product` WHERE business_type='$id' AND status='1';";
         $result = $this->conn->query($sql);
         if ($result) {
             return $result->num_rows;

@@ -23,3 +23,10 @@ while ($row = $result->fetch_assoc()) {
     </div>
 </div>';
 }
+
+$formFillUp = "";
+if (isset($_SESSION['u_id'])) {
+    $userObj = new user();
+    $formFillUp = $userObj->getUser($_SESSION['u_id']);
+}
+ 

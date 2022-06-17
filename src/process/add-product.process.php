@@ -1,14 +1,16 @@
 <?php
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 session_start();
-if(!function_exists("Autoloader"))
-{
-  require $phpPath . 'includes/class-autoload.inc.php';
+if (!function_exists("Autoloader")) {
+    require $phpPath . 'includes/class-autoload.inc.php';
 }
 
 if (isset($_POST['submit'])) {
     // echo "<pre>" . print_r($_FILES['img_archive']) . "</pre>";
     $id = $_SESSION['u_id'];
+    $userObj = new user();
+    $user = $userObj->getUser($id);
+    $business_type = $user['business_type'];
     $name = $_POST['name'];
     $price = $_POST['price'];
     $quantity = trim($_POST['quantity']);
@@ -25,7 +27,7 @@ if (isset($_POST['submit'])) {
     for ($i = 0; $i < $total; $i++) {
         $processedOtherImages[$i] = $product->processImage('img_archive', $i);
     }
-    $inserted_id = $product->addProuct($id, $price,$name, $quantity, $category, $subCategory, $location, $seller_type, $desc);
+    $inserted_id = $product->addProuct($id, $business_type, $price, $name, $quantity, $category, $subCategory, $location, $seller_type, $desc);
     if ($inserted_id != false) {
         $bool = $product->addImages($inserted_id, $processedPrimaryImage, '1');
         for ($i = 0; $i < $total; $i++) {
@@ -38,8 +40,6 @@ if (isset($_POST['submit'])) {
         }
     }
 } else {
-    
+
     header('location: ../../public/e404.html');
 }
-
-
