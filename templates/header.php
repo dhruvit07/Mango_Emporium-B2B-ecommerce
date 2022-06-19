@@ -6,7 +6,7 @@ if (!defined("MYSITE")) {
 	header("location: ../public/404");
 }
 $_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-require 'C:/xampp/htdocs/project-1/src/process/category.process.php';
+require 'C:/xampp/htdocs/project-1/includes/search.inc.php';
 $contact = $product_obj->getContact();
 ?>
 <!DOCTYPE html>
@@ -20,9 +20,6 @@ $contact = $product_obj->getContact();
 
 	<title>Mango Emporium</title>
 	<link rel="icon" type="image/x-icon" href="<?php echo $htmlPath; ?>/resources/img/favicon.png">
-
-	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
 	<!-- Bootstrap -->
 	<!-- <link type="text/css" rel="stylesheet" href="<?php echo $htmlPath; ?>/resources/css/bootstrap.css" /> -->
@@ -44,7 +41,7 @@ $contact = $product_obj->getContact();
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
- 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
  		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
  		<![endif]-->
 	<style>
@@ -99,29 +96,32 @@ $contact = $product_obj->getContact();
 						<!-- /Menu Toogle -->
 					</div>
 					<!-- LOGO -->
-					<div class="col-md-6" style="margin: 0 25%;">
-						<!-- <div class="header-logo" style="margin: 0 25%;"> -->
-						<a href="#" class="logo ">
-							<img style="margin: 0 auto;height:100px;width:300px;object-fit:cover;" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
-						</a>
-						<!-- </div> -->
-					</div>
+					<a href="<?php echo $htmlPath; ?>/public" style="height:250px;width:100%;object-fit:cover;" class="logo ">
+						<img id="img-logo" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
+					</a>
 					<!-- /LOGO -->
-
-					<!-- SEARCH BAR -->
-					<div class="col-md-12">
+					<?php if (defined("HOME")) { ?>
+						<!-- SEARCH BAR -->
 						<div class="header-search col-md-12">
-							<form>
-								<select class="input-select " style="width:120px">
-									<option value="0">Category</option>
+							<form target="_blank" action="<?php echo $htmlPath ?>/public/store/" method="GET">
+								<select class="input-select" name="business-type[]" required>
+									<option value="">Business Type</option>
+									<?php echo $searchBarBusinessTypeOptionHTML; ?>
+								</select>
+								<select class="input-select middle" name="location[]" required>
+									<option value="">Location</option>
+									<?php echo $searchBarLocationOptionHTML; ?>
+								</select>
+								<select class="input-select middle" name="category[]" required>
+									<option value="">Category</option>
 									<?php echo $searchBarCategoryOptionHTML; ?>
 								</select>
-								<input class="input" placeholder="Search here">
-								<button class="search-btn" style="width:100px;height:41px;text-align:center;margin-bottom:1px;">Search</button>
+								<input class="input" type="text" name="search"  placeholder="Search here">
+								<button class="search-btn" name="filter">Search</button>
 							</form>
 						</div>
-					</div>
-					<!-- /SEARCH BAR -->
+						<!-- /SEARCH BAR -->
+					<?php } ?>
 
 					<!-- ACCOUNT -->
 
@@ -134,8 +134,6 @@ $contact = $product_obj->getContact();
 		</div>
 		<!-- /MAIN HEADER -->
 	</header>
-	<!-- /HEADER -->
-
 	<!-- NAVIGATION -->
 	<nav id="navigation">
 		<!-- container -->
@@ -147,24 +145,24 @@ $contact = $product_obj->getContact();
 					<?php
 					if (strpos($_url, 'store') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
-								<li class="active"><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
+									<li class="active"><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
+									<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
+									<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					} else if (strpos($_url, 'category') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
-							<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-							<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>
-							<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
+								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
+								<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>
+								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					} else if (strpos($_url, 'content') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
-							<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-							<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-							<li class="active"><a href="' . $htmlPath . '/public/content">Content</a></li>';
+								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
+								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
+								<li class="active"><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					} else if (strpos($_url, 'public') !== false) {
 						echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
-							<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
-							<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-							<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
+								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
+								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
+								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
 					}
 					?>
 
@@ -177,3 +175,4 @@ $contact = $product_obj->getContact();
 		<!-- /container -->
 	</nav>
 	<!-- /NAVIGATION -->
+	<!-- /HEADER -->

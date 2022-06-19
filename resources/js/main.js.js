@@ -114,6 +114,12 @@ function checkPassword(input1) {
     return true;
   }
 }
+$(document).ready(function() {
+  $('.toggle').click(function() {
+    $('.sidebar-contact').toggleClass('active')
+    $('.toggle').toggleClass('active')
+  })
+})
 
 
 //Event Listeners

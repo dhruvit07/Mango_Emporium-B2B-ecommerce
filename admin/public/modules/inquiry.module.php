@@ -4,12 +4,16 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $object = new inquiry();
+$product_obj = new _product();
 $HTML = "";
 if (isset($_GET['inquiry'])) {
     $result = $object->getInquiry();
     while ($row = $result->fetch_assoc()) {
+        $row2 = $product_obj->getProductById($row['product_id']);
+        $row3 = $object->getUser($row2['user_id']);
         $HTML .= '<tr>
-    <td><a href="./?product&approved&search=' . $row['product_id'] . '">' . $row['product_id'] . '</a></td>
+    <td><a href="./?product=' . $row2['business_type'] . '&approved&search=' . $row['product_id'] . '">' . $row['product_id'] . '</a></td>
+    <td><a href="./?users&search=' . $row3['u_id'] . '">' . $row3['u_name'] . '</a></td>
     <td>' . $row['email'] . '</td>
     <td>' . $row['contact'] . '</td>
     <td>' . $row['description'] . '</td>
@@ -22,14 +26,36 @@ if (isset($_GET['inquiry'])) {
     </tr>';
     }
 
-    // if (isset($_GET['delete'])) {
-    //     $id = $_GET['delete'];
-    //     if ($object->deleteInquiry($id)) {
-    //         $_SESSION['msg'] = "Inquiry Deleted Deleted!";
-    //         echo '<script type="text/javascript"> window.location.href = "./?content&msg"</script>';
-    //         exit();
-    //     }
-    // }
+    if (isset($_GET['delete'])) {
+        $id = $_GET['delete'];
+        if ($object->deleteInquiry($id)) {
+            $_SESSION['msg'] = "Inquiry  Deleted!";
+            echo '<script type="text/javascript"> window.location.href = "./?inquiry&msg"</script>';
+            exit();
+        }
+    }
+}
+if (isset($_GET['direct-inquiry'])) {
+    $result = $object->getDirectInquiry();
+    while ($row = $result->fetch_assoc()) {
+        $HTML .= '<tr>
+    <td>' . $row['email'] . '</td>
+    <td>' . $row['contact'] . '</td>
+    <td>' . $row['description'] . '</td>
+        <td class="text-right">
+        <a href="./?direct-inquiry&delete=' . $row['id'] . '" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+        </td>
+    </tr>';
+    }
+
+    if (isset($_GET['delete'])) {
+        $id = $_GET['delete'];
+        if ($object->deleteDirectInquiry($id)) {
+            $_SESSION['msg'] = "Inquiry Deleted Deleted!";
+            echo '<script type="text/javascript"> window.location.href = "./?direct-inquiry&msg"</script>';
+            exit();
+        }
+    }
 }
 ?>
 <div class="content">
@@ -66,7 +92,11 @@ if (isset($_GET['inquiry'])) {
                             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Product Id</th>
+                                        <?php if (isset($_GET['inquiry'])) { ?>
+                                            <th>Product Id</th>
+                                            <th>Company</th>
+                                        <?php } ?>
+
                                         <th>Email</th>
                                         <th>Contact</th>
                                         <th>Description</th>
@@ -75,7 +105,10 @@ if (isset($_GET['inquiry'])) {
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Product Id</th>
+                                        <?php if (isset($_GET['inquiry'])) { ?>
+                                            <th>Product Id</th>
+                                            <th>Company</th>
+                                        <?php } ?>
                                         <th>Email</th>
                                         <th>Contact</th>
                                         <th>Description</th>

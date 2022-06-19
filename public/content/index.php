@@ -124,6 +124,7 @@ include_once $phpPath . "templates/header.php";
 
 <!-- CATEGORY -->
 <div class="container mt-20 mb-30">
+
     <div class="row">
         <?php echo $contentHTML; ?>
     </div>
@@ -137,11 +138,18 @@ include_once $phpPath . "templates/header.php";
 include_once $phpPath . "templates/footer.php";
 
 include_once $phpPath . "templates/loadJS.php";
+include_once $phpPath . "templates/form.php";
 ?>
 
 
 <script type="text/javascript" src="https://www.youtube.com/player_api"></script>
 <script>
+    $(document).ready(function() {
+        $('.toggle').click(function() {
+            $('.sidebar-contact').toggleClass('active')
+            $('.toggle').toggleClass('active')
+        })
+    });
     var player;
 
     var $ = function(id) {

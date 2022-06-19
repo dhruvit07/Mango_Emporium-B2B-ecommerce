@@ -28,9 +28,9 @@ class _product extends config
             return false;
         }
     }
-    public function getPendingProduct()
+    public function getPendingProduct($id)
     {
-        $sql = "SELECT * FROM `product` WHERE status='0';";
+        $sql = "SELECT * FROM `product` WHERE business_type='$id' AND status='0';";
 
         if ($result = $this->conn->query($sql)) {
             return $result;
@@ -48,9 +48,17 @@ class _product extends config
             return false;
         }
     }
-    public function getApprovedProduct()
+    public function getBusinessTypeById($id)
     {
-        $sql = "SELECT * FROM `product` WHERE status='1';";
+        if ($result = $this->conn->query("SELECT * FROM `business_type` WHERE id='$id';")) {
+            $row = $result->fetch_assoc();
+            return $row['name'];
+        } else
+            return false;
+    }
+    public function getApprovedProduct($id)
+    {
+        $sql = "SELECT * FROM `product` WHERE business_type='$id' AND status='1';";
 
         if ($result = $this->conn->query($sql)) {
             return $result;

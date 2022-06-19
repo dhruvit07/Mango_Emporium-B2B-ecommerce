@@ -26,12 +26,14 @@ function getFilterHTML($result, $product_obj, $string, $_name)
     $html = "";
     while ($row = $result->fetch_assoc()) {
         $name = $row[$string];
+        if ($string == "seller_type" && $row['id'] == 1)
+            continue;
         $html .= '<div class="input-checkbox">
 								<input type="checkbox" id="' . $string . '-' . $i . '" name="' . $_name . '[]" value="' . $row["id"] . '">
 								<label for="' . $string . '-' . $i . '">
 									<span></span>
 									' . $name . '
-									<small>(' . ($string == "sellertype" ? $product_obj->getProductCountBySellerType($row['id']) : ($string == "location" ?
+									<small>(' . ($string == "seller_type" ? $product_obj->getProductCountBySellerType($row['id']) : ($string == "location" ?
             $product_obj->getProductCountByLocation($row['id']) : ($string == "category_name" ? $product_obj->getProductCountByCategory($row['id']) : $product_obj->getProductCountByBusinessType($row['id'])))) . ')    </small>
 								</label>
 							</div>';
@@ -46,22 +48,24 @@ if (isset($_GET["page"]))
     $page = $_GET["page"];
 else
     $page = 1;
-$limit_per_page = 20;
+$limit_per_page = 10;
 $offset = ($page - 1) * $limit_per_page;
 $product = "";
 
-if (isset($_GET['filter']) && (isset($_GET['category']) || isset($_GET['business-type']) || (isset($_GET['sub']) && isset($_GET['category'])) || isset($_GET['location']) || isset($_GET['sellerType']) || isset($_GET['priceMin']) || isset($_GET['priceMax']))) {
+if (isset($_GET['filter']) && (isset($_GET['category']) || isset($_GET['search']) ||  isset($_GET['user']) || isset($_GET['business-type']) || (isset($_GET['sub']) && isset($_GET['category'])) || isset($_GET['location']) || isset($_GET['sellerType']) || isset($_GET['priceMin']) || isset($_GET['priceMax']))) {
 
-    $category = isset($_GET['category']) ? $_GET['category'] : "";
-    $businessType = isset($_GET['business-type']) ? $_GET['business-type'] : "";
-    $sub = isset($_GET['sub']) ? $_GET['sub'] : "";
-    $location = isset($_GET['location']) ? $_GET['location'] : "";
-    $sellerType = isset($_GET['sellerType']) ? $_GET['sellerType'] : "";
+    $category = isset($_GET['category']) ? ($_GET['category'][0] == "" ? "" : $_GET['category']) : "";
+    $search = isset($_GET['search']) ? ($_GET['search'] == "" ? "" : $_GET['search']) : "";
+    $user = isset($_GET['user']) ? ($_GET['user'] == "" ? "" : $_GET['user']) : "";
+    $businessType = isset($_GET['business-type']) ? ($_GET['business-type'][0] == "" ? "" : $_GET['business-type']) : "";
+    $sub = isset($_GET['sub']) ? ($_GET['sub'][0] == "" ? "" : $_GET['sub']) : "";
+    $location = isset($_GET['location']) ? ($_GET['location'][0] == "" ? "" : $_GET['location']) : "";
+    $sellerType = isset($_GET['sellerType']) ? ($_GET['sellerType'][0] == "" ? "" : $_GET['sellerType']) : "";
     $priceMin = isset($_GET['priceMin']) ? $_GET['priceMin'] : "";
     $priceMax = isset($_GET['priceMax']) ? $_GET['priceMax'] : "";
 
-    $result = $product_obj->getFilteredProduct($category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page);
-    $totalProduct = $product_obj->getFilteredProduct($category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, true);
+    $result = $product_obj->getFilteredProduct($search, $user, $category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page);
+    $totalProduct = $product_obj->getFilteredProduct($search, $user, $category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, true);
 } else {
 
     $result = $product_obj->getAllProduct($offset, $limit_per_page);
@@ -73,7 +77,7 @@ $product = productHTMLGenterator($result, $product_obj, $number_of_pages, $page,
 
 if ($totalProduct < 1) {
 
-    $product =  '<img class="img-responsive" src=' . $htmlPath . '/resources/img/not_found.jpg>';
+    $product =  $search . '<img class="img-responsive" src=' . $htmlPath . '/resources/img/not_found.jpg>';
 }
 
 

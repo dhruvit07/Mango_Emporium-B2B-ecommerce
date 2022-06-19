@@ -17,7 +17,7 @@ class user
     {
         if ($result = $this->conn->query("SELECT * FROM `business_type` WHERE id='$id';")) {
             $row = $result->fetch_assoc();
-            return $row['name'];
+            return $row;
         } else
             return false;
     }

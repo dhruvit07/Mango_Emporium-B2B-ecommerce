@@ -7,9 +7,11 @@ $product_obj = new _product();
 if (isset($_GET["users"])) {
     $result = $product_obj->getVendors();
     while ($row = $result->fetch_assoc()) {
+        $business_type = $product_obj->getBusinessTypeById($row['business_type']);
         $userHTML .= '<tr>
     <td>' . $row['u_id'] . '</td>
     <td>' . $row['u_name'] . '</td>
+    <td>' . $business_type . '</td>
     <td>' . $row['u_email'] . '</td>
     <td>' . $row['u_contact'] . '</td>
         <td class="text-right">
@@ -63,6 +65,7 @@ if (isset($_GET["users"]) && isset($_GET["delete"])) {
                                     <tr>
                                         <th>Vendor Id</th>
                                         <th>Vendor Name</th>
+                                        <th>Business Type</th>
                                         <th>Email</th>
                                         <th>Contact</th>
                                         <th class="disabled-sorting text-right">Action</th>
@@ -72,6 +75,7 @@ if (isset($_GET["users"]) && isset($_GET["delete"])) {
                                     <tr>
                                         <th>Vendor Id</th>
                                         <th>Vendor Name</th>
+                                        <th>Business Type</th>
                                         <th>Email</th>
                                         <th>Contact</th>
                                         <th class="disabled-sorting text-right">Action</th>

@@ -23,9 +23,9 @@ class content extends config
             return false;
         }
     }
-    public function insertContent($url, $name, $viewUrl)
+    public function insertContent($id, $url, $name, $viewUrl)
     {
-        $sql = "INSERT INTO video_content (video_url,video_name,video_view_url) VALUES('$url','$name','$viewUrl');";
+        $sql = "INSERT INTO video_content (video_url,video_name,video_view_url,product_id) VALUES('$url','$name','$viewUrl','$id');";
 
         if ($result = $this->conn->query($sql)) {
             return true;

@@ -28,15 +28,18 @@ if (isset($_POST['direct-inquiry'])) {
     $contact = $_POST['number'];
     $desc = $_POST['description'];
     $inquiryObj = new inquiry();
-    $result = $inquiryObj->sendInquiry($productId, $email, $contact, $desc);
+    $result = $inquiryObj->sendDirectInquiry($email, $contact, $desc);
     // print_r($_POST);
     if ($result) {
         $_SESSION['msg'] = "Inquiry Sent Successfully!!";
-        header('location: ' . $htmlPath . '/public/store/?msg');
+        header('location: ' . $htmlPath . '/public/?msg');
         exit();
     } else {
         $_SESSION['msg'] = "Inquiry Not Sent!!";
-        header('location: ' . $htmlPath . '/public/store/?msg');
+        header('location: ' . $htmlPath . '/public/?msg');
         exit();
     }
+    exit();
 }
+
+exit();

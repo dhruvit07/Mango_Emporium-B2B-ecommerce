@@ -44,11 +44,8 @@ if (isset($_GET['id']) && $_GET['id'] != "") {
     }
 }
 
-$searchBarCategoryOptionHTML = "";
-$result = $product_obj->getCategory();
-while ($row = $result->fetch_assoc()) {
-    $searchBarCategoryOptionHTML .= '
-    <option value="' . $row['id'] . '">' . $row["category_name"] . '</option>
-';
+$formFillUp = "";
+if (isset($_SESSION['u_id'])) {
+    $userObj = new user();
+    $formFillUp = $userObj->getUser($_SESSION['u_id']);
 }
-

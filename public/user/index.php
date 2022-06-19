@@ -337,7 +337,7 @@ require $phpPath . 'includes/user-product.inc.php';
                                     <h4><?php echo $user['u_name']; ?></h4>
                                     <p class="text-secondary mb-1"><?php echo $user['u_contact']; ?></p>
                                     <p class="text-muted font-size-sm"><?php echo $user['u_email']; ?></p>
-                                    <p class="text-muted font-size-sm"><?php echo $business_type; ?></p>
+                                    <p class="text-muted font-size-sm"><?php echo $business_type['name']; ?></p>
                                     <!-- <button class="btn btn-primary">Follow</button> -->
                                     <!-- <button class="btn btn-outline-primary">Message</button> -->
                                 </div>
@@ -421,7 +421,7 @@ require $phpPath . 'includes/user-product.inc.php';
                                         <h6 class="mb-0">Business Type</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <?php echo $business_type; ?>
+                                        <?php echo $business_type['name']; ?>
                                     </div>
                                 </div>
                                 <hr>
@@ -515,22 +515,22 @@ require $phpPath . 'includes/user-product.inc.php';
                                             <div class="col-sm-12">
 
                                                 <div class="row">
-                                                    <label for="tech" class="col-sm-6 control-label">Seller Type</label>
                                                     <label for="tech" class="col-sm-6 control-label">Location</label>
+                                                    <label for="tech" <?php echo $business_type['id'] == 1 ? "" : 'style="display:none"' ?> class="col-sm-6 control-label">Seller Type</label>
 
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        <select class="form-control" id="seller_type" name="seller_type" required>
-                                                            <option value="">Seller Type</option>
-                                                            <?php echo $sellerType_html; ?>
-
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-sm-6">
                                                         <select class="form-control" name="location" id="location" required>
                                                             <option value="">Location</option>
                                                             <?php echo $location_html; ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <select <?php echo $business_type['id'] == 1 ? "" : "hidden" ?> class="form-control" id="seller_type" name="seller_type" required>
+                                                            <option value="<?php echo $business_type['id'] == 1 ? "" : "1" ?>" <?php echo $business_type['id'] == 1 ? "" : "selected" ?>>Seller Type</option>
+                                                            <?php echo $sellerType_html; ?>
+
                                                         </select>
                                                     </div>
                                                 </div>

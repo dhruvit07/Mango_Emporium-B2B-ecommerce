@@ -125,6 +125,8 @@ include_once $phpPath . "templates/header.php";
 </body>
 
 <?php
+include_once $phpPath . "templates/form.php";
+
 include_once $phpPath . "templates/footer.php";
 
 include_once $phpPath . "templates/loadJS.php";

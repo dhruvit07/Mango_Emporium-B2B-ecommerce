@@ -6,6 +6,11 @@ if (!isset($_GET['id'])) {
     header("location: " . $htmlPath . "/public/e404.html");
     exit();
 }
+$formFillUp = "";
+if (isset($_SESSION['u_id'])) {
+    $userObj = new user();
+    $formFillUp = $userObj->getUser($_SESSION['u_id']);
+}
 
 $productObj = new product();
 $id = trim($_GET['id']);

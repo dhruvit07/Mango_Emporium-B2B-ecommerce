@@ -23,4 +23,45 @@ class inquiry extends config
             return false;
         }
     }
+    public function getUser($id)
+    {
+        $login_sql = "SELECT * FROM `user` WHERE u_id='$id';";
+        $result = $this->conn->query($login_sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row;
+        } else {
+            return false;
+        }
+    }
+    public function deleteInquiry($id)
+    {
+        $sql = "DELETE FROM `inquiry` WHERE id='$id';";
+
+        if ($result = $this->conn->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function deleteDirectInquiry($id)
+    {
+        $sql = "DELETE FROM `direct_inquiry` WHERE id='$id';";
+
+        if ($result = $this->conn->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function getDirectInquiry()
+    {
+        $sql = "SELECT * FROM `direct_inquiry`;";
+
+        if ($result = $this->conn->query($sql)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

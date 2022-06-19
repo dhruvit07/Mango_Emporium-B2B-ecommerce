@@ -9,8 +9,12 @@ if (!function_exists("Autoloader")) {
     require $phpPath . 'includes/class-autoload.inc.php';
 }
 $pageTitle = "Dashboard";
-if (isset($_GET["product"])) {
-    $pageTitle = "Product";
+if (isset($_GET["product"]) && $_GET["product"] == 1) {
+    $pageTitle = "Business Volume Product";
+} else if (isset($_GET["product"]) && $_GET["product"] == 2) {
+    $pageTitle = "Business to Distribution Product";
+} else if (isset($_GET["product"]) && $_GET["product"] == 3) {
+    $pageTitle = "Franchise Product";
 } else if (isset($_GET["category"])) {
     $pageTitle = "Category";
 } else if (isset($_GET["subCategory"])) {
@@ -25,6 +29,8 @@ if (isset($_GET["product"])) {
     $pageTitle = "Content";
 } else if (isset($_GET["inquiry"])) {
     $pageTitle = "Inquiry";
+} else if (isset($_GET["direct-inquiry"])) {
+    $pageTitle = "Direct Inquiry";
 }
 ?>
 
@@ -64,7 +70,7 @@ if (isset($_GET["product"])) {
                 require $phpPath . "public/modules/user.module.php";
             } else if (isset($_GET["content"])) {
                 require $phpPath . "public/modules/content.module.php";
-            } else if (isset($_GET["inquiry"])) {
+            } else if (isset($_GET["inquiry"]) || isset($_GET["direct-inquiry"])) {
                 require $phpPath . "public/modules/inquiry.module.php";
             }
             ?>
@@ -347,11 +353,11 @@ if (isset($_GET["product"])) {
             <?php
             if (isset($_GET["search"])) {
             ?>
-                table.search(<?php echo $_GET['search'] ?>).draw();
+                table.columns(0).search(<?php echo $_GET['search'] ?>).draw();
             <?php
             } ?>
 
-            
+
         });
     </script>
     <!-- Form Validation script -->

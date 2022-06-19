@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\ArrayShape;
+
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 // session_start();
 if (defined("require")) {
@@ -87,11 +90,17 @@ trait productFunction
         else
             return false;
     }
-    public function getFilteredProduct($category, $business_type, $subCategory, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, $count = false)
+    public function getFilteredProduct($search, $user, $category, $business_type, $subCategory, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, $count = false)
     {
         $sql = "SELECT * FROM `product` WHERE status='1'";
         if ($priceMin != "" && $priceMax != "") {
             $sql .= " AND product_price BETWEEN $priceMin AND $priceMax";
+        }
+        if ($user != "") {
+            $sql .= " AND `user_id`='$user'";
+        }
+        if ($search != "") {
+            $sql .= " AND `product_name` LIKE '%$search%' OR `product_desc`LIKE '%$search%'";
         }
         if ($category != "") {
             $categoryFilter = implode(',', $category);
@@ -174,9 +183,29 @@ trait productFunction
             return false;
         }
     }
+    public function getProductByCategory($id)
+    {
+        // $limit = 20;
+        $sql = "SELECT * FROM `product` WHERE status='1' AND product_category='$id';";
+        if ($result = $this->conn->query($sql)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
     public function getCategory()
     {
         $sql = "SELECT * FROM `category`;";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    public function getUsersByBusinessType($id)
+    {
+        $sql = "SELECT * FROM `user` WHERE business_type='$id';";
         $result = $this->conn->query($sql);
         if ($result) {
             return $result;
@@ -270,6 +299,30 @@ trait productFunction
         $result = $this->conn->query($sql);
         if ($result) {
             return $result->num_rows;
+        } else {
+            return false;
+        }
+    }
+    public function getProductCountByUser($id)
+    {
+        $sql = "SELECT * FROM `product` WHERE `user_id`='$id' AND status='1';";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return $result->num_rows;
+        } else {
+            return false;
+        }
+    }
+    public function getProductRangeByUser($id)
+    {
+        $price = array();
+        $sql = "SELECT MIN(product_price) AS minimum,MAX(product_price) AS maximum FROM `product` WHERE user_id='$id' AND status='1';";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        $price[0] = $row['minimum'];
+        $price[1] = $row['maximum'];
+        if ($result) {
+            return $price;
         } else {
             return false;
         }

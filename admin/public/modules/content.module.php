@@ -21,10 +21,11 @@ if (isset($_GET['content'])) {
 
     if (isset($_POST['insert-content'])) {
         $viewUrl = $_POST['video-url'];
+        $id = $_POST['product-id'];
         $url = $_POST['video-url'];
         $name = $_POST['video-name'];
         $url = str_replace("/watch/?v=", "/embed/", $url);
-        $result = $object->insertContent(trim($url), trim($name), trim($viewUrl));
+        $result = $object->insertContent($id, trim($url), trim($name), trim($viewUrl));
         if ($result) {
             // echo $viewUrl . $name . $url;
             $_SESSION['msg'] = "Video Content Added!";
@@ -79,6 +80,10 @@ if (isset($_GET['content'])) {
                             <div class="form-group ">
                                 <label for="location" class="bmd-label-floating">Video Url</label>
                                 <input type="text" class="form-control" id="location" name="video-url" url="true" required="true" />
+                            </div>
+                            <div class="form-group ">
+                                <label for="location" class="bmd-label-floating">Product Id</label>
+                                <input type="number" class="form-control" id="location" name="product-id"required="true" />
                             </div>
                             <div class="form-group ">
                                 <div class="card-footer">

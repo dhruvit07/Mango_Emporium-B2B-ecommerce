@@ -90,8 +90,14 @@ include_once $phpPath . "templates/header.php";
 
 
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-phone"></i> Get Contact</button>
-                        <button class="add-to-cart-btn"><i class="fa fa-phone"></i> Inquiry</button>
+                        <div id="button">
+                            <div id="translate"></div>
+                            <button type="button" class="button inquiry">Inquiry</button>
+                        </div>
+                        <div id="button">
+                            <div id="translate"></div>
+                            <button type="button" class="button">Contact Info</button>
+                        </div>
                     </div>
 
 
@@ -99,7 +105,7 @@ include_once $phpPath . "templates/header.php";
                     <ul class="product-links">
                         <li>Category:</li>
                         <li><a href="<?php echo $htmlPath ?>/public/category/?id=<?php echo $productCategory['id'] ?>"><?php echo $productCategory['category_name'] ?></a></li>
-                        <li><a href="<?php echo $htmlPath ?>/public/store/?category=<?php echo $productCategory['id'] ?>&sub=<?php echo $productSubCategory['id']?>"><?php echo $productSubCategory['sub_category_name'] ?></a></li>
+                        <li><a href="<?php echo $htmlPath ?>/public/store/?category=<?php echo $productCategory['id'] ?>&sub=<?php echo $productSubCategory['id'] ?>"><?php echo $productSubCategory['sub_category_name'] ?></a></li>
                     </ul>
                     <ul class="product-links">
                         <li>Location:</li>
@@ -360,7 +366,45 @@ include_once $phpPath . "templates/header.php";
 </div>
 <!-- /Section -->
 
+<!-- MODAL -->
+<div id="open-modal" class="modal-window modal-window-close">
+    <div>
+        <a title="Close" class="modal-close">
+            <svg version="1.1" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+                <g>
+                    <path d="M962.2,13.3l24.4,24.4L34.4,989.8L10,965.5L962.2,13.3z" />
+                    <path d="M39.2,10L990,960.9L960.9,990L10.1,39.1L39.2,10L39.2,10z" />
+                </g>
+            </svg>
+        </a>
+        <form action="<?php echo $htmlPath; ?>/src/process/inquiry.process.php" method="post">
+            <div class="input-group">
+                <i class='bx bx-mail-send'></i>
+                <label for="email"> Email*</label>
+                <input type="email" name="email" <?php echo $formFillUp == "" ? "" : 'readonly="readonly"'; ?> id="email" value="<?php echo $formFillUp == "" ? "" : $formFillUp['u_email']; ?>" placeholder="Email">
+                <small>Content</small>
+            </div>
+            <div class="input-group">
+                <i class='bx bxs-user'></i>
+                <label for="number"> Number*</label>
+                <input type="name" name="number" id="number" <?php echo $formFillUp == "" ? "" :  'readonly="readonly"'; ?> value="<?php echo $formFillUp == "" ? "" : $formFillUp['u_contact'] ?>" placeholder="Number">
+                <small>Content</small>
+            </div>
+            <div class="input-group">
+                <i class='bx bxs-user'></i>
+                <label for="description"> Describe in Few Words*</label>
+                <textarea class="form-control" id="description" name="description" placeholder=" Please include product name, order quantity, usage, special requests if any in your inquiry." rows="3"></textarea>
+                <small>Content</small>
+            </div>
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>" id="product-id" placeholder="Number">
+            <div class="input-group">
+                <input type="submit" name="product-inquiry" id="submit-button" style="background-color:var(--primary-color); height:50px; ">
+            </div>
+        </form>
 
+    </div>
+</div>
+<!-- MODAL -->
 
 <!-- FOOTER -->
 <?php
@@ -373,6 +417,16 @@ include_once $phpPath . "templates/loadJS.php";
 <!-- jQuery Plugins -->
 <script>
     $(document).ready(function() {
+        $(document).on('click', ".inquiry", function() {
+            $('.modal-window').removeClass('modal-window-close');
+            $('.modal-window').addClass('modal-window-open');
+
+        });
+        $(document).on('click', ".modal-close", function() {
+            $('.modal-window').removeClass('modal-window-open');
+            $('.modal-window').addClass('modal-window-close');
+
+        });
 
     });
 </script>

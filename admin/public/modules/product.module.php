@@ -7,19 +7,19 @@ $product_obj = new _product();
 
 if (isset($_GET["product"]) && !isset($_GET["approved"])) {
 
-    $product = $product_obj->getPendingProduct();
+    $product = $product_obj->getPendingProduct($_GET['product']);
     $productHTML = generateProductHTML($product, $product_obj, 0);
 
     if (isset($_GET['approve'])) {
         if ($product_obj->approveProduct($_GET['approve'])) {
 
             $_SESSION['msg'] = "Product Approved";
-            echo '<script type="text/javascript"> window.location.href = "./?product&msg"</script>';
+            echo '<script type="text/javascript"> window.location.href = "./?product=' . $_GET['product'] . '&msg"</script>';
             exit();
         } else {
 
             $_SESSION['msg'] = "Some Error Occured";
-            echo '<script type="text/javascript"> window.location.href = "./?product&msg"</script>';
+            echo '<script type="text/javascript"> window.location.href = "./?product=' . $_GET['product'] . '&msg"</script>';
             exit();
         }
     }
@@ -27,28 +27,28 @@ if (isset($_GET["product"]) && !isset($_GET["approved"])) {
 
         if ($product_obj->deleteProduct($_GET['delete'])) {
             $_SESSION['msg'] = "Product Deleted";
-            echo '<script type="text/javascript"> window.location.href = "./?product&msg"</script>';
+            echo '<script type="text/javascript"> window.location.href = "./?product=' . $_GET['product'] . '&msg"</script>';
             exit();
         } else {
             $_SESSION['msg'] = "Some Error Occured";
-            echo '<script type="text/javascript"> window.location.href = "./?product&msg"</script>';
+            echo '<script type="text/javascript"> window.location.href = "./?product=' . $_GET['product'] . '&msg"</script>';
             exit();
         }
     }
 } else if (isset($_GET["product"]) && isset($_GET["approved"])) {
 
-    $product = $product_obj->getApprovedProduct();
+    $product = $product_obj->getApprovedProduct($_GET['product']);
     $productHTML = generateProductHTML($product, $product_obj, 1);
 
     if (isset($_GET['delete'])) {
 
         if ($product_obj->deleteProduct($_GET['delete'])) {
             $_SESSION['msg'] = "Product Deleted";
-            echo '<script type="text/javascript"> window.location.href = "./?product&approved&msg"</script>';
+            echo '<script type="text/javascript"> window.location.href = "./?product=' . $_GET['product'] . '&approved&msg"</script>';
             exit();
         } else {
             $_SESSION['msg'] = "Some Error Occured";
-            echo '<script type="text/javascript"> window.location.href = "./?product&approved&msg"</script>';
+            echo '<script type="text/javascript"> window.location.href = "./?product=' . $_GET['product'] . '&approved&msg"</script>';
             exit();
         }
     }
@@ -71,19 +71,19 @@ function generateProductHTML($product, $product_obj, $status)
             '<a href="../../public/store/product?id=' . $row['id'] . '&testing" target="_blank" class=" p-0 btn btn-link btn-info">
                                     <button class="px-3 py-2 m-1 btn ">View</button>
                                     </a>
-                                    <a href="./?product&approve=' . $row['id'] . '" class=" p-0 btn btn-link btn-info">
+                                    <a href="./?product=' . $_GET['product'] . '&approve=' . $row['id'] . '" class=" p-0 btn btn-link btn-info">
                                             <button class="p-2 m-1 btn btn-success">
                                             <span class="btn-label">
                                             <i class="material-icons">check</i>
                                             </span>
                                             Approve
                                         </button> </a>
-                                        <a href="./?product&delete=' . $row['id'] . '" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                        <a href="./?product=' . $_GET['product'] . '&delete=' . $row['id'] . '" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
                                         ' :
             '<a href="../../public/store/product?id=' . $row['id'] . '" target="_blank" class=" p-0 btn btn-link btn-info">
                                         <button class=" px-3 py-2 m-1 btn btn-info">View</button>
                                         </a>
-                                        <a href="./?product&approved&delete=' . $row['id'] . '" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                        <a href="./?product=' . $_GET['product'] . '&approved&delete=' . $row['id'] . '" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
                                         ';
         $date = $row['product_date'];
         $dateObj = new DateTime($date);

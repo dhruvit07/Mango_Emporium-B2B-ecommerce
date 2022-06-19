@@ -20,11 +20,9 @@ if (!isset($_SESSION['access'])) {
 
         body {
             background-color: #1DBF73;
-            font-family: 'Muli', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             overflow: hidden;
             margin: 0;
         }

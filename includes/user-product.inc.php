@@ -21,6 +21,8 @@ while ($row = $result->fetch_assoc()) {
 $sellerType_html = "";
 $result = $product->getSellerType();
 while ($row = $result->fetch_assoc()) {
+    if ($row['id'] == 1)
+        continue;
     $sellerType_html .= '<option value=' . $row['id'] . '>' . $row['seller_type'] . '</option>';
 }
 

@@ -26,4 +26,13 @@ class inquiry
             return false;
         }
     }
+    public function sendDirectInquiry($email, $contact, $description)
+    {
+        $result = $this->runQuery("INSERT INTO direct_inquiry (email,contact,description) VALUES('$email','$contact','$description');");
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

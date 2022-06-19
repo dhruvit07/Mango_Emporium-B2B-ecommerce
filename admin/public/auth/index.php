@@ -2,7 +2,7 @@
 session_start();
 // unset($_SESSION['auth-key']);
 if (!isset($_GET['a3643d46a8a4b9ae9e2d932df39d312f']) || (isset($_SESSION['auth-key']) && $_SESSION['auth-key'] == "a3643d46a8a4b9ae9e2d932df39d312f")) {
-    header('location: ./');
+    header('location: ../');
     exit();
 }
 require 'C:/xampp/htdocs/project-1/admin/includes/path-config.inc.php';

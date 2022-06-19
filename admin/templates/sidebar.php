@@ -91,7 +91,7 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item <?php echo $pageTitle == "Product" ? "active" : "" ?>">
+            <li class="nav-item <?php echo strpos($url, 'product') ? "active" : "" ?>">
                 <a class="nav-link" data-toggle="collapse" href="#products">
                     <i class="material-icons">shopping_cart</i>
                     <p> Products
@@ -100,30 +100,71 @@
                 </a>
                 <div class="collapse" id="products">
                     <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="">
-                                <span class="sidebar-mini"> OP </span>
-                                <span class="sidebar-normal"> Our Products </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item <?php echo strpos($url, 'product') ? "active" : "" ?>">
-                            <a class="nav-link " data-toggle="collapse" href="#vendor-product">
-                                <span class="sidebar-mini"> VP </span>
-                                <span class="sidebar-normal"> Vendors Products
+                        <li class="nav-item <?php echo strpos($url, 'product=1') ? "active" : "" ?>">
+                            <a class="nav-link " data-toggle="collapse" href="#product-1">
+                                <span class="sidebar-mini"> BVP </span>
+                                <span class="sidebar-normal"> Business Volume Products
                                     <b class="caret"></b>
                                 </span>
                             </a>
-                            <div class="collapse" id="vendor-product">
+                            <div class="collapse" id="product-1">
                                 <ul class="nav">
-                                    <li class="nav-item <?php echo strpos($url, 'product') && !strpos($url, 'approved') ? "active" : "" ?>">
-                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product">
+                                    <li class="nav-item <?php echo strpos($url, 'product=1') && !strpos($url, 'approved') ? "active" : "" ?>">
+                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product=1">
                                             <span class="sidebar-mini"> PP </span>
                                             <span class="sidebar-normal"> Pending Product </span>
                                         </a>
                                     </li>
-                                    <li class="nav-item <?php echo strpos($url, 'approved') ? "active" : "" ?>">
-                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product&approved">
+                                    <li class="nav-item <?php echo strpos($url, 'product=1') && strpos($url, 'approved') ? "active" : "" ?>">
+                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product=1&approved">
+                                            <span class="sidebar-mini"> AP </span>
+                                            <span class="sidebar-normal"> Approved Product </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item <?php echo strpos($url, 'product=2') ? "active" : "" ?>">
+                            <a class="nav-link " data-toggle="collapse" href="#product-2">
+                                <span class="sidebar-mini"> DP </span>
+                                <span class="sidebar-normal"> Distribution Products
+                                    <b class="caret"></b>
+                                </span>
+                            </a>
+                            <div class="collapse" id="product-2">
+                                <ul class="nav">
+                                    <li class="nav-item <?php echo strpos($url, 'product=2') && !strpos($url, 'approved') ? "active" : "" ?>">
+                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product=2">
+                                            <span class="sidebar-mini"> PP </span>
+                                            <span class="sidebar-normal"> Pending Product </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item <?php echo strpos($url, 'product=2') && strpos($url, 'approved') ? "active" : "" ?>">
+                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product=2&approved">
+                                            <span class="sidebar-mini"> AP </span>
+                                            <span class="sidebar-normal"> Approved Product </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item <?php echo strpos($url, 'product=3') ? "active" : "" ?>">
+                            <a class="nav-link " data-toggle="collapse" href="#product-3">
+                                <span class="sidebar-mini"> FP </span>
+                                <span class="sidebar-normal"> Franchise Products
+                                    <b class="caret"></b>
+                                </span>
+                            </a>
+                            <div class="collapse" id="product-3">
+                                <ul class="nav">
+                                    <li class="nav-item <?php echo strpos($url, 'product=3') && !strpos($url, 'approved') ? "active" : "" ?>">
+                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product=3">
+                                            <span class="sidebar-mini"> PP </span>
+                                            <span class="sidebar-normal"> Pending Product </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item <?php echo strpos($url, 'product=3') && strpos($url, 'approved') ? "active" : "" ?>">
+                                        <a class="nav-link" href="<?php echo $htmlPath; ?>/public/?product=3&approved">
                                             <span class="sidebar-mini"> AP </span>
                                             <span class="sidebar-normal"> Approved Product </span>
                                         </a>
@@ -149,7 +190,13 @@
             <li class="nav-item <?php echo $pageTitle == "Inquiry" ? "active" : "" ?> ">
                 <a class="nav-link" href="<?php echo $htmlPath ?>/public/?inquiry">
                     <i class="material-icons">info</i>
-                    <p> Inquiries </p>
+                    <p> Product Inquiries </p>
+                </a>
+            </li>
+            <li class="nav-item <?php echo $pageTitle == "Direct Inquiry" ? "active" : "" ?> ">
+                <a class="nav-link" href="<?php echo $htmlPath ?>/public/?direct-inquiry">
+                    <i class="material-icons">info</i>
+                    <p> Direct Inquiries </p>
                 </a>
             </li>
 
