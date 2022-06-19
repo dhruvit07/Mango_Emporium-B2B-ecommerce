@@ -221,17 +221,18 @@ require $phpPath . 'src/process/index.process.php';
 		margin: 10px 0px;
 	}
 
-	.card-details{
+	.card-details {
 		display: inline;
 	}
+
 	.card-details p {
 		width: 49%;
 		display: inline-block;
 		margin-bottom: 2px;
 	}
-	@media only screen and (max-width: 767px)
-	{
-		.card-details p{
+
+	@media only screen and (max-width: 767px) {
+		.card-details p {
 			width: 45%;
 		}
 	}
@@ -518,13 +519,18 @@ require $phpPath . 'src/process/index.process.php';
 
 
 	<?php
-	 include_once $phpPath . "templates/form.php";
+	include_once $phpPath . "templates/form.php";
 	include_once $phpPath . "templates/footer.php";
 	include_once $phpPath . "templates/loadJS.php";
 	?>
 	<!-- jQuery Plugins -->
 
 	<script>
+		setTimeout(() => {
+			$('.sidebar-contact').toggleClass('active')
+			$('.toggle').toggleClass('active')
+		}, 6000);
+
 		$(document).on('click', ".modal-close", function() {
 			$('.modal-window').removeClass('modal-window-open');
 			$('.modal-window').addClass('modal-window-close');

@@ -8,7 +8,7 @@ function Autoloader($className)
         $path = "../../classes/";
     else if (strpos($url, 'process') !== false)
         $path = "../classes/";
-    else if (strpos($url, 'user') !== false || strpos($url, 'store') !== false || strpos($url, 'category') !== false || strpos($url, 'content') !== false)
+    else if (strpos($url, 'user') !== false || strpos($url, 'store') !== false || strpos($url, 'category') !== false || strpos($url, 'content') !== false ||strpos($url, 'connect') !== false)
         $path = "../../src/classes/";
     else if (strpos($url, 'includes') !== false || strpos($url, 'templates') !== false || strpos($url, 'public') !== false)
         $path = "../src/classes/";

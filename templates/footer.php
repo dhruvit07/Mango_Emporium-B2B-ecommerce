@@ -66,10 +66,10 @@ while ($row = $result->fetch_assoc()) {
 					<div class="footer">
 						<h3 class="footer-title">Information</h3>
 						<ul class="footer-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Contact Us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Terms & Conditions</a></li>
+							<li><a href="<?php echo $htmlPath?>/public/connect/about">About Us</a></li>
+							<li><a href="<?php echo $htmlPath?>/public/connect/?contact">Contact Us</a></li>
+							<li><a href="<?php echo $htmlPath?>/public/connect/?privacypolicy">Privacy Policy</a></li>
+							<li><a href="<?php echo $htmlPath?>/public/connect/?termsandconditions">Terms & Conditions</a></li>
 						</ul>
 					</div>
 				</div>

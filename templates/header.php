@@ -77,6 +77,7 @@ $contact = $product_obj->getContact();
 		</div>
 		<!-- /TOP HEADER -->
 
+		<?php if (!defined("ABOUT")) { ?>
 		<!-- MAIN HEADER -->
 		<div id="header">
 			<!-- container -->
@@ -116,7 +117,7 @@ $contact = $product_obj->getContact();
 									<option value="">Category</option>
 									<?php echo $searchBarCategoryOptionHTML; ?>
 								</select>
-								<input class="input" type="text" name="search"  placeholder="Search here">
+								<input class="input" type="text" name="search" placeholder="Search here">
 								<button class="search-btn" name="filter">Search</button>
 							</form>
 						</div>
@@ -134,45 +135,46 @@ $contact = $product_obj->getContact();
 		</div>
 		<!-- /MAIN HEADER -->
 	</header>
-	<!-- NAVIGATION -->
-	<nav id="navigation">
-		<!-- container -->
-		<div class="container">
-			<!-- responsive-nav -->
-			<div id="responsive-nav">
-				<!-- NAV -->
-				<ul class="main-nav nav navbar-nav">
-					<?php
-					if (strpos($_url, 'store') !== false) {
-						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<?php
+						if (strpos($_url, 'store') !== false) {
+							echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 									<li class="active"><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 									<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
 									<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
-					} else if (strpos($_url, 'category') !== false) {
-						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+						} else if (strpos($_url, 'category') !== false) {
+							echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>
 								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
-					} else if (strpos($_url, 'content') !== false) {
-						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+						} else if (strpos($_url, 'content') !== false) {
+							echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
 								<li class="active"><a href="' . $htmlPath . '/public/content">Content</a></li>';
-					} else if (strpos($_url, 'public') !== false) {
-						echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
+						} else if (strpos($_url, 'public') !== false) {
+							echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
 								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
-					}
-					?>
+						}
+						?>
 
 
-				</ul>
-				<!-- /NAV -->
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
 			</div>
-			<!-- /responsive-nav -->
-		</div>
-		<!-- /container -->
-	</nav>
-	<!-- /NAVIGATION -->
-	<!-- /HEADER -->
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->
+		<!-- /HEADER -->
+	<?php } ?>
