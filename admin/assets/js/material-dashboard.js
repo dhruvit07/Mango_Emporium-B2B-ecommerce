@@ -5,7 +5,7 @@
  =========================================================
 
  * Product Page: https://www.creative-tim.com/product/material-dashboard-pro
- * Copyright 2020 Creative Tim (http://www.creative-tim.com)
+ * Copyright 2020 Creative Tim (https://www.creative-tim.com)
 
  * Designed by www.invisionapp.com Coded by www.creative-tim.com
 
@@ -753,14 +753,14 @@ md = {
           title: 'Click for Creative Tim',
           start: new Date(y, m, 21),
           end: new Date(y, m, 22),
-          url: 'http://www.creative-tim.com/',
+          url: 'https://www.creative-tim.com/',
           className: 'event-orange'
         },
         {
           title: 'Click for Google',
           start: new Date(y, m, 21),
           end: new Date(y, m, 22),
-          url: 'http://www.creative-tim.com/',
+          url: 'https://www.creative-tim.com/',
           className: 'event-orange'
         }
       ]

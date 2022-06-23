@@ -1,9 +1,7 @@
 <?php
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 session_start();
-if (!isset($_SESSION['access'])) {
-    header("location: ../e404.html");
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

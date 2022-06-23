@@ -2,9 +2,8 @@
 require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
 ob_start();
 session_start();
-if(!function_exists("Autoloader"))
-{
-  require $phpPath . 'includes/class-autoload.inc.php';
+if (!function_exists("Autoloader")) {
+    require $phpPath . 'includes/class-autoload.inc.php';
 }
 
 
@@ -27,9 +26,9 @@ if (isset($_POST['password-reset-token']) && $_POST['email']) {
 
         $expDate = date("Y-m-d H:i:s", $expFormat);
         $bool = $obj->insertToken($token, $expDate, $email);
-        $link = "http://localhost/project-1/public/auth/forgot?key=" . $email . "&token=" . $token;
+        $link = "https://www.mangoemporium.com/public/auth/forgot?key=" . $email . "&token=" . $token;
 
-          require $phpPath . "src/phpmail/emailconfig.inc.php";
+        require $phpPath . "src/phpmail/emailconfig.inc.php";
 
         $mail->addAddress($email, 'Person Name');
 

@@ -42,7 +42,7 @@
     return this;
   };
 })(jQuery);
-/*! Copyright (c) 2013 Brandon Aaron (http://brandon.aaron.sh)
+/*! Copyright (c) 2013 Brandon Aaron (https://brandon.aaron.sh)
  * Licensed under the MIT License (LICENSE.txt).
  *
  * Version: 3.1.9
@@ -683,7 +683,7 @@ jvm.SVGElement = function (name, config) {
 
 jvm.inherits(jvm.SVGElement, jvm.AbstractElement);
 
-jvm.SVGElement.svgns = "http://www.w3.org/2000/svg";
+jvm.SVGElement.svgns = "https://www.w3.org/2000/svg";
 
 /**
  * Creates DOM element.
@@ -778,7 +778,7 @@ jvm.SVGShapeElement.prototype.applyAttr = function (attr, value) {
     if (!jvm.SVGShapeElement.images[value]) {
       jvm.whenImageLoaded(value).then(function (img) {
         imageEl = new jvm.SVGElement('image');
-        imageEl.node.setAttributeNS('http://www.w3.org/1999/xlink', 'href', value);
+        imageEl.node.setAttributeNS('https://www.w3.org/1999/xlink', 'href', value);
         imageEl.applyAttr('x', '0');
         imageEl.applyAttr('y', '0');
         imageEl.applyAttr('width', img[0].width);
@@ -832,7 +832,7 @@ jvm.SVGImageElement.prototype.applyAttr = function (attr, value) {
 
   if (attr == 'image') {
     jvm.whenImageLoaded(value).then(function (img) {
-      that.node.setAttributeNS('http://www.w3.org/1999/xlink', 'href', value);
+      that.node.setAttributeNS('https://www.w3.org/1999/xlink', 'href', value);
       that.width = img[0].width;
       that.height = img[0].height;
       that.applyAttr('width', that.width);
@@ -1803,7 +1803,7 @@ jvm.Proj = {
   /**
    * Converts point on sphere to the Cartesian coordinates using Albers Equal-Area Conic
    * projection
-   * @see <a href="http://mathworld.wolfram.com/AlbersEqual-AreaConicProjection.html">Albers Equal-Area Conic projection</a>
+   * @see <a href="https://mathworld.wolfram.com/AlbersEqual-AreaConicProjection.html">Albers Equal-Area Conic projection</a>
    * @param {Number} lat Latitude in degrees
    * @param {Number} lng Longitude in degrees
    * @param {Number} c Central meridian in degrees
@@ -1830,7 +1830,7 @@ jvm.Proj = {
   /**
    * Converts Cartesian coordinates to the point on sphere using Albers Equal-Area Conic
    * projection
-   * @see <a href="http://mathworld.wolfram.com/AlbersEqual-AreaConicProjection.html">Albers Equal-Area Conic projection</a>
+   * @see <a href="https://mathworld.wolfram.com/AlbersEqual-AreaConicProjection.html">Albers Equal-Area Conic projection</a>
    * @param {Number} x X of point in Cartesian system as integer
    * @param {Number} y Y of point in Cartesian system as integer
    * @param {Number} c Central meridian in degrees
@@ -1857,7 +1857,7 @@ jvm.Proj = {
   /**
    * Converts point on sphere to the Cartesian coordinates using Lambert conformal
    * conic projection
-   * @see <a href="http://mathworld.wolfram.com/LambertConformalConicProjection.html">Lambert Conformal Conic Projection</a>
+   * @see <a href="https://mathworld.wolfram.com/LambertConformalConicProjection.html">Lambert Conformal Conic Projection</a>
    * @param {Number} lat Latitude in degrees
    * @param {Number} lng Longitude in degrees
    * @param {Number} c Central meridian in degrees
@@ -1883,7 +1883,7 @@ jvm.Proj = {
   /**
    * Converts Cartesian coordinates to the point on sphere using Lambert conformal conic
    * projection
-   * @see <a href="http://mathworld.wolfram.com/LambertConformalConicProjection.html">Lambert Conformal Conic Projection</a>
+   * @see <a href="https://mathworld.wolfram.com/LambertConformalConicProjection.html">Lambert Conformal Conic Projection</a>
    * @param {Number} x X of point in Cartesian system as integer
    * @param {Number} y Y of point in Cartesian system as integer
    * @param {Number} c Central meridian in degrees

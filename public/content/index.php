@@ -121,14 +121,111 @@ include_once $phpPath . "templates/header.php";
     <!-- /container -->
 </div>
 <!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section" style="background-color: white;">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row justify-content-center">
+            <!-- ASIDE -->
+            <div id="aside" class=" filter-close col-md-2 col-sm-12  text-center">
+                <!-- aside Widget -->
+                <form id="filter_form">
+                    <div class="aside">
+                        <h3 class="aside-title">options</h3>
+                        <div class="checkbox-filter">
+                        <div class="aside">
+							<div id="button" style="width:100%">
+								<div id="translate"></div>
+								<button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=1">Videos</a></button>
+							</div>
+						</div>
+                        <div class="aside">
+							<div id="button" style="width:100%">
+								<div id="translate"></div>
+								<button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=2">Photoshoot</a></button>
+							</div>
+						</div>
+                        <div class="aside">
+							<div id="button" style="width:100%">
+								<div id="translate"></div>
+								<button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=3">Catalouge</a></button>
+							</div>
+						</div>
+                        </div>
+                    </div>
+                    <!-- /aside Widget -->
+                </form>
+            </div>
+            <!-- /ASIDE -->
 
-<!-- CATEGORY -->
-<div class="container mt-20 mb-30">
+            <!-- STORE -->
+            <div id="store" class="col-md-10  col-sm-12 col-xs-12 ">
+                <?php
+                if (isset($_GET['msg']) && isset($_SESSION['msg'])) {
+                    echo ' <div class="alert alert-warning alert-dismissible  show" role="alert">
+            <strong>' . $_SESSION["msg"] . '</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>';
+                    unset($_SESSION['msg']);
+                }
+                ?>
+                <!-- store top filter -->
+                <div class="store-filter clearfix">
+                    <div class="store-sort">
+                        <label>
+                            Sort By:
+                            <select class="input-select">
+                                <option value="0">Popular</option>
+                                <option value="1">Position</option>
+                            </select>
+                        </label>
+                    </div>
+                    <ul class="store-grid" id="filter">
+                        Filter:
+                        <li><a class="active"><i class="fa fa-th-list"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /store top filter -->
 
-    <div class="row">
-        <?php echo $contentHTML; ?>
+                <!-- store products -->
+                <!-- product -->
+                <div class="body">
+                    <div class="" id="loader">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div id="pruduct_html">
+                    <div class="container col-md-12 col-sm-12 mt-20 mb-30">
+
+                        <div class="row">
+
+                            <?php echo $contentHTML; ?>
+                        </div>
+                    </div>
+                </div>
+                <!-- /product -->
+                <!-- /product -->
+
+                <!-- /store products -->
+
+                <!-- store bottom filter -->
+
+                <!-- /store bottom filter -->
+            </div>
+            <!-- /STORE -->
+        </div>
+        <!-- /row -->
     </div>
+    <!-- /container -->
 </div>
+<!-- /SECTION -->
+<!-- CATEGORY -->
+
 <!-- /CATEGORY -->
 
 <!-- jQuery Plugins -->

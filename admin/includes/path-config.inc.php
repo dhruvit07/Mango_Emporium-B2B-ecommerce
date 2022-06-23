@@ -9,3 +9,4 @@ global $rootPhp;
 $rootPhp = "C:/xampp/htdocs/project-1/";
 global $rootHtml;
 $rootHtml = '/project-1';
+

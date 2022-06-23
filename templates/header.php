@@ -6,7 +6,7 @@ if (!defined("MYSITE")) {
 	header("location: ../public/404");
 }
 $_url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-require 'C:/xampp/htdocs/project-1/includes/search.inc.php';
+require $phpPath . 'includes/search.inc.php';
 $contact = $product_obj->getContact();
 ?>
 <!DOCTYPE html>
@@ -78,103 +78,103 @@ $contact = $product_obj->getContact();
 		<!-- /TOP HEADER -->
 
 		<?php if (!defined("ABOUT")) { ?>
-		<!-- MAIN HEADER -->
-		<div id="header">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="header-ctn">
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="header-ctn">
 
 
-						<!-- Menu Toogle -->
-						<div class="menu-toggle">
-							<a href="#">
-								<i class="fa fa-bars"></i>
-								<span>Menu</span>
-							</a>
+							<!-- Menu Toogle -->
+							<div class="menu-toggle">
+								<a href="#">
+									<i class="fa fa-bars"></i>
+									<span>Menu</span>
+								</a>
+							</div>
+							<!-- /Menu Toogle -->
 						</div>
-						<!-- /Menu Toogle -->
+						<!-- LOGO -->
+						<a href="<?php echo $htmlPath; ?>/public" style="height:250px;width:100%;object-fit:cover;" class="logo ">
+							<img id="img-logo" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
+						</a>
+						<!-- /LOGO -->
+						<?php if (defined("HOME")) { ?>
+							<!-- SEARCH BAR -->
+							<div class="header-search col-md-12">
+								<form target="_blank" action="<?php echo $htmlPath ?>/public/store/" method="GET">
+									<select class="input-select" name="business-type[]" required>
+										<option value="">Business Type</option>
+										<?php echo $searchBarBusinessTypeOptionHTML; ?>
+									</select>
+									<select class="input-select middle" name="location[]" required>
+										<option value="">Location</option>
+										<?php echo $searchBarLocationOptionHTML; ?>
+									</select>
+									<select class="input-select middle" name="category[]" required>
+										<option value="">Category</option>
+										<?php echo $searchBarCategoryOptionHTML; ?>
+									</select>
+									<input class="input" type="text" name="search" placeholder="Search here">
+									<button class="search-btn" name="filter">Search</button>
+								</form>
+							</div>
+							<!-- /SEARCH BAR -->
+						<?php } ?>
+
+						<!-- ACCOUNT -->
+
 					</div>
-					<!-- LOGO -->
-					<a href="<?php echo $htmlPath; ?>/public" style="height:250px;width:100%;object-fit:cover;" class="logo ">
-						<img id="img-logo" class="img-responsive" src="<?php echo $htmlPath; ?>/resources/img/logo.png" alt="">
-					</a>
-					<!-- /LOGO -->
-					<?php if (defined("HOME")) { ?>
-						<!-- SEARCH BAR -->
-						<div class="header-search col-md-12">
-							<form target="_blank" action="<?php echo $htmlPath ?>/public/store/" method="GET">
-								<select class="input-select" name="business-type[]" required>
-									<option value="">Business Type</option>
-									<?php echo $searchBarBusinessTypeOptionHTML; ?>
-								</select>
-								<select class="input-select middle" name="location[]" required>
-									<option value="">Location</option>
-									<?php echo $searchBarLocationOptionHTML; ?>
-								</select>
-								<select class="input-select middle" name="category[]" required>
-									<option value="">Category</option>
-									<?php echo $searchBarCategoryOptionHTML; ?>
-								</select>
-								<input class="input" type="text" name="search" placeholder="Search here">
-								<button class="search-btn" name="filter">Search</button>
-							</form>
-						</div>
-						<!-- /SEARCH BAR -->
-					<?php } ?>
-
-					<!-- ACCOUNT -->
-
+					<!-- /ACCOUNT -->
 				</div>
-				<!-- /ACCOUNT -->
+				<!-- row -->
 			</div>
-			<!-- row -->
-		</div>
-		<!-- container -->
-		</div>
-		<!-- /MAIN HEADER -->
-	</header>
-		<!-- NAVIGATION -->
-		<nav id="navigation">
 			<!-- container -->
-			<div class="container">
-				<!-- responsive-nav -->
-				<div id="responsive-nav">
-					<!-- NAV -->
-					<ul class="main-nav nav navbar-nav">
-						<?php
-						if (strpos($_url, 'store') !== false) {
-							echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+			</div>
+			<!-- /MAIN HEADER -->
+	</header>
+	<!-- NAVIGATION -->
+	<nav id="navigation">
+		<!-- container -->
+		<div class="container">
+			<!-- responsive-nav -->
+			<div id="responsive-nav">
+				<!-- NAV -->
+				<ul class="main-nav nav navbar-nav">
+					<?php
+					if (strpos($_url, 'store') !== false) {
+						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 									<li class="active"><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 									<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-									<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
-						} else if (strpos($_url, 'category') !== false) {
-							echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+									<li><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+					} else if (strpos($_url, 'category') !== false) {
+						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
-						} else if (strpos($_url, 'content') !== false) {
-							echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
+								<li><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+					} else if (strpos($_url, 'content') !== false) {
+						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li class="active"><a href="' . $htmlPath . '/public/content">Content</a></li>';
-						} else if (strpos($_url, 'public') !== false) {
-							echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
+								<li class="active"><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+					} else if (strpos($_url, 'public') !== false) {
+						echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li><a href="' . $htmlPath . '/public/content">Content</a></li>';
-						}
-						?>
+								<li><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+					}
+					?>
 
 
-					</ul>
-					<!-- /NAV -->
-				</div>
-				<!-- /responsive-nav -->
+				</ul>
+				<!-- /NAV -->
 			</div>
-			<!-- /container -->
-		</nav>
-		<!-- /NAVIGATION -->
-		<!-- /HEADER -->
-	<?php } ?>
+			<!-- /responsive-nav -->
+		</div>
+		<!-- /container -->
+	</nav>
+	<!-- /NAVIGATION -->
+	<!-- /HEADER -->
+<?php } ?>

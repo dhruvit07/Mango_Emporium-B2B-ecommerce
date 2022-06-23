@@ -9,6 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 class content extends config
 {
+    use functions;
     function __construct()
     {
         parent::__construct();
@@ -18,6 +19,26 @@ class content extends config
         $sql = "SELECT * FROM `video_content`;";
 
         if ($result = $this->conn->query($sql)) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    public function getCatalouge()
+    {
+        $sql = "SELECT * FROM `catalouge`;";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    public function getPhotoshoot()
+    {
+        $sql = "SELECT * FROM `photoshoot`;";
+        $result = $this->conn->query($sql);
+        if ($result) {
             return $result;
         } else {
             return false;
@@ -33,11 +54,59 @@ class content extends config
             return false;
         }
     }
+    public function insertCatalouge($catId, $userId, $name, $image)
+    {
+        $sql = "INSERT INTO catalouge (catalouge_name,image,u_id,c_id) VALUES ('$name','$image','$userId','$catId');";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function insertPhotoshoot($id, $name, $image)
+    {
+        $sql = "INSERT INTO photoshoot (image,photoshoot_name,product_id) VALUES ('$image','$name','$id');";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function deleteContent($id)
     {
         $sql = "DELETE FROM `video_content` WHERE id='$id';";
 
         if ($result = $this->conn->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function deleteCatalouge($id)
+    {
+        $sql = "SELECT image FROM `catalouge` WHERE id='$id';";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        unlink("../../uploads/catalouge/" . $row['image']);
+        $sql = "DELETE FROM `catalouge` WHERE id='$id';";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function deletePhotoshoot($id)
+    {
+        $sql = "SELECT image FROM `photoshoot` WHERE id='$id';";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        unlink("../../uploads/photoshoot/" . $row['image']);
+        $sql = "DELETE FROM `photoshoot` WHERE id='$id';";
+        $result = $this->conn->query($sql);
+        if ($result) {
             return true;
         } else {
             return false;

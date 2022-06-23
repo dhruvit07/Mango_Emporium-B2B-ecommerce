@@ -67,7 +67,7 @@ if ($result->num_rows >= 1) {
                 <br>
 
                 <h4 class="card-title">Sagar Private Limited</h4>
-                <a class="btn btn-outline-primary btn-sm" href="" data-abc="true">View Products</a>
+                <a class="btn btn-outline-primary btn-sm" href="' . $htmlPath . '/public/store/?filter&user=' . $row['u_id'] . '" data-abc="true">View Products</a>
             </div>
         </div>
     </div>';
@@ -158,7 +158,7 @@ if ($result->num_rows >= 1) {
                 <br>
 
                 <h4 class="card-title">Sagar Private Limited</h4>
-                <a class="btn btn-outline-primary btn-sm" href="" data-abc="true">View Products</a>
+                <a class="btn btn-outline-primary btn-sm" href="' . $htmlPath . '/public/store/?filter&user=' . $row['u_id'] . '" data-abc="true">View Products</a>
             </div>
         </div>
     </div>';

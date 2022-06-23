@@ -184,7 +184,19 @@
             <li class="nav-item <?php echo $pageTitle == "Content" ? "active" : "" ?> ">
                 <a class="nav-link" href="<?php echo $htmlPath ?>/public/?content">
                     <i class="material-icons">subscriptions</i>
-                    <p> Content </p>
+                    <p> Video Content </p>
+                </a>
+            </li>
+            <li class="nav-item <?php echo $pageTitle == "Photoshoot" ? "active" : "" ?> ">
+                <a class="nav-link" href="<?php echo $htmlPath ?>/public/?photoshoot">
+                    <i class="material-icons">photo_camera</i>
+                    <p> Photoshoot </p>
+                </a>
+            </li>
+            <li class="nav-item <?php echo $pageTitle == "Catalouge" ? "active" : "" ?> ">
+                <a class="nav-link" href="<?php echo $htmlPath ?>/public/?catalouge">
+                    <i class="material-icons">photo_album</i>
+                    <p> Catalouge </p>
                 </a>
             </li>
             <li class="nav-item <?php echo $pageTitle == "Inquiry" ? "active" : "" ?> ">

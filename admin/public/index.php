@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['auth-key']) && $_SESSION['auth-key'] == "a3643d46a8a4b9ae9e2d932df39d312f") {
 } else {
-    header('location: ./');
+    header('location: ' . $htmlPath . '/public/e404.html');
 }
 require 'C:/xampp/htdocs/project-1/admin/includes/path-config.inc.php';
 if (!function_exists("Autoloader")) {
@@ -31,6 +31,10 @@ if (isset($_GET["product"]) && $_GET["product"] == 1) {
     $pageTitle = "Inquiry";
 } else if (isset($_GET["direct-inquiry"])) {
     $pageTitle = "Direct Inquiry";
+} else if (isset($_GET["photoshoot"])) {
+    $pageTitle = "Photoshoot";
+} else if (isset($_GET["catalouge"])) {
+    $pageTitle = "Catalouge";
 }
 ?>
 
@@ -72,6 +76,10 @@ if (isset($_GET["product"]) && $_GET["product"] == 1) {
                 require $phpPath . "public/modules/content.module.php";
             } else if (isset($_GET["inquiry"]) || isset($_GET["direct-inquiry"])) {
                 require $phpPath . "public/modules/inquiry.module.php";
+            } else if (isset($_GET["photoshoot"])) {
+                require $phpPath . "public/modules/photoshoot.module.php";
+            } else if (isset($_GET["catalouge"])) {
+                require $phpPath . "public/modules/catalouge.module.php";
             }
             ?>
 

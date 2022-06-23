@@ -29,5 +29,24 @@ class content
             return false;
         }
     }
-    
+    public function getCatalouge()
+    {
+        $sql = "SELECT * FROM `catalouge`;";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    public function getPhotoshoot()
+    {
+        $sql = "SELECT * FROM `photoshoot`;";
+        $result = $this->conn->query($sql);
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 }

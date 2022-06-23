@@ -11,7 +11,7 @@
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/jquery.validate.min.js"></script>
 <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
-<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+<!--	Plugin for Select, full documentation here: https://silviomoreto.github.io/bootstrap-select -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/bootstrap-selectpicker.js"></script>
 <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
@@ -20,12 +20,12 @@
 <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/bootstrap-tagsinput.js"></script>
 <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+<!-- Plugin for Fileupload, full documentation here: https://www.jasny.net/bootstrap/javascript/#fileinput -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/jasny-bootstrap.min.js"></script>
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/fullcalendar.min.js"></script>
-<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+<!-- Vector Map plugin, full documentation here: https://jvectormap.com/documentation/ -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/jquery-jvectormap.js"></script>
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+<!--  Plugin for the Sliders, full documentation here: https://refreshless.com/nouislider/ -->
 <script src="<?php echo $htmlPath ?>/assets/js/plugins/nouislider.min.js"></script>
 <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>

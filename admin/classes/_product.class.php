@@ -125,6 +125,7 @@ class _product extends config
             return false;
         }
     }
+   
     public function deleteSellerType($id)
     {
         $sql = "DELETE FROM `seller_type` WHERE id='$id';";
@@ -159,6 +160,7 @@ class _product extends config
             return false;
         }
     }
+   
     public function insertLocation($name)
     {
         $sql = "INSERT INTO location (location) VALUES ('$name');";
@@ -199,4 +201,5 @@ class _product extends config
             return false;
         }
     }
+    
 }

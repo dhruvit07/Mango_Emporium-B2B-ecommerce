@@ -26,9 +26,14 @@ trait functions
                             $fileD = "../../uploads/category/" . $fileNameNew;
                         } else if ($uploadLocation == 'profile') {
                             $fileD = "../../uploads/profile/" . $fileNameNew;
+                        } else if ($uploadLocation == 'catalouge') {
+                            $fileD = "../../uploads/catalouge/" . $fileNameNew;
+                        } else if ($uploadLocation == 'photoshoot') {
+                            $fileD = "../../uploads/photoshoot/" . $fileNameNew;
                         } else {
                             $fileD = "../../uploads/products/" . $fileNameNew;
                         }
+
                         $stat =  move_uploaded_file($fileTmpName, $fileD);
                         if ($stat == true) {
                             return $fileDestination;
@@ -43,7 +48,7 @@ trait functions
                     } else {
                         // $error = true;
                         $_SESSION['msg'] = "File Size is too big! Choose a lower Resolution Image.";
-                        if ($uploadLocation == 'category' || $uploadLocation == 'profile') {
+                        if ($uploadLocation == 'category' || $uploadLocation == 'profile' || $uploadLocation == 'catalouge' || $uploadLocation == 'photoshoot') {
                             return false;
                         }
                         header('location: ../../public/user/?msg&addproduct');
@@ -52,7 +57,7 @@ trait functions
                 } else {
                     // $error = true;
                     $_SESSION['msg'] = "Error Uploading Image!! Try Again.";
-                    if ($uploadLocation == 'category' || $uploadLocation == 'profile') {
+                    if ($uploadLocation == 'category' || $uploadLocation == 'profile' || $uploadLocation == 'catalouge' || $uploadLocation == 'photoshoot') {
                         return false;
                     }
                     header('location: ../../public/user/?msg&addproduct');
@@ -61,7 +66,7 @@ trait functions
             } else {
                 // $error = true;
                 $_SESSION['msg'] = "Image Type Not Allowed!! Try a Diffrent Format eg. JPG, PNG, JPEG";
-                if ($uploadLocation == 'category' || $uploadLocation == 'profile') {
+                if ($uploadLocation == 'category' || $uploadLocation == 'profile' || $uploadLocation == 'catalouge' || $uploadLocation == 'photoshoot') {
                     return false;
                 }
                 header('location: ../../public/user/?msg&addproduct');
