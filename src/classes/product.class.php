@@ -2,7 +2,7 @@
 
 use JetBrains\PhpStorm\ArrayShape;
 
-require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 // session_start();
 if (defined("require")) {
     require $phpPath . "src/classes/config.class.php";

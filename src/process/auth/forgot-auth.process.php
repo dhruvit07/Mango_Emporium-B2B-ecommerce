@@ -1,5 +1,5 @@
 <?php
-require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 ob_start();
 session_start();
 if (!function_exists("Autoloader")) {

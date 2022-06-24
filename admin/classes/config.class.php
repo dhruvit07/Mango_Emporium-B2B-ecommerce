@@ -1,5 +1,5 @@
 <?php
-require 'C:/xampp/htdocs/project-1/admin/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/admin/includes/path-config.inc.php';
 class config {
     protected $serverName;
     protected $userName;
@@ -10,9 +10,13 @@ class config {
     function __construct()
     {
         $this -> serverName = "localhost";
-        $this -> userName = "root";
-        $this -> passCode = "";
-        $this -> dbName = "Project_1";
+        $this -> userName = "mangoemp_web1";
+        $this -> passCode = "uBuAleDBYC";
+        $this -> dbName = "mangoemp_web1";   
+        // $this -> serverName = "localhost";
+        // $this -> userName = "root";
+        // $this -> passCode = "";
+        // $this -> dbName = "Project_1";
         $this->conn  = new mysqli($this -> serverName,$this -> userName,$this -> passCode,$this -> dbName);
     }
 
@@ -25,4 +29,3 @@ class config {
 //     $row = $result->num_rows;
 //     echo $row;
 // }
-?>

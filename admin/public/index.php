@@ -4,7 +4,7 @@ if (isset($_SESSION['auth-key']) && $_SESSION['auth-key'] == "a3643d46a8a4b9ae9e
 } else {
     header('location: ' . $htmlPath . '/public/e404.html');
 }
-require 'C:/xampp/htdocs/project-1/admin/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/admin/includes/path-config.inc.php';
 if (!function_exists("Autoloader")) {
     require $phpPath . 'includes/class-autoload.inc.php';
 }

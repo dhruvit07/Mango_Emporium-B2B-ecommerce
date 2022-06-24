@@ -1,5 +1,5 @@
 <?php
-require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 ?>
 <script src="<?php echo $htmlPath; ?>/resources/js/jquery.min.js"></script>
 <script src="<?php echo $htmlPath; ?>/resources/js/bootstrap.min.js"></script>

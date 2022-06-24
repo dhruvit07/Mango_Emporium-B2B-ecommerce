@@ -1,5 +1,5 @@
 <?php
-require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 // define( 'ROOT_DIR', dirname(__FILE__) );
 // session_start();
 if (!defined("MYSITE")) {

@@ -1,5 +1,5 @@
 <?php
-require 'C:/xampp/htdocs/project-1/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 require $phpPath . "src/classes/functions.class.php";
 require $phpPath . "src/classes/product.class.php";
 define('require', true);
