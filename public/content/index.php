@@ -1,11 +1,14 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
-session_start();
+if (!isset($_COOKIE["PHPSESSID"])) {
+    session_start();
+}
 define("MYSITE", true);
 if (!function_exists("Autoloader")) {
     require $phpPath . 'includes/class-autoload.inc.php';
 }
 require $phpPath . 'includes/content.inc.php';
+require $phpPath . 'includes/store.inc.php';
 include_once $phpPath . "templates/header.php";
 ?>
 <style>
@@ -130,28 +133,47 @@ include_once $phpPath . "templates/header.php";
             <!-- ASIDE -->
             <div id="aside" class=" filter-close col-md-2 col-sm-12  text-center">
                 <!-- aside Widget -->
+                <?php if (isset($_GET['id']) && ($_GET['id'] == 1 ||  $_GET['id'] == 2)) {
+
+                    echo '<form id="filter_form" action="./" type="get">
+                        <div class="aside">
+                        <input type="hidden" name="id" value="' . $_GET['id'] . '">
+                            <h3 class="aside-title">Category</h3>
+                            <div class="checkbox-filter">
+                            ' . $category_html . '
+                            </div>
+                        </div>
+                        <!-- /aside Widget -->
+                        <div class="aside">
+							<div id="button">
+								<div id="translate"></div>
+								<button type="submit" id="filter_button" name="filter" class="button" style="width:98%"> Apply Filter</button>
+							</div>
+						</div>
+                        </form>';
+                } ?>
                 <form id="filter_form">
                     <div class="aside">
                         <h3 class="aside-title">options</h3>
                         <div class="checkbox-filter">
-                        <div class="aside">
-							<div id="button" style="width:100%">
-								<div id="translate"></div>
-								<button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=1">Videos</a></button>
-							</div>
-						</div>
-                        <div class="aside">
-							<div id="button" style="width:100%">
-								<div id="translate"></div>
-								<button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=2">Photoshoot</a></button>
-							</div>
-						</div>
-                        <div class="aside">
-							<div id="button" style="width:100%">
-								<div id="translate"></div>
-								<button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=3">Catalouge</a></button>
-							</div>
-						</div>
+                            <div class="aside">
+                                <div id="button" style="width:100%">
+                                    <div id="translate"></div>
+                                    <button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=1">Videos</a></button>
+                                </div>
+                            </div>
+                            <div class="aside">
+                                <div id="button" style="width:100%">
+                                    <div id="translate"></div>
+                                    <button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=2">Photoshoot</a></button>
+                                </div>
+                            </div>
+                            <div class="aside">
+                                <div id="button" style="width:100%">
+                                    <div id="translate"></div>
+                                    <button id="filter_button" class="button" style="width:100%;padding:0px 10px;"><a href="./?id=3">Catalouge</a></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /aside Widget -->

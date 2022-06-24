@@ -44,9 +44,9 @@ class content extends config
             return false;
         }
     }
-    public function insertContent($id, $url, $name, $viewUrl)
+    public function insertContent($id, $c_id, $url, $name, $viewUrl)
     {
-        $sql = "INSERT INTO video_content (video_url,video_name,video_view_url,product_id) VALUES('$url','$name','$viewUrl','$id');";
+        $sql = "INSERT INTO video_content (video_url,video_name,video_view_url,product_id,c_id) VALUES('$url','$name','$viewUrl','$id','$c_id');";
 
         if ($result = $this->conn->query($sql)) {
             return true;
@@ -64,9 +64,9 @@ class content extends config
             return false;
         }
     }
-    public function insertPhotoshoot($id, $name, $image)
+    public function insertPhotoshoot($p_id, $c_id, $name, $image)
     {
-        $sql = "INSERT INTO photoshoot (image,photoshoot_name,product_id) VALUES ('$image','$name','$id');";
+        $sql = "INSERT INTO photoshoot (image,photoshoot_name,product_id,c_id) VALUES ('$image','$name','$p_id','$c_id');";
         $result = $this->conn->query($sql);
         if ($result) {
             return true;

@@ -5,7 +5,8 @@ $contentObject = new content();
 
 $contentHTML = "";
 if (isset($_GET['id']) && $_GET['id'] == 1) {
-    $result = $contentObject->getAllVideoContent();
+    $category = isset($_GET['category']) ? ($_GET['category'][0] == "" ? "" : $_GET['category']) : "";
+    $result = $contentObject->getAllVideoContent($category);
     $i = 1;
     while ($row = $result->fetch_assoc()) {
         $contentHTML .= '
@@ -18,7 +19,8 @@ if (isset($_GET['id']) && $_GET['id'] == 1) {
         </div>';
     }
 } else if (isset($_GET['id']) && $_GET['id'] == 2) {
-    $result = $contentObject->getPhotoshoot();
+    $category = isset($_GET['category']) ? ($_GET['category'][0] == "" ? "" : $_GET['category']) : "";
+    $result = $contentObject->getPhotoshoot($category);
     $i = 1;
     while ($row = $result->fetch_assoc()) {
         $contentHTML .= '
@@ -39,6 +41,10 @@ if (isset($_GET['id']) && $_GET['id'] == 1) {
         </a><h4 class="text-center m-20"><a href="' . $htmlPath . '/public/store/?filter&user=' . $row["u_id"] . '&category[]=' . $row["c_id"] . '"> View Products<a></h4>
         </div>';
     }
+}
+if ($contentHTML == "") {
+
+    $contentHTML =  '<img class="img-responsive" src=' . $htmlPath . '/resources/img/not_found.jpg>';
 }
 $formFillUp = "";
 if (isset($_SESSION['u_id'])) {

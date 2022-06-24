@@ -28,7 +28,9 @@ if (isset($_GET['content'])) {
         $url = $_POST['video-url'];
         $name = $_POST['video-name'];
         $url = str_replace("/watch/?v=", "/embed/", $url);
-        $result = $object->insertContent($id, trim($url), trim($name), trim($viewUrl));
+        $product = $product_obj->getProductById($id);
+        $c_id = $product['product_category'];
+        $result = $object->insertContent($id, $c_id, trim($url), trim($name), trim($viewUrl));
         if ($result) {
             // echo $viewUrl . $name . $url;
             $_SESSION['msg'] = "Video Content Added!";

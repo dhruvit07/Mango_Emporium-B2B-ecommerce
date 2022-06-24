@@ -1,7 +1,7 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 if (!function_exists("Autoloader")) {
-    require 'C:/xampp/htdocs/Project-1/includes/class-autoload.inc.php';
+    require $_SERVER['DOCUMENT_ROOT']  . '/includes/class-autoload.inc.php';
 }
 
 $product_obj = new product();

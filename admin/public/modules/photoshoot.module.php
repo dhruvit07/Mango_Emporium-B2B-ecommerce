@@ -32,7 +32,9 @@ if (isset($_GET['photoshoot'])) {
             echo '<script type="text/javascript"> window.location.href = "./?photoshoot&msg"</script>';
             exit();
         } else {
-            $result = $object->insertPhotoshoot($productId, $categoryName, $processedImage);
+            $product = $product_obj->getProductById($productId);
+            $c_id = $product['product_category'];
+            $result = $object->insertPhotoshoot($productId, $c_id, $categoryName, $processedImage);
             if ($result) {
                 $_SESSION['msg'] = "Photoshoot Inserted!";
                 echo '<script type="text/javascript"> window.location.href = "./?photoshoot&msg"</script>';

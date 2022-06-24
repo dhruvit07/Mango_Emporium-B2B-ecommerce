@@ -20,9 +20,30 @@ class content
         return $this->conn->query($sql);
     }
 
-    public function getAllVideoContent()
+    public function getAllVideoContent($category)
     {
-        $result = $this->runQuery("SELECT * FROM `video_content`;");
+        $sql = "SELECT * FROM `video_content`";
+        if ($category != "") {
+            $categoryFilter = implode(',', $category);
+            $sql .= "WHERE c_id IN($categoryFilter)";
+        }
+        $sql .= ";";
+        $result = $this->runQuery($sql);
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
+    public function getPhotoshoot($category)
+    {
+        $sql = "SELECT * FROM `photoshoot` ";
+        if ($category != "") {
+            $categoryFilter = implode(',', $category);
+            $sql .= "WHERE c_id IN($categoryFilter)";
+        }
+        $sql .= ";";
+        $result = $this->runQuery($sql);
         if ($result) {
             return $result;
         } else {
@@ -32,16 +53,6 @@ class content
     public function getCatalouge()
     {
         $sql = "SELECT * FROM `catalouge`;";
-        $result = $this->conn->query($sql);
-        if ($result) {
-            return $result;
-        } else {
-            return false;
-        }
-    }
-    public function getPhotoshoot()
-    {
-        $sql = "SELECT * FROM `photoshoot`;";
         $result = $this->conn->query($sql);
         if ($result) {
             return $result;

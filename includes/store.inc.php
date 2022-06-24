@@ -5,7 +5,10 @@ require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
 //     require $phpPath . 'src/classes/product.class.php';
 // }
 // require $phpPath . 'src/process/store.process.php';
-session_start();
+if(!isset($_COOKIE["PHPSESSID"]))
+{
+  session_start();
+}
 
 $product_obj = new product();
 
