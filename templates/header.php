@@ -148,22 +148,22 @@ $contact = $product_obj->getContact();
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 									<li class="active"><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 									<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-									<li><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+									<li><a href="' . $htmlPath . '/public/content/?id=1">Videos and Photos</a></li>';
 					} else if (strpos($_url, 'category') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li class="active"><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+								<li><a href="' . $htmlPath . '/public/content/?id=1">Videos and Photos</a></li>';
 					} else if (strpos($_url, 'content') !== false) {
 						echo '<li ><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li class="active"><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+								<li class="active"><a href="' . $htmlPath . '/public/content/?id=1">Videos and Photos</a></li>';
 					} else if (strpos($_url, 'public') !== false) {
 						echo '<li class="active"><a href="' . $htmlPath . '/public">Home</a></li>
 								<li><a href="' . $htmlPath . '/public/store/">Our Products</a></li>
 								<li><a href="' . $htmlPath . '/public/category">Categories</a></li>
-								<li><a href="' . $htmlPath . '/public/content/?id=1">Content</a></li>';
+								<li><a href="' . $htmlPath . '/public/content/?id=1">Videos and Photos</a></li>';
 					}
 					?>
 
