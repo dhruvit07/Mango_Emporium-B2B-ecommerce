@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2022 at 04:09 AM
+-- Generation Time: Jun 26, 2022 at 09:45 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.14
 
@@ -237,15 +237,17 @@ CREATE TABLE `photoshoot` (
   `id` int(11) NOT NULL,
   `image` varchar(100) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `photoshoot_name` varchar(100) NOT NULL
+  `photoshoot_name` varchar(100) NOT NULL,
+  `c_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `photoshoot`
 --
 
-INSERT INTO `photoshoot` (`id`, `image`, `product_id`, `photoshoot_name`) VALUES
-(2, '62b42782b7abc7.24693223.png', 25, 'test');
+INSERT INTO `photoshoot` (`id`, `image`, `product_id`, `photoshoot_name`, `c_id`) VALUES
+(2, '62b42782b7abc7.24693223.png', 25, 'test', 9),
+(4, '62b571682d59c9.64605042.png', 25, 'test', 9);
 
 -- --------------------------------------------------------
 
@@ -312,6 +314,13 @@ CREATE TABLE `pwd_reset` (
   `exp_date` datetime NOT NULL,
   `reset_email` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pwd_reset`
+--
+
+INSERT INTO `pwd_reset` (`reset_id`, `reset_link_token`, `exp_date`, `reset_email`) VALUES
+(37, '25f26cd9d5333b11e8ee26aece779b842082', '2022-06-25 08:27:20', 'salatd0852@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -398,16 +407,18 @@ CREATE TABLE `video_content` (
   `video_url` text NOT NULL,
   `video_name` text NOT NULL,
   `video_view_url` text NOT NULL,
-  `product_id` int(11) NOT NULL
+  `product_id` int(11) NOT NULL,
+  `c_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `video_content`
 --
 
-INSERT INTO `video_content` (`id`, `video_url`, `video_name`, `video_view_url`, `product_id`) VALUES
-(4, 'https://www.youtube.com/embed/IWyQkRF6BwU', 'Build Your Own Channel', 'https://www.youtube.com/watch/?v=IWyQkRF6BwU', 25),
-(5, 'https://www.youtube.com/embed/IWyQkRF6BwU', 'Build Your Own Channel', 'https://www.youtube.com/watch/?v=IWyQkRF6BwU', 25);
+INSERT INTO `video_content` (`id`, `video_url`, `video_name`, `video_view_url`, `product_id`, `c_id`) VALUES
+(4, 'https://www.youtube.com/embed/IWyQkRF6BwU', 'Build Your Own Channel', 'https://www.youtube.com/watch/?v=IWyQkRF6BwU', 25, 9),
+(5, 'https://www.youtube.com/embed/IWyQkRF6BwU', 'Build Your Own Channel', 'https://www.youtube.com/watch/?v=IWyQkRF6BwU', 25, 9),
+(6, 'https://www.youtube.com/embed/IWyQkRF6BwU', 'Build Your Own Channel', 'https://www.youtube.com/watch/?v=IWyQkRF6BwU', 25, 9);
 
 --
 -- Indexes for dumped tables
@@ -531,7 +542,8 @@ ALTER TABLE `user`
 --
 ALTER TABLE `video_content`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_id` (`product_id`);
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `c_id` (`c_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -601,7 +613,7 @@ ALTER TABLE `otp`
 -- AUTO_INCREMENT for table `photoshoot`
 --
 ALTER TABLE `photoshoot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `policy`
@@ -619,7 +631,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `pwd_reset`
 --
 ALTER TABLE `pwd_reset`
-  MODIFY `reset_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `reset_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `seller_type`
@@ -643,7 +655,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `video_content`
 --
 ALTER TABLE `video_content`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -694,7 +706,8 @@ ALTER TABLE `user`
 -- Constraints for table `video_content`
 --
 ALTER TABLE `video_content`
-  ADD CONSTRAINT `video_content_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
+  ADD CONSTRAINT `video_content_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `video_content_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `category` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
