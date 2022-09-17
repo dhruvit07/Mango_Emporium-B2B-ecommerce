@@ -1,9 +1,9 @@
 <?php
 
 global $phpPath;
-$phpPath = $_SERVER['DOCUMENT_ROOT'] . "/";
+$phpPath = $_SERVER['DOCUMENT_ROOT'] . "/project-1/";
 global $htmlPath;
-$htmlPath = '';
+$htmlPath = '/project-1';
 global $url;
 $url = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 

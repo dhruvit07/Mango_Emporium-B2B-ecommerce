@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT']  .  '/project-1/includes/path-config.inc.php';
 
 session_start();
 if (!isset($_SESSION['loggedin'])) {

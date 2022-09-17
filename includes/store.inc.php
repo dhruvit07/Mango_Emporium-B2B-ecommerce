@@ -1,25 +1,25 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT']  .  '/includes/path-config.inc.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/includes/path-config.inc.php';
 // if (isset($_GET['filter']) || isset($_GET['page_no'])) {
 //     define("require", true);
 //     require $phpPath . 'src/classes/product.class.php';
 // }
 // require $phpPath . 'src/process/store.process.php';
-if(!isset($_COOKIE["PHPSESSID"]))
-{
-  session_start();
+if (!isset($_COOKIE["PHPSESSID"])) {
+    session_start();
 }
 
 $product_obj = new product();
 
 $result = $product_obj->getCategory();
-$category_html = getFilterHTML($result, $product_obj,  'category_name', 'category');
+$category_html = getFilterHTML($result, $product_obj, 'category_name', 'category');
 
 $result = $product_obj->getSellerType();
 $seller_type_html = getFilterHTML($result, $product_obj, 'seller_type', 'sellerType');
 
 $result = $product_obj->getLocation();
-$location_html = getFilterHTML($result, $product_obj,  'location', 'location');
+$location_html = getFilterHTML($result, $product_obj, 'location', 'location');
+
 $result = $product_obj->getBusinessType();
 $business_type_html = getFilterHTML($result, $product_obj, 'name', 'business-type');
 
@@ -29,8 +29,10 @@ function getFilterHTML($result, $product_obj, $string, $_name)
     $html = "";
     while ($row = $result->fetch_assoc()) {
         $name = $row[$string];
-        if ($string == "seller_type" && $row['id'] == 1)
+        if ($string == "seller_type" && $row['id'] == 1) {
             continue;
+        }
+
         $html .= '<div class="input-checkbox">
 								<input type="checkbox" id="' . $string . '-' . $i . '" name="' . $_name . '[]" value="' . $row["id"] . '">
 								<label for="' . $string . '-' . $i . '">
@@ -47,15 +49,17 @@ function getFilterHTML($result, $product_obj, $string, $_name)
 }
 
 $page = "";
-if (isset($_GET["page"]))
+if (isset($_GET["page"])) {
     $page = $_GET["page"];
-else
+} else {
     $page = 1;
+}
+
 $limit_per_page = 10;
 $offset = ($page - 1) * $limit_per_page;
 $product = "";
 
-if (isset($_GET['filter']) && (isset($_GET['category']) || isset($_GET['search']) ||  isset($_GET['user']) || isset($_GET['business-type']) || (isset($_GET['sub']) && isset($_GET['category'])) || isset($_GET['location']) || isset($_GET['sellerType']) || isset($_GET['priceMin']) || isset($_GET['priceMax']))) {
+if (isset($_GET['filter']) && (isset($_GET['category']) || isset($_GET['search']) || isset($_GET['user']) || isset($_GET['business-type']) || (isset($_GET['sub']) && isset($_GET['category'])) || isset($_GET['location']) || isset($_GET['sellerType']) || isset($_GET['priceMin']) || isset($_GET['priceMax']))) {
 
     $category = isset($_GET['category']) ? ($_GET['category'][0] == "" ? "" : $_GET['category']) : "";
     $search = isset($_GET['search']) ? ($_GET['search'] == "" ? "" : $_GET['search']) : "";
@@ -70,7 +74,6 @@ if (isset($_GET['filter']) && (isset($_GET['category']) || isset($_GET['search']
     $result = $product_obj->getFilteredProduct($search, $user, $category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page);
     $totalProduct = $product_obj->getFilteredProduct($search, $user, $category, $businessType, $sub, $location, $sellerType, $priceMin, $priceMax, $offset, $limit_per_page, true);
 } else {
-
     $result = $product_obj->getAllProduct($offset, $limit_per_page);
     $totalProduct = $product_obj->getProductCount();
 }
@@ -80,9 +83,8 @@ $product = productHTMLGenterator($result, $product_obj, $number_of_pages, $page,
 
 if ($totalProduct < 1) {
 
-    $product =  $search . '<img class="img-responsive" src=' . $htmlPath . '/resources/img/not_found.jpg>';
+    $product = $search . '<img class="img-responsive" src=' . $htmlPath . '/resources/img/not_found.jpg>';
 }
-
 
 function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $fetchedProductCount, $totalProduct, $htmlPath)
 {
@@ -94,8 +96,9 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
         $productCategory = $_row['category_name'];
         $_row = $product_obj->getProductLocation($row['location']);
         $productLocation = $_row['location'];
-        if (session_id() == '')
+        if (session_id() == '') {
             session_start();
+        }
 
         $button = '<button type="button" name="inquiry" id="' . $row['id'] . '" class="inquiry button">Send Inquiry</button>';
 
@@ -104,7 +107,7 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
         <div class="product-img col-md-5 col-sm-5 col-xs-5 pl-0">
         <img src="' . $htmlPath . '/uploads/products/' . $productImage . '" class="img-responsive" alt="">
         </div>
-                        
+
                         <div class="product-body col-md-7 col-sm-7 col-xs-7 position-unset">
                         <p class="product-category">' . $productCategory . '</p>
                         <p class="product-category">' . $productLocation . '</p>
@@ -134,9 +137,9 @@ function productHTMLGenterator($result, $product_obj, $number_of_pages, $page, $
                     <ul class="store-pagination" id="pagination">';
 
     global $url;
-    $product  .= ($page > 1) ? '<li><a href="' . substr($url, strpos($url, '?')) . (strpos($url, '?') !== false ? '&page=' : '?page=') .  $page - 1 . '" id="' . $page - 1 . '"><i class="fa fa-angle-left" ></i></a></li>' : "";
-    $product .=  '<li class="active"><a href="' . substr($url, strpos($url, '?')) . (strpos($url, '?') !== false ? '&page=' : '?page=') .  $page  . '" id="' . $page . '">' . $page . '</a></li>';
-    $product .=  ($page < $number_of_pages) ? ' <li><a href="' . substr($url, strpos($url, '?')) . (strpos($url, '?') !== false ? '&page=' : '?page=') .  $page + 1 . '" id="' . $page + 1 . '"><i class="fa fa-angle-right"></i></a></li></ul></div>' : '</ul></div>';
+    $product .= (($page > 1) ? ('<li><a href="' . substr($url, strpos($url, '?')) . (strpos($url, '?') !== false ? '&page=' : '?page=') . ($page - 1) . '" id="' . ($page - 1) . '"><i class="fa fa-angle-left" ></i></a></li>') : "");
+    $product .= '<li class="active"><a href="' . substr($url, strpos($url, '?')) . (strpos($url, '?') !== false ? '&page=' : '?page=') . $page . '" id="' . $page . '">' . $page . '</a></li>';
+    $product .= ($page < $number_of_pages) ? ' <li><a href="' . substr($url, strpos($url, '?')) . (strpos($url, '?') !== false ? '&page=' : '?page=') . ($page + 1) . '" id="' . ($page + 1) . '"><i class="fa fa-angle-right"></i></a></li></ul></div>' : '</ul></div>';
     return $product;
 }
 
